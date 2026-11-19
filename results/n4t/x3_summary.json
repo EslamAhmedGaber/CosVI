@@ -1,0 +1,194 @@
+{
+ "rule": "05 3b X3",
+ "by": {
+  "twoscale": {
+   "name": "CosVI",
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "H": [
+    0.83,
+    0.04
+   ],
+   "ll": [
+    -56.54,
+    0.52
+   ]
+  },
+  "cosine64": {
+   "name": "CosVI-64",
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "H": [
+    0.81,
+    0.03
+   ],
+   "ll": [
+    -54.77,
+    0.22
+   ]
+  },
+  "grid": {
+   "name": "exact grid",
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "H": [
+    0.59,
+    0.05
+   ],
+   "ll": [
+    -62.06,
+    0.99
+   ]
+  },
+  "markov": {
+   "name": "MA-fBm law, published",
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "H": [
+    0.74,
+    0.0
+   ],
+   "ll": [
+    -57.79,
+    0.63
+   ]
+  },
+  "markov_tuned": {
+   "name": "MA-fBm law, tuned",
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "H": [
+    0.66,
+    0.07
+   ],
+   "ll": [
+    -63.1,
+    2.87
+   ]
+  },
+  "competitor_joint": {
+   "name": "MA-fBm system (joint)",
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "H": [
+    0.56,
+    0.0
+   ],
+   "ll": [
+    -327.78,
+    13.31
+   ]
+  },
+  "competitor_oracle": {
+   "name": "MA-fBm system (oracle)",
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "H": [
+    0.84,
+    0.0
+   ],
+   "ll": [
+    -455.57,
+    6.53
+   ]
+  }
+ },
+ "paired_vs_cosvi": {
+  "cosine64": {
+   "n": 3,
+   "mean": -1.77,
+   "sd": 0.31,
+   "per_seed": [
+    -1.62,
+    -1.57,
+    -2.13
+   ]
+  },
+  "grid": {
+   "n": 3,
+   "mean": 5.51,
+   "sd": 0.55,
+   "per_seed": [
+    5.58,
+    4.93,
+    6.02
+   ]
+  },
+  "markov": {
+   "n": 3,
+   "mean": 1.25,
+   "sd": 1.15,
+   "per_seed": [
+    2.0,
+    1.81,
+    -0.08
+   ]
+  },
+  "markov_tuned": {
+   "n": 3,
+   "mean": 6.56,
+   "sd": 2.63,
+   "per_seed": [
+    8.07,
+    3.52,
+    8.08
+   ]
+  },
+  "competitor_joint": {
+   "n": 3,
+   "mean": 271.24,
+   "sd": 12.91,
+   "per_seed": [
+    271.83,
+    258.05,
+    283.84
+   ]
+  },
+  "competitor_oracle": {
+   "n": 3,
+   "mean": 399.03,
+   "sd": 6.01,
+   "per_seed": [
+    394.83,
+    396.35,
+    405.91
+   ]
+  }
+ },
+ "reading": {
+  "cosvi_best_or_tied_among_exact": true,
+  "cosvi_ahead_of": {
+   "markov": true,
+   "markov_tuned": true,
+   "competitor_joint": true,
+   "competitor_oracle": true
+  },
+  "leading_representation": "CosVI-64"
+ },
+ "classical_H": {
+  "H_whittle_fgn": 0.835,
+  "H_aggregated_variance": 0.884,
+  "H_RS": 0.795
+ }
+}

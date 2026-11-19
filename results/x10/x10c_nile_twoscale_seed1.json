@@ -1,0 +1,85 @@
+{
+ "part": "c",
+ "series": "nile",
+ "rep": "twoscale",
+ "seed": 1,
+ "group_H": 0.8,
+ "H_profile": 0.8052873611450195,
+ "model_file": "n4v2_twoscale_seed1_s0.1.pt",
+ "windows_ok": 3,
+ "windows_total": 3,
+ "failures": [],
+ "score_sets": [
+  -47.50696105202265,
+  -47.53093319244757
+ ],
+ "score": -47.51894712223511,
+ "set_difference": 0.023972140424916688,
+ "archived_smooth_ll": -47.53957748413086,
+ "min_ess": 238.22082019208145,
+ "max_weight": 0.023339954447834453,
+ "flagged_windows_ess_below_5pct": [],
+ "seconds": 16.881059646606445,
+ "windows": [
+  {
+   "series": 0,
+   "mode_evaluations": 6,
+   "mode_gradient_inf": 2.972466224271386e-07,
+   "linearised_gap": 0.7951488650898936,
+   "sets": [
+    {
+     "log_score": -46.25762329439701,
+     "ess": 262.0014345275586,
+     "max_weight": 0.014666690561501926,
+     "draws": 512
+    },
+    {
+     "log_score": -46.288260569286386,
+     "ess": 268.11281673694907,
+     "max_weight": 0.014941437053809598,
+     "draws": 512
+    }
+   ]
+  },
+  {
+   "series": 1,
+   "mode_evaluations": 7,
+   "mode_gradient_inf": 7.109952593342683e-07,
+   "linearised_gap": 0.9064806029987271,
+   "sets": [
+    {
+     "log_score": -53.92958537104278,
+     "ess": 285.55212928552066,
+     "max_weight": 0.017214227788024068,
+     "draws": 512
+    },
+    {
+     "log_score": -53.95064914680046,
+     "ess": 274.02163631191706,
+     "max_weight": 0.016348137094155224,
+     "draws": 512
+    }
+   ]
+  },
+  {
+   "series": 2,
+   "mode_evaluations": 7,
+   "mode_gradient_inf": 5.237432132432218e-08,
+   "linearised_gap": 0.6860815000562501,
+   "sets": [
+    {
+     "log_score": -42.333674490628155,
+     "ess": 238.22082019208145,
+     "max_weight": 0.023339954447834453,
+     "draws": 512
+    },
+    {
+     "log_score": -42.353889861255865,
+     "ess": 257.8438556078139,
+     "max_weight": 0.018106563140579596,
+     "draws": 512
+    }
+   ]
+  }
+ ]
+}

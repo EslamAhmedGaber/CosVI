@@ -1,0 +1,217 @@
+{
+ "cosine64": {
+  "n": 3,
+  "H_profile": [
+   0.7780474821726481,
+   0.025341496921191784
+  ],
+  "heldout_at_profile": [
+   -50.7764523824056,
+   0.42476277789222433
+  ],
+  "heldout_per_group_mean": [
+   -53.94195683797201,
+   -53.125099182128906,
+   -51.53207270304362,
+   -50.361151377360024,
+   -49.829087575276695
+  ],
+  "heldout_per_group_sd": [
+   0.303796775351547,
+   0.3380499532655567,
+   0.313347928069201,
+   0.45254334896196274,
+   0.814633479918376
+  ],
+  "best_group_H": 0.9,
+  "best_group_heldout": [
+   -49.829087575276695,
+   0.814633479918376
+  ],
+  "diverged_groups": 0,
+  "grid_refit_failures": 13,
+  "name": "CosVI-64"
+ },
+ "grid": {
+  "n": 3,
+  "H_profile": [
+   0.6178875764211019,
+   0.04428230395608441
+  ],
+  "heldout_at_profile": [
+   -53.89886474609375,
+   2.9044914527576275
+  ],
+  "heldout_per_group_mean": [
+   -62.009604136149086,
+   -53.33233133951823,
+   -50.28863779703776,
+   -349.00389862060547,
+   -96.92985280354817
+  ],
+  "heldout_per_group_sd": [
+   0.2574766524705783,
+   3.709601890273912,
+   2.183626675001456,
+   476.6373807971844,
+   26.3759101018154
+  ],
+  "best_group_H": 0.7,
+  "best_group_heldout": [
+   -50.28863779703776,
+   2.183626675001456
+  ],
+  "diverged_groups": 6,
+  "grid_refit_failures": 0,
+  "name": "exact grid"
+ },
+ "markov": {
+  "n": 3,
+  "H_profile": [
+   0.7146282196044922,
+   0.001270215357403173
+  ],
+  "heldout_at_profile": [
+   -51.46900939941406,
+   0.0674111875147815
+  ],
+  "heldout_per_group_mean": [
+   -58.66737747192383,
+   -64.52041117350261,
+   -51.46900939941406,
+   -56.324938456217446,
+   -126.60241444905598
+  ],
+  "heldout_per_group_sd": [
+   0.29760259848039083,
+   0.3279347432566907,
+   0.0674111875147815,
+   0.24614466780499944,
+   0.944252246168352
+  ],
+  "best_group_H": 0.7,
+  "best_group_heldout": [
+   -51.46900939941406,
+   0.0674111875147815
+  ],
+  "diverged_groups": 0,
+  "grid_refit_failures": 7,
+  "name": "MA-fBm law, published nodes"
+ },
+ "markov_tuned": {
+  "n": 3,
+  "H_profile": [
+   0.6108684341112772,
+   0.0416703205545375
+  ],
+  "heldout_at_profile": [
+   -51.32486089070638,
+   2.925537258131271
+  ],
+  "heldout_per_group_mean": [
+   -61.70673370361328,
+   -51.99022928873698,
+   -49.480204264322914,
+   -66.16023381551106,
+   -203.07828521728516
+  ],
+  "heldout_per_group_sd": [
+   1.0334865373344602,
+   2.067415131501655,
+   2.308156320211326,
+   14.615096907616001,
+   261.16699622389433
+  ],
+  "best_group_H": 0.7,
+  "best_group_heldout": [
+   -49.480204264322914,
+   2.308156320211326
+  ],
+  "diverged_groups": 7,
+  "grid_refit_failures": 3,
+  "name": "MA-fBm law, tuned nodes"
+ },
+ "twoscale": {
+  "n": 3,
+  "H_profile": [
+   0.7939657171567281,
+   0.03473966600196707
+  ],
+  "heldout_at_profile": [
+   -47.64354705810547,
+   0.32689037159350953
+  ],
+  "heldout_per_group_mean": [
+   -49.210768381754555,
+   -49.10780334472656,
+   -48.33351262410482,
+   -47.64354705810547,
+   -47.694844563802086
+  ],
+  "heldout_per_group_sd": [
+   0.3057346144822385,
+   0.2767429469263442,
+   0.24317074962829122,
+   0.32689037159350953,
+   0.5119541607913858
+  ],
+  "best_group_H": 0.8,
+  "best_group_heldout": [
+   -47.64354705810547,
+   0.32689037159350953
+  ],
+  "diverged_groups": 0,
+  "grid_refit_failures": 10,
+  "name": "CosVI"
+ },
+ "competitor": [
+  {
+   "mode": "joint",
+   "seed": 0,
+   "H_fit": 0.5784935355186462,
+   "test_loglik_exact_law_twoscale_coords_mean": -246.94921875,
+   "test_loglik_exact_law_grid_coords_mean": -247.1146240234375,
+   "sigma_years_standard_scale": 0.13429497182369232
+  },
+  {
+   "mode": "joint",
+   "seed": 1,
+   "H_fit": 0.5762051343917847,
+   "test_loglik_exact_law_twoscale_coords_mean": -249.51539611816406,
+   "test_loglik_exact_law_grid_coords_mean": -250.1792755126953,
+   "sigma_years_standard_scale": 0.1328897923231125
+  },
+  {
+   "mode": "joint",
+   "seed": 2,
+   "H_fit": 0.5802000761032104,
+   "test_loglik_exact_law_twoscale_coords_mean": -250.9595947265625,
+   "test_loglik_exact_law_grid_coords_mean": -251.6395263671875,
+   "sigma_years_standard_scale": 0.13263805210590363
+  },
+  {
+   "mode": "oracle",
+   "seed": 0,
+   "H_fit": 0.8400000333786011,
+   "test_loglik_exact_law_twoscale_coords_mean": -360.5021667480469,
+   "test_loglik_exact_law_grid_coords_mean": -379.7779846191406,
+   "sigma_years_standard_scale": 0.10566838085651398
+  },
+  {
+   "mode": "oracle",
+   "seed": 1,
+   "H_fit": 0.8400000333786011,
+   "test_loglik_exact_law_twoscale_coords_mean": -357.6753234863281,
+   "test_loglik_exact_law_grid_coords_mean": -386.7330322265625,
+   "sigma_years_standard_scale": 0.10702305287122726
+  },
+  {
+   "mode": "oracle",
+   "seed": 2,
+   "H_fit": 0.8400000333786011,
+   "test_loglik_exact_law_twoscale_coords_mean": -366.9729309082031,
+   "test_loglik_exact_law_grid_coords_mean": -379.1508483886719,
+   "sigma_years_standard_scale": 0.1031392440199852
+  }
+ ]
+}

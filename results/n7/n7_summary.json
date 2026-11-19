@@ -1,0 +1,290 @@
+{
+ "rule": "05_EXPERIMENTS.md N7, fixed 15 Nov 2026 21:59",
+ "by_H": {
+  "0.60": {
+   "rows": [
+    {
+     "T": 2.0,
+     "J_star": 16,
+     "err_lift": {
+      "published_coded": 0.02146770737098036,
+      "published_rescaled": 0.018145207900754627,
+      "best": 0.0001751423060288541
+     },
+     "cosvi_cheapest": [
+      "two-scale",
+      54.01490000076592
+     ],
+     "lift_cheapest_qualifying": [
+      "published (rescaled)",
+      120.52510003559291
+     ],
+     "cosvi_costs_more": false
+    },
+    {
+     "T": 5.0,
+     "J_star": 32,
+     "err_lift": {
+      "published_coded": 0.022155089834519654,
+      "published_rescaled": 0.018761206088534453,
+      "best": 0.00016626365446962746
+     },
+     "cosvi_cheapest": [
+      "cosine J=32",
+      134.5067999791354
+     ],
+     "lift_cheapest_qualifying": [
+      "best K=12",
+      300.4411999718286
+     ],
+     "cosvi_costs_more": false
+    },
+    {
+     "T": 10.0,
+     "J_star": 64,
+     "err_lift": {
+      "published_coded": 0.02238336012906122,
+      "published_rescaled": 0.018965729641167727,
+      "best": 0.0001585481417142851
+     },
+     "cosvi_cheapest": [
+      "cosine J=64",
+      264.6848000586033
+     ],
+     "lift_cheapest_qualifying": [
+      "published (rescaled)",
+      597.2892999998294
+     ],
+     "cosvi_costs_more": false
+    },
+    {
+     "T": 20.0,
+     "J_star": 128,
+     "err_lift": {
+      "published_coded": 0.022498046610334464,
+      "published_rescaled": 0.019068519458137437,
+      "best": 0.0001734999721121953
+     },
+     "cosvi_cheapest": [
+      "two-scale",
+      538.5863000410609
+     ],
+     "lift_cheapest_qualifying": [
+      "published (rescaled)",
+      1189.7583999671042
+     ],
+     "cosvi_costs_more": false
+    },
+    {
+     "T": 50.0,
+     "J_star": null,
+     "err_lift": {
+      "published_coded": 0.022567706687940753,
+      "published_rescaled": 0.019130998643087514,
+      "best": 0.00017285619555232679
+     },
+     "cosvi_cheapest": [
+      "two-scale",
+      1463.423400069587
+     ],
+     "lift_cheapest_qualifying": [
+      "published (rescaled)",
+      2341.7719999561086
+     ],
+     "cosvi_costs_more": false
+    }
+   ],
+   "crossover_T": "no crossover in range"
+  },
+  "0.75": {
+   "rows": [
+    {
+     "T": 2.0,
+     "J_star": 16,
+     "err_lift": {
+      "published_coded": 0.07469627008349061,
+      "published_rescaled": 0.08158677956014089,
+      "best": 0.0005167407231530799
+     },
+     "cosvi_cheapest": [
+      "two-scale",
+      54.01490000076592
+     ],
+     "lift_cheapest_qualifying": [
+      "best K=12",
+      121.24240002594888
+     ],
+     "cosvi_costs_more": false
+    },
+    {
+     "T": 5.0,
+     "J_star": 32,
+     "err_lift": {
+      "published_coded": 0.07752883317448063,
+      "published_rescaled": 0.08447657537435266,
+      "best": 0.00045881054379943195
+     },
+     "cosvi_cheapest": [
+      "cosine J=32",
+      134.5067999791354
+     ],
+     "lift_cheapest_qualifying": [
+      "best K=12",
+      300.4411999718286
+     ],
+     "cosvi_costs_more": false
+    },
+    {
+     "T": 10.0,
+     "J_star": 64,
+     "err_lift": {
+      "published_coded": 0.07846751975262074,
+      "published_rescaled": 0.08543376968497894,
+      "best": 0.0004411710301861498
+     },
+     "cosvi_cheapest": [
+      "cosine J=64",
+      264.6848000586033
+     ],
+     "lift_cheapest_qualifying": [
+      "best K=12",
+      599.5714000309817
+     ],
+     "cosvi_costs_more": false
+    },
+    {
+     "T": 20.0,
+     "J_star": 128,
+     "err_lift": {
+      "published_coded": 0.0789387577022527,
+      "published_rescaled": 0.08591428567624895,
+      "best": 0.00043730013326816593
+     },
+     "cosvi_cheapest": [
+      "two-scale",
+      538.5863000410609
+     ],
+     "lift_cheapest_qualifying": [
+      "best K=12",
+      1191.3238000124693
+     ],
+     "cosvi_costs_more": false
+    },
+    {
+     "T": 50.0,
+     "J_star": null,
+     "err_lift": {
+      "published_coded": 0.07922225264964354,
+      "published_rescaled": 0.08620337770117037,
+      "best": 0.000231400369017687
+     },
+     "cosvi_cheapest": [
+      "two-scale",
+      1463.423400069587
+     ],
+     "lift_cheapest_qualifying": [
+      "best K=12",
+      2876.338100002613
+     ],
+     "cosvi_costs_more": false
+    }
+   ],
+   "crossover_T": "no crossover in range"
+  },
+  "0.90": {
+   "rows": [
+    {
+     "T": 2.0,
+     "J_star": 16,
+     "err_lift": {
+      "published_coded": 0.0128374242499231,
+      "published_rescaled": 0.09343381498134622,
+      "best": 0.00041956045405167725
+     },
+     "cosvi_cheapest": [
+      "two-scale",
+      54.01490000076592
+     ],
+     "lift_cheapest_qualifying": [
+      "published (coded)",
+      120.52510003559291
+     ],
+     "cosvi_costs_more": false
+    },
+    {
+     "T": 5.0,
+     "J_star": 32,
+     "err_lift": {
+      "published_coded": 0.012814412232388127,
+      "published_rescaled": 0.09341776757506316,
+      "best": 0.00021834759826324998
+     },
+     "cosvi_cheapest": [
+      "cosine J=32",
+      134.5067999791354
+     ],
+     "lift_cheapest_qualifying": [
+      "best K=12",
+      300.4411999718286
+     ],
+     "cosvi_costs_more": false
+    },
+    {
+     "T": 10.0,
+     "J_star": 64,
+     "err_lift": {
+      "published_coded": 0.01279657220270971,
+      "published_rescaled": 0.09343257045456349,
+      "best": 0.00032709666728632355
+     },
+     "cosvi_cheapest": [
+      "cosine J=64",
+      264.6848000586033
+     ],
+     "lift_cheapest_qualifying": [
+      "published (coded)",
+      597.2892999998294
+     ],
+     "cosvi_costs_more": false
+    },
+    {
+     "T": 20.0,
+     "J_star": 128,
+     "err_lift": {
+      "published_coded": 0.012783767660749798,
+      "published_rescaled": 0.09344924030998801,
+      "best": 0.002316371161725182
+     },
+     "cosvi_cheapest": [
+      "two-scale",
+      538.5863000410609
+     ],
+     "lift_cheapest_qualifying": [
+      "published (coded)",
+      1189.7583999671042
+     ],
+     "cosvi_costs_more": false
+    },
+    {
+     "T": 50.0,
+     "J_star": null,
+     "err_lift": {
+      "published_coded": 0.012775744343984596,
+      "published_rescaled": 0.09346351367993577,
+      "best": 0.007120325745071207
+     },
+     "cosvi_cheapest": [
+      "two-scale",
+      1463.423400069587
+     ],
+     "lift_cheapest_qualifying": [
+      "published (coded)",
+      2341.7719999561086
+     ],
+     "cosvi_costs_more": false
+    }
+   ],
+   "crossover_T": "no crossover in range"
+  }
+ }
+}

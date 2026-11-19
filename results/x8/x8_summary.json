@@ -1,0 +1,1152 @@
+{
+ "rule": "05 3b X8",
+ "a": {
+  "pass_all": true,
+  "max_abs_diff_pl_vs_grid": 1.9184653865522705e-12,
+  "max_abs_diff_smooth_vs_grid": {
+   "0.6": {
+    "logev": 0.08391768490175977,
+    "elbo_opt": 0.07491140379770655
+   },
+   "0.75": {
+    "logev": 0.013768913063529453,
+    "elbo_opt": 0.01087635545244936
+   },
+   "0.9": {
+    "logev": 0.00086220727061459,
+    "elbo_opt": 0.0015904453847781497
+   }
+  },
+  "cov_relerr_grid_values": {
+   "0.6": {
+    "grid": 2.391049657559343e-16,
+    "twoscale_pl": 8.15785587210774e-16,
+    "twoscale": 0.0013416337169218804
+   },
+   "0.75": {
+    "grid": 2.699960662544558e-16,
+    "twoscale_pl": 4.636385736622484e-16,
+    "twoscale": 0.0001598342329102475
+   },
+   "0.9": {
+    "grid": 2.9513496379009846e-16,
+    "twoscale_pl": 3.5474171133181977e-16,
+    "twoscale": 1.1521485328404716e-05
+   }
+  },
+  "product_family_gap_mean": {
+   "0.6": 1.811,
+   "0.75": 1.565,
+   "0.9": 1.189
+  }
+ },
+ "b": {
+  "by_H": {
+   "0.6": {
+    "cosine": {
+     "seeds": [
+      1,
+      2
+     ],
+     "smooth": {
+      "mean": -0.042,
+      "sd": 0.133,
+      "per_seed": [
+       0.052,
+       -0.135
+      ],
+      "reading": "tied"
+     },
+     "pl": {
+      "mean": -0.022,
+      "sd": 0.03,
+      "per_seed": [
+       -0.001,
+       -0.043
+      ],
+      "reading": "tied"
+     },
+     "same_reading": true
+    },
+    "grid": {
+     "seeds": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "smooth": {
+      "mean": 0.965,
+      "sd": 1.305,
+      "per_seed": [
+       0.557,
+       0.183,
+       0.213,
+       2.906
+      ],
+      "reading": "tied"
+     },
+     "pl": {
+      "mean": 0.9,
+      "sd": 1.567,
+      "per_seed": [
+       0.364,
+       0.051,
+       -0.05,
+       3.236
+      ],
+      "reading": "tied"
+     },
+     "same_reading": true
+    },
+    "markov": {
+     "seeds": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "smooth": {
+      "mean": 0.297,
+      "sd": 0.795,
+      "per_seed": [
+       0.621,
+       -0.058,
+       -0.599,
+       1.226
+      ],
+      "reading": "tied"
+     },
+     "pl": {
+      "mean": 0.243,
+      "sd": 0.994,
+      "per_seed": [
+       0.673,
+       -0.191,
+       -0.892,
+       1.384
+      ],
+      "reading": "tied"
+     },
+     "same_reading": true
+    },
+    "markov_tuned": {
+     "seeds": [
+      1,
+      2
+     ],
+     "smooth": {
+      "mean": 0.648,
+      "sd": 0.572,
+      "per_seed": [
+       1.052,
+       0.243
+      ],
+      "reading": "ahead"
+     },
+     "pl": {
+      "mean": 0.325,
+      "sd": 0.225,
+      "per_seed": [
+       0.484,
+       0.166
+      ],
+      "reading": "ahead"
+     },
+     "same_reading": true
+    },
+    "markov_best": {
+     "seeds": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "smooth": {
+      "mean": 1.656,
+      "sd": 1.913,
+      "per_seed": [
+       1.002,
+       0.319,
+       0.811,
+       4.492
+      ],
+      "reading": "tied"
+     },
+     "pl": {
+      "mean": 1.603,
+      "sd": 2.0,
+      "per_seed": [
+       1.079,
+       0.362,
+       0.409,
+       4.562
+      ],
+      "reading": "tied"
+     },
+     "same_reading": true
+    }
+   },
+   "0.75": {
+    "cosine": {
+     "seeds": [
+      1,
+      2
+     ],
+     "smooth": {
+      "mean": 0.055,
+      "sd": 0.126,
+      "per_seed": [
+       -0.034,
+       0.144
+      ],
+      "reading": "tied"
+     },
+     "pl": {
+      "mean": 0.086,
+      "sd": 0.014,
+      "per_seed": [
+       0.075,
+       0.096
+      ],
+      "reading": "ahead"
+     },
+     "same_reading": false
+    },
+    "grid": {
+     "seeds": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "smooth": {
+      "mean": 1.065,
+      "sd": 0.703,
+      "per_seed": [
+       1.304,
+       0.664,
+       0.354,
+       1.936
+      ],
+      "reading": "ahead"
+     },
+     "pl": {
+      "mean": 1.078,
+      "sd": 0.89,
+      "per_seed": [
+       1.205,
+       0.601,
+       0.234,
+       2.271
+      ],
+      "reading": "ahead"
+     },
+     "same_reading": true
+    },
+    "markov": {
+     "seeds": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "smooth": {
+      "mean": 0.033,
+      "sd": 0.715,
+      "per_seed": [
+       0.942,
+       0.181,
+       -0.747,
+       -0.244
+      ],
+      "reading": "tied"
+     },
+     "pl": {
+      "mean": -0.021,
+      "sd": 0.717,
+      "per_seed": [
+       0.875,
+       0.145,
+       -0.824,
+       -0.278
+      ],
+      "reading": "tied"
+     },
+     "same_reading": true
+    },
+    "markov_tuned": {
+     "seeds": [
+      1,
+      2
+     ],
+     "smooth": {
+      "mean": 1.283,
+      "sd": 0.741,
+      "per_seed": [
+       1.807,
+       0.759
+      ],
+      "reading": "ahead"
+     },
+     "pl": {
+      "mean": 1.015,
+      "sd": 0.535,
+      "per_seed": [
+       1.394,
+       0.637
+      ],
+      "reading": "ahead"
+     },
+     "same_reading": true
+    },
+    "markov_best": {
+     "seeds": [
+      1,
+      2,
+      3,
+      4
+     ],
+     "smooth": {
+      "mean": 1.684,
+      "sd": 1.127,
+      "per_seed": [
+       2.085,
+       0.7,
+       0.855,
+       3.096
+      ],
+      "reading": "ahead"
+     },
+     "pl": {
+      "mean": 1.713,
+      "sd": 1.124,
+      "per_seed": [
+       2.095,
+       0.866,
+       0.758,
+       3.134
+      ],
+      "reading": "ahead"
+     },
+     "same_reading": true
+    }
+   },
+   "0.9": {
+    "cosine": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "smooth": {
+      "mean": 0.1,
+      "sd": 0.117,
+      "per_seed": [
+       0.057,
+       0.011,
+       0.233
+      ],
+      "reading": "tied"
+     },
+     "pl": {
+      "mean": 0.021,
+      "sd": 0.09,
+      "per_seed": [
+       -0.072,
+       0.027,
+       0.107
+      ],
+      "reading": "tied"
+     },
+     "same_reading": true
+    },
+    "grid": {
+     "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+     ],
+     "smooth": {
+      "mean": 0.674,
+      "sd": 0.606,
+      "per_seed": [
+       1.619,
+       0.929,
+       0.309,
+       0.137,
+       0.375
+      ],
+      "reading": "ahead"
+     },
+     "pl": {
+      "mean": 0.641,
+      "sd": 0.543,
+      "per_seed": [
+       1.549,
+       0.573,
+       0.237,
+       0.209,
+       0.638
+      ],
+      "reading": "ahead"
+     },
+     "same_reading": true
+    },
+    "markov": {
+     "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+     ],
+     "smooth": {
+      "mean": 0.094,
+      "sd": 0.539,
+      "per_seed": [
+       0.723,
+       0.546,
+       0.052,
+       -0.321,
+       -0.529
+      ],
+      "reading": "tied"
+     },
+     "pl": {
+      "mean": -0.005,
+      "sd": 0.579,
+      "per_seed": [
+       0.625,
+       0.412,
+       -0.024,
+       -0.171,
+       -0.868
+      ],
+      "reading": "tied"
+     },
+     "same_reading": true
+    },
+    "markov_tuned": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "smooth": {
+      "mean": 1.004,
+      "sd": 0.684,
+      "per_seed": [
+       1.691,
+       0.999,
+       0.323
+      ],
+      "reading": "ahead"
+     },
+     "pl": {
+      "mean": 0.693,
+      "sd": 0.634,
+      "per_seed": [
+       1.403,
+       0.492,
+       0.185
+      ],
+      "reading": "ahead"
+     },
+     "same_reading": true
+    },
+    "markov_best": {
+     "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+     ],
+     "smooth": {
+      "mean": 1.101,
+      "sd": 0.789,
+      "per_seed": [
+       2.32,
+       1.376,
+       0.439,
+       0.419,
+       0.95
+      ],
+      "reading": "ahead"
+     },
+     "pl": {
+      "mean": 1.068,
+      "sd": 0.718,
+      "per_seed": [
+       2.285,
+       1.09,
+       0.577,
+       0.523,
+       0.865
+      ],
+      "reading": "ahead"
+     },
+     "same_reading": true
+    }
+   }
+  },
+  "robust_to_evaluation_map": false,
+  "changed_rows": [
+   "H=0.75 cosine"
+  ]
+ },
+ "c": {
+  "by_H": {
+   "0.6": {
+    "seeds": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "arms": {
+     "twoscale": {
+      "pl": [
+       0.175,
+       1.345
+      ],
+      "smooth": [
+       0.249,
+       1.316
+      ],
+      "drift_rmse_occupation": [
+       0.318,
+       0.067
+      ],
+      "elbo_train_own_model": [
+       -0.2,
+       0.834
+      ],
+      "sigma": [
+       0.44,
+       0.018
+      ]
+     },
+     "twoscale_pl": {
+      "pl": [
+       0.318,
+       1.454
+      ],
+      "smooth": [
+       0.271,
+       1.392
+      ],
+      "drift_rmse_occupation": [
+       0.317,
+       0.067
+      ],
+      "elbo_train_own_model": [
+       -0.208,
+       0.835
+      ],
+      "sigma": [
+       0.44,
+       0.018
+      ]
+     },
+     "grid": {
+      "pl": [
+       -0.726,
+       2.239
+      ],
+      "smooth": [
+       -0.778,
+       2.402
+      ],
+      "drift_rmse_occupation": [
+       0.347,
+       0.083
+      ],
+      "elbo_train_own_model": [
+       -1.119,
+       1.271
+      ],
+      "sigma": [
+       0.403,
+       0.025
+      ]
+     }
+    },
+    "train_seconds": 518.0,
+    "inert_block_max_change": 0.0,
+    "contrasts": {
+     "coordinate": {
+      "pl": {
+       "n": 5,
+       "mean": 1.045,
+       "sd": 1.132,
+       "se": 0.506,
+       "per_seed": [
+        1.153,
+        0.443,
+        0.509,
+        0.157,
+        2.961
+       ],
+       "verdict": "present, +"
+      },
+      "smooth": {
+       "n": 5,
+       "mean": 1.049,
+       "sd": 1.485,
+       "se": 0.664,
+       "per_seed": [
+        1.418,
+        0.541,
+        0.064,
+        -0.235,
+        3.458
+       ],
+       "verdict": "not distinguishable"
+      },
+      "drift": {
+       "n": 5,
+       "mean": 0.029,
+       "sd": 0.057,
+       "se": 0.025,
+       "per_seed": [
+        0.087,
+        0.016,
+        0.022,
+        -0.055,
+        0.078
+       ],
+       "verdict": "not distinguishable"
+      }
+     },
+     "solver": {
+      "pl": {
+       "n": 5,
+       "mean": -0.144,
+       "sd": 0.252,
+       "se": 0.113,
+       "per_seed": [
+        -0.016,
+        0.043,
+        -0.583,
+        -0.103,
+        -0.061
+       ],
+       "verdict": "not distinguishable"
+      },
+      "smooth": {
+       "n": 5,
+       "mean": -0.022,
+       "sd": 0.135,
+       "se": 0.06,
+       "per_seed": [
+        -0.042,
+        -0.018,
+        -0.165,
+        0.198,
+        -0.083
+       ],
+       "verdict": "not distinguishable"
+      },
+      "drift": {
+       "n": 5,
+       "mean": -0.0,
+       "sd": 0.0,
+       "se": 0.0,
+       "per_seed": [
+        -0.0,
+        -0.0,
+        -0.001,
+        -0.0,
+        0.0
+       ],
+       "verdict": "present, -"
+      }
+     },
+     "total": {
+      "pl": {
+       "n": 5,
+       "mean": 0.901,
+       "sd": 1.214,
+       "se": 0.543,
+       "per_seed": [
+        1.137,
+        0.486,
+        -0.074,
+        0.055,
+        2.9
+       ],
+       "verdict": "not distinguishable"
+      },
+      "smooth": {
+       "n": 5,
+       "mean": 1.027,
+       "sd": 1.44,
+       "se": 0.644,
+       "per_seed": [
+        1.376,
+        0.522,
+        -0.101,
+        -0.037,
+        3.375
+       ],
+       "verdict": "not distinguishable"
+      },
+      "drift": {
+       "n": 5,
+       "mean": 0.029,
+       "sd": 0.057,
+       "se": 0.025,
+       "per_seed": [
+        0.086,
+        0.016,
+        0.021,
+        -0.055,
+        0.078
+       ],
+       "verdict": "not distinguishable"
+      }
+     }
+    },
+    "decision": "coordinates"
+   },
+   "0.75": {
+    "seeds": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "arms": {
+     "twoscale": {
+      "pl": [
+       5.332,
+       1.335
+      ],
+      "smooth": [
+       5.344,
+       1.323
+      ],
+      "drift_rmse_occupation": [
+       0.285,
+       0.081
+      ],
+      "elbo_train_own_model": [
+       4.997,
+       1.057
+      ],
+      "sigma": [
+       0.423,
+       0.025
+      ]
+     },
+     "twoscale_pl": {
+      "pl": [
+       5.421,
+       1.401
+      ],
+      "smooth": [
+       5.404,
+       1.315
+      ],
+      "drift_rmse_occupation": [
+       0.285,
+       0.081
+      ],
+      "elbo_train_own_model": [
+       4.995,
+       1.058
+      ],
+      "sigma": [
+       0.423,
+       0.025
+      ]
+     },
+     "grid": {
+      "pl": [
+       4.372,
+       1.744
+      ],
+      "smooth": [
+       4.31,
+       1.884
+      ],
+      "drift_rmse_occupation": [
+       0.348,
+       0.072
+      ],
+      "elbo_train_own_model": [
+       3.859,
+       1.475
+      ],
+      "sigma": [
+       0.373,
+       0.031
+      ]
+     }
+    },
+    "train_seconds": 531.7,
+    "inert_block_max_change": 0.0,
+    "contrasts": {
+     "coordinate": {
+      "pl": {
+       "n": 5,
+       "mean": 1.049,
+       "sd": 0.642,
+       "se": 0.287,
+       "per_seed": [
+        0.849,
+        1.104,
+        0.855,
+        0.35,
+        2.088
+       ],
+       "verdict": "present, +"
+      },
+      "smooth": {
+       "n": 5,
+       "mean": 1.094,
+       "sd": 0.981,
+       "se": 0.439,
+       "per_seed": [
+        1.185,
+        1.147,
+        0.499,
+        0.019,
+        2.62
+       ],
+       "verdict": "present, +"
+      },
+      "drift": {
+       "n": 5,
+       "mean": 0.063,
+       "sd": 0.056,
+       "se": 0.025,
+       "per_seed": [
+        0.106,
+        0.106,
+        0.068,
+        -0.031,
+        0.064
+       ],
+       "verdict": "present, +"
+      }
+     },
+     "solver": {
+      "pl": {
+       "n": 5,
+       "mean": -0.09,
+       "sd": 0.206,
+       "se": 0.092,
+       "per_seed": [
+        0.029,
+        0.097,
+        -0.414,
+        -0.167,
+        0.007
+       ],
+       "verdict": "not distinguishable"
+      },
+      "smooth": {
+       "n": 5,
+       "mean": -0.06,
+       "sd": 0.167,
+       "se": 0.075,
+       "per_seed": [
+        0.069,
+        -0.02,
+        -0.19,
+        0.114,
+        -0.274
+       ],
+       "verdict": "not distinguishable"
+      },
+      "drift": {
+       "n": 5,
+       "mean": -0.0,
+       "sd": 0.0,
+       "se": 0.0,
+       "per_seed": [
+        -0.0,
+        0.0,
+        -0.0,
+        -0.0,
+        -0.0
+       ],
+       "verdict": "not distinguishable"
+      }
+     },
+     "total": {
+      "pl": {
+       "n": 5,
+       "mean": 0.959,
+       "sd": 0.746,
+       "se": 0.334,
+       "per_seed": [
+        0.878,
+        1.201,
+        0.44,
+        0.183,
+        2.094
+       ],
+       "verdict": "present, +"
+      },
+      "smooth": {
+       "n": 5,
+       "mean": 1.034,
+       "sd": 0.883,
+       "se": 0.395,
+       "per_seed": [
+        1.254,
+        1.127,
+        0.308,
+        0.133,
+        2.345
+       ],
+       "verdict": "present, +"
+      },
+      "drift": {
+       "n": 5,
+       "mean": 0.063,
+       "sd": 0.056,
+       "se": 0.025,
+       "per_seed": [
+        0.106,
+        0.106,
+        0.068,
+        -0.031,
+        0.064
+       ],
+       "verdict": "present, +"
+      }
+     }
+    },
+    "decision": "coordinates"
+   },
+   "0.9": {
+    "seeds": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "arms": {
+     "twoscale": {
+      "pl": [
+       12.248,
+       1.149
+      ],
+      "smooth": [
+       12.207,
+       1.202
+      ],
+      "drift_rmse_occupation": [
+       0.255,
+       0.089
+      ],
+      "elbo_train_own_model": [
+       11.718,
+       1.586
+      ],
+      "sigma": [
+       0.37,
+       0.032
+      ]
+     },
+     "twoscale_pl": {
+      "pl": [
+       12.302,
+       1.215
+      ],
+      "smooth": [
+       12.319,
+       1.129
+      ],
+      "drift_rmse_occupation": [
+       0.255,
+       0.089
+      ],
+      "elbo_train_own_model": [
+       11.717,
+       1.586
+      ],
+      "sigma": [
+       0.37,
+       0.032
+      ]
+     },
+     "grid": {
+      "pl": [
+       11.639,
+       1.176
+      ],
+      "smooth": [
+       11.565,
+       1.259
+      ],
+      "drift_rmse_occupation": [
+       0.298,
+       0.072
+      ],
+      "elbo_train_own_model": [
+       10.905,
+       1.739
+      ],
+      "sigma": [
+       0.335,
+       0.028
+      ]
+     }
+    },
+    "train_seconds": 519.5,
+    "inert_block_max_change": 0.0,
+    "contrasts": {
+     "coordinate": {
+      "pl": {
+       "n": 5,
+       "mean": 0.663,
+       "sd": 0.535,
+       "se": 0.239,
+       "per_seed": [
+        1.518,
+        0.795,
+        0.309,
+        0.156,
+        0.536
+       ],
+       "verdict": "present, +"
+      },
+      "smooth": {
+       "n": 5,
+       "mean": 0.754,
+       "sd": 0.689,
+       "se": 0.308,
+       "per_seed": [
+        1.627,
+        1.004,
+        0.201,
+        -0.082,
+        1.021
+       ],
+       "verdict": "present, +"
+      },
+      "drift": {
+       "n": 5,
+       "mean": 0.044,
+       "sd": 0.05,
+       "se": 0.022,
+       "per_seed": [
+        0.106,
+        0.046,
+        0.073,
+        -0.026,
+        0.021
+       ],
+       "verdict": "not distinguishable"
+      }
+     },
+     "solver": {
+      "pl": {
+       "n": 5,
+       "mean": -0.054,
+       "sd": 0.178,
+       "se": 0.08,
+       "per_seed": [
+        0.052,
+        -0.029,
+        -0.133,
+        -0.311,
+        0.152
+       ],
+       "verdict": "not distinguishable"
+      },
+      "smooth": {
+       "n": 5,
+       "mean": -0.113,
+       "sd": 0.153,
+       "se": 0.069,
+       "per_seed": [
+        0.053,
+        -0.233,
+        -0.08,
+        0.004,
+        -0.307
+       ],
+       "verdict": "not distinguishable"
+      },
+      "drift": {
+       "n": 5,
+       "mean": -0.0,
+       "sd": 0.0,
+       "se": 0.0,
+       "per_seed": [
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0
+       ],
+       "verdict": "present, -"
+      }
+     },
+     "total": {
+      "pl": {
+       "n": 5,
+       "mean": 0.609,
+       "sd": 0.656,
+       "se": 0.294,
+       "per_seed": [
+        1.57,
+        0.766,
+        0.176,
+        -0.154,
+        0.688
+       ],
+       "verdict": "present, +"
+      },
+      "smooth": {
+       "n": 5,
+       "mean": 0.641,
+       "sd": 0.687,
+       "se": 0.307,
+       "per_seed": [
+        1.679,
+        0.771,
+        0.121,
+        -0.078,
+        0.714
+       ],
+       "verdict": "present, +"
+      },
+      "drift": {
+       "n": 5,
+       "mean": 0.044,
+       "sd": 0.05,
+       "se": 0.022,
+       "per_seed": [
+        0.106,
+        0.046,
+        0.073,
+        -0.026,
+        0.021
+       ],
+       "verdict": "not distinguishable"
+      }
+     }
+    },
+    "decision": "coordinates"
+   }
+  },
+  "overall": {
+   "coordinate": "present, +",
+   "solver": "not established",
+   "decision": "coordinates"
+  }
+ }
+}

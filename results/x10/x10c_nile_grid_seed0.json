@@ -1,0 +1,85 @@
+{
+ "part": "c",
+ "series": "nile",
+ "rep": "grid",
+ "seed": 0,
+ "group_H": 0.7,
+ "H_profile": 0.6609801650047302,
+ "model_file": "n4v2_grid_seed0_s0.1.pt",
+ "windows_ok": 3,
+ "windows_total": 3,
+ "failures": [],
+ "score_sets": [
+  -51.64363523854072,
+  -51.643293708363096
+ ],
+ "score": -51.64346447345191,
+ "set_difference": 0.0003415301776215074,
+ "archived_smooth_ll": -51.3322639465332,
+ "min_ess": 95.04474750264495,
+ "max_weight": 0.07316630850869839,
+ "flagged_windows_ess_below_5pct": [],
+ "seconds": 15.701595306396484,
+ "windows": [
+  {
+   "series": 0,
+   "mode_evaluations": 6,
+   "mode_gradient_inf": 9.507632641181374e-07,
+   "linearised_gap": 0.14985503317186197,
+   "sets": [
+    {
+     "log_score": -49.460586402964296,
+     "ess": 193.31685222068182,
+     "max_weight": 0.03308086228062779,
+     "draws": 512
+    },
+    {
+     "log_score": -49.53765698363254,
+     "ess": 152.06751253598821,
+     "max_weight": 0.05176343353137943,
+     "draws": 512
+    }
+   ]
+  },
+  {
+   "series": 1,
+   "mode_evaluations": 6,
+   "mode_gradient_inf": 4.6275525525385497e-07,
+   "linearised_gap": 0.13689628326589337,
+   "sets": [
+    {
+     "log_score": -60.32693866056159,
+     "ess": 145.23971137856165,
+     "max_weight": 0.0510733010357111,
+     "draws": 512
+    },
+    {
+     "log_score": -60.23560384346552,
+     "ess": 151.59859537410048,
+     "max_weight": 0.04309903154231107,
+     "draws": 512
+    }
+   ]
+  },
+  {
+   "series": 2,
+   "mode_evaluations": 7,
+   "mode_gradient_inf": 8.120839645187061e-08,
+   "linearised_gap": 0.11893970027679082,
+   "sets": [
+    {
+     "log_score": -45.14338065209627,
+     "ess": 153.7138576056851,
+     "max_weight": 0.03242507099712686,
+     "draws": 512
+    },
+    {
+     "log_score": -45.156620297991225,
+     "ess": 95.04474750264495,
+     "max_weight": 0.07316630850869839,
+     "draws": 512
+    }
+   ]
+  }
+ ]
+}

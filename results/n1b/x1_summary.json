@@ -1,0 +1,616 @@
+{
+ "rule": "05 section 3b X1 (fixed 07:03, amended 07:41)",
+ "part_i": {
+  "twoscale|0.9": {
+   "name": "CosVI",
+   "H_true": 0.9,
+   "n": 3,
+   "runs": [
+    {
+     "seed": 0,
+     "H_profile": 0.883,
+     "profile_at_edge": false,
+     "H_val": 0.8609,
+     "val_at_edge": false,
+     "N1b_H_profile_old_grid": 0.9,
+     "heldout_oracle": 13.101,
+     "heldout_per_group": [
+      9.966,
+      11.385,
+      12.355,
+      12.931,
+      13.005,
+      12.788,
+      13.101
+     ]
+    },
+    {
+     "seed": 1,
+     "H_profile": 0.8673,
+     "profile_at_edge": false,
+     "H_val": 0.9168,
+     "val_at_edge": false,
+     "N1b_H_profile_old_grid": 0.9,
+     "heldout_oracle": 13.761,
+     "heldout_per_group": [
+      9.554,
+      11.342,
+      12.44,
+      13.325,
+      13.847,
+      13.815,
+      13.761
+     ]
+    },
+    {
+     "seed": 2,
+     "H_profile": 0.8637,
+     "profile_at_edge": false,
+     "H_val": 0.8149,
+     "val_at_edge": false,
+     "N1b_H_profile_old_grid": 0.9,
+     "heldout_oracle": 12.908,
+     "heldout_per_group": [
+      10.563,
+      11.782,
+      12.369,
+      13.1,
+      12.704,
+      12.027,
+      12.908
+     ]
+    }
+   ],
+   "H_profile_mean": 0.871,
+   "H_profile_sd": 0.01,
+   "H_val_mean": 0.864,
+   "H_val_sd": 0.051,
+   "profile_recovered_runs": 3,
+   "val_recovered_runs": 2,
+   "profile_at_edge_runs": 0,
+   "val_at_edge_runs": 0
+  },
+  "cosine|0.9": {
+   "name": "CosVI-32",
+   "H_true": 0.9,
+   "n": 3,
+   "runs": [
+    {
+     "seed": 0,
+     "H_profile": 0.8776,
+     "profile_at_edge": false,
+     "H_val": 0.8484,
+     "val_at_edge": false,
+     "N1b_H_profile_old_grid": 0.9,
+     "heldout_oracle": 13.101,
+     "heldout_per_group": [
+      9.831,
+      11.33,
+      12.351,
+      13.031,
+      13.02,
+      12.804,
+      13.101
+     ]
+    },
+    {
+     "seed": 1,
+     "H_profile": 0.8645,
+     "profile_at_edge": false,
+     "H_val": 0.9236,
+     "val_at_edge": false,
+     "N1b_H_profile_old_grid": 0.9,
+     "heldout_oracle": 13.736,
+     "heldout_per_group": [
+      9.509,
+      11.339,
+      12.477,
+      13.304,
+      13.793,
+      13.788,
+      13.736
+     ]
+    },
+    {
+     "seed": 2,
+     "H_profile": 0.8593,
+     "profile_at_edge": false,
+     "H_val": 0.8114,
+     "val_at_edge": false,
+     "N1b_H_profile_old_grid": 0.9,
+     "heldout_oracle": 12.863,
+     "heldout_per_group": [
+      10.626,
+      11.772,
+      12.402,
+      13.085,
+      12.656,
+      11.976,
+      12.863
+     ]
+    }
+   ],
+   "H_profile_mean": 0.867,
+   "H_profile_sd": 0.009,
+   "H_val_mean": 0.861,
+   "H_val_sd": 0.057,
+   "profile_recovered_runs": 3,
+   "val_recovered_runs": 1,
+   "profile_at_edge_runs": 0,
+   "val_at_edge_runs": 0
+  },
+  "grid|0.9": {
+   "name": "exact grid",
+   "H_true": 0.9,
+   "n": 3,
+   "runs": [
+    {
+     "seed": 0,
+     "H_profile": 0.8966,
+     "profile_at_edge": false,
+     "H_val": 0.8163,
+     "val_at_edge": false,
+     "N1b_H_profile_old_grid": 0.9,
+     "heldout_oracle": 11.645,
+     "heldout_per_group": [
+      9.799,
+      10.878,
+      11.524,
+      11.634,
+      11.578,
+      11.429,
+      11.645
+     ]
+    },
+    {
+     "seed": 1,
+     "H_profile": 0.8929,
+     "profile_at_edge": false,
+     "H_val": 0.95,
+     "val_at_edge": true,
+     "N1b_H_profile_old_grid": 0.9,
+     "heldout_oracle": 13.092,
+     "heldout_per_group": [
+      9.159,
+      10.879,
+      11.806,
+      12.565,
+      13.246,
+      13.335,
+      13.092
+     ]
+    },
+    {
+     "seed": 2,
+     "H_profile": 0.8996,
+     "profile_at_edge": false,
+     "H_val": 0.7945,
+     "val_at_edge": false,
+     "N1b_H_profile_old_grid": 0.9,
+     "heldout_oracle": 12.667,
+     "heldout_per_group": [
+      11.122,
+      12.165,
+      12.566,
+      12.97,
+      12.466,
+      11.952,
+      12.667
+     ]
+    }
+   ],
+   "H_profile_mean": 0.896,
+   "H_profile_sd": 0.003,
+   "H_val_mean": 0.854,
+   "H_val_sd": 0.084,
+   "profile_recovered_runs": 3,
+   "val_recovered_runs": 1,
+   "profile_at_edge_runs": 0,
+   "val_at_edge_runs": 1
+  },
+  "markov|0.6": {
+   "name": "MA-fBm law, published",
+   "H_true": 0.6,
+   "n": 3,
+   "runs": [
+    {
+     "seed": 0,
+     "H_profile": 0.8819,
+     "profile_at_edge": false,
+     "H_val": 0.5673,
+     "val_at_edge": false,
+     "N1b_H_profile_old_grid": 0.9,
+     "heldout_oracle": 0.26,
+     "heldout_per_group": [
+      0.346,
+      0.456,
+      -0.074,
+      0.09,
+      -1.591,
+      -3.762,
+      0.26
+     ]
+    },
+    {
+     "seed": 1,
+     "H_profile": 0.5,
+     "profile_at_edge": true,
+     "H_val": 0.5783,
+     "val_at_edge": false,
+     "N1b_H_profile_old_grid": 0.5,
+     "heldout_oracle": 1.364,
+     "heldout_per_group": [
+      1.081,
+      1.435,
+      0.538,
+      1.117,
+      0.788,
+      -0.941,
+      1.364
+     ]
+    },
+    {
+     "seed": 2,
+     "H_profile": 0.8806,
+     "profile_at_edge": false,
+     "H_val": 0.5,
+     "val_at_edge": true,
+     "N1b_H_profile_old_grid": 0.9,
+     "heldout_oracle": 2.167,
+     "heldout_per_group": [
+      1.935,
+      1.875,
+      1.451,
+      1.608,
+      -0.279,
+      -2.425,
+      2.167
+     ]
+    }
+   ],
+   "H_profile_mean": 0.754,
+   "H_profile_sd": 0.22,
+   "H_val_mean": 0.549,
+   "H_val_sd": 0.042,
+   "profile_recovered_runs": 0,
+   "val_recovered_runs": 2,
+   "profile_at_edge_runs": 1,
+   "val_at_edge_runs": 1
+  },
+  "markov|0.9": {
+   "name": "MA-fBm law, published",
+   "H_true": 0.9,
+   "n": 3,
+   "runs": [
+    {
+     "seed": 0,
+     "H_profile": 0.7869,
+     "profile_at_edge": false,
+     "H_val": 0.8806,
+     "val_at_edge": false,
+     "N1b_H_profile_old_grid": 0.7869,
+     "heldout_oracle": 12.421,
+     "heldout_per_group": [
+      9.893,
+      11.126,
+      11.96,
+      12.289,
+      12.375,
+      12.312,
+      12.421
+     ]
+    },
+    {
+     "seed": 1,
+     "H_profile": 0.7683,
+     "profile_at_edge": false,
+     "H_val": 0.9035,
+     "val_at_edge": false,
+     "N1b_H_profile_old_grid": 0.7683,
+     "heldout_oracle": 13.247,
+     "heldout_per_group": [
+      9.374,
+      11.089,
+      12.08,
+      12.721,
+      13.263,
+      13.154,
+      13.247
+     ]
+    },
+    {
+     "seed": 2,
+     "H_profile": 0.7788,
+     "profile_at_edge": false,
+     "H_val": 0.7984,
+     "val_at_edge": false,
+     "N1b_H_profile_old_grid": 0.7788,
+     "heldout_oracle": 12.98,
+     "heldout_per_group": [
+      11.254,
+      12.291,
+      12.707,
+      13.217,
+      12.674,
+      12.487,
+      12.98
+     ]
+    }
+   ],
+   "H_profile_mean": 0.778,
+   "H_profile_sd": 0.009,
+   "H_val_mean": 0.861,
+   "H_val_sd": 0.055,
+   "profile_recovered_runs": 0,
+   "val_recovered_runs": 2,
+   "profile_at_edge_runs": 0,
+   "val_at_edge_runs": 0
+  },
+  "markov_tuned|0.9": {
+   "name": "MA-fBm law, tuned",
+   "H_true": 0.9,
+   "n": 3,
+   "runs": [
+    {
+     "seed": 0,
+     "H_profile": 0.8935,
+     "profile_at_edge": false,
+     "H_val": 0.95,
+     "val_at_edge": true,
+     "N1b_H_profile_old_grid": 0.9,
+     "heldout_oracle": 11.61,
+     "heldout_per_group": [
+      9.66,
+      10.646,
+      11.195,
+      11.336,
+      11.54,
+      11.696,
+      11.61
+     ]
+    },
+    {
+     "seed": 1,
+     "H_profile": 0.8966,
+     "profile_at_edge": false,
+     "H_val": 0.95,
+     "val_at_edge": true,
+     "N1b_H_profile_old_grid": 0.9,
+     "heldout_oracle": 13.165,
+     "heldout_per_group": [
+      8.987,
+      10.66,
+      11.564,
+      12.335,
+      13.315,
+      13.53,
+      13.165
+     ]
+    },
+    {
+     "seed": 2,
+     "H_profile": 0.9111,
+     "profile_at_edge": false,
+     "H_val": 0.7978,
+     "val_at_edge": false,
+     "N1b_H_profile_old_grid": 0.9,
+     "heldout_oracle": 12.66,
+     "heldout_per_group": [
+      11.086,
+      12.081,
+      12.471,
+      12.893,
+      12.433,
+      12.352,
+      12.66
+     ]
+    }
+   ],
+   "H_profile_mean": 0.9,
+   "H_profile_sd": 0.009,
+   "H_val_mean": 0.899,
+   "H_val_sd": 0.088,
+   "profile_recovered_runs": 3,
+   "val_recovered_runs": 2,
+   "profile_at_edge_runs": 0,
+   "val_at_edge_runs": 2
+  },
+  "markov_best|0.9": {
+   "name": "MA-fBm law, best",
+   "H_true": 0.9,
+   "n": 3,
+   "runs": [
+    {
+     "seed": 0,
+     "H_profile": 0.8804,
+     "profile_at_edge": false,
+     "H_val": 0.7919,
+     "val_at_edge": false,
+     "N1b_H_profile_old_grid": 0.9,
+     "heldout_oracle": 11.058,
+     "heldout_per_group": [
+      9.552,
+      10.475,
+      10.999,
+      11.022,
+      10.99,
+      10.906,
+      11.058
+     ]
+    },
+    {
+     "seed": 1,
+     "H_profile": 0.9228,
+     "profile_at_edge": false,
+     "H_val": 0.95,
+     "val_at_edge": true,
+     "N1b_H_profile_old_grid": 0.9,
+     "heldout_oracle": 12.715,
+     "heldout_per_group": [
+      8.879,
+      10.516,
+      11.372,
+      12.041,
+      12.909,
+      13.169,
+      12.715
+     ]
+    },
+    {
+     "seed": 2,
+     "H_profile": 0.8783,
+     "profile_at_edge": false,
+     "H_val": 0.7882,
+     "val_at_edge": false,
+     "N1b_H_profile_old_grid": 0.9,
+     "heldout_oracle": 12.398,
+     "heldout_per_group": [
+      11.055,
+      12.079,
+      12.435,
+      12.821,
+      12.197,
+      11.756,
+      12.398
+     ]
+    }
+   ],
+   "H_profile_mean": 0.894,
+   "H_profile_sd": 0.025,
+   "H_val_mean": 0.843,
+   "H_val_sd": 0.092,
+   "profile_recovered_runs": 3,
+   "val_recovered_runs": 1,
+   "profile_at_edge_runs": 0,
+   "val_at_edge_runs": 1
+  }
+ },
+ "part_ii": {
+  "grid|0.6": {
+   "n": 5,
+   "delta_mean": 0.496,
+   "delta_sd": 0.852,
+   "se": 0.381,
+   "per_seed": [
+    0.918,
+    0.005,
+    -0.142,
+    -0.106,
+    1.805
+   ],
+   "verdict_n5_rule": "not distinguishable"
+  },
+  "markov|0.6": {
+   "n": 5,
+   "delta_mean": 0.05,
+   "delta_sd": 0.628,
+   "se": 0.281,
+   "per_seed": [
+    0.533,
+    0.408,
+    -0.345,
+    -0.865,
+    0.52
+   ],
+   "verdict_n5_rule": "not distinguishable"
+  },
+  "markov_best|0.6": {
+   "n": 5,
+   "delta_mean": 0.917,
+   "delta_sd": 1.119,
+   "se": 0.501,
+   "per_seed": [
+    1.379,
+    0.233,
+    0.03,
+    0.26,
+    2.681
+   ],
+   "verdict_n5_rule": "not distinguishable"
+  },
+  "grid|0.75": {
+   "n": 5,
+   "delta_mean": 0.728,
+   "delta_sd": 0.512,
+   "se": 0.229,
+   "per_seed": [
+    0.646,
+    0.98,
+    0.391,
+    0.158,
+    1.464
+   ],
+   "verdict_n5_rule": "gain"
+  },
+  "markov|0.75": {
+   "n": 5,
+   "delta_mean": -0.049,
+   "delta_sd": 0.589,
+   "se": 0.263,
+   "per_seed": [
+    0.015,
+    0.822,
+    -0.006,
+    -0.807,
+    -0.27
+   ],
+   "verdict_n5_rule": "not distinguishable"
+  },
+  "markov_best|0.75": {
+   "n": 5,
+   "delta_mean": 1.197,
+   "delta_sd": 0.709,
+   "se": 0.317,
+   "per_seed": [
+    1.121,
+    1.603,
+    0.586,
+    0.492,
+    2.181
+   ],
+   "verdict_n5_rule": "gain"
+  },
+  "grid|0.9": {
+   "n": 5,
+   "delta_mean": 0.637,
+   "delta_sd": 0.567,
+   "se": 0.254,
+   "per_seed": [
+    1.531,
+    0.742,
+    0.255,
+    0.063,
+    0.594
+   ],
+   "verdict_n5_rule": "gain"
+  },
+  "markov|0.9": {
+   "n": 5,
+   "delta_mean": 0.093,
+   "delta_sd": 0.478,
+   "se": 0.214,
+   "per_seed": [
+    0.67,
+    0.474,
+    0.035,
+    -0.246,
+    -0.47
+   ],
+   "verdict_n5_rule": "not distinguishable"
+  },
+  "markov_best|0.9": {
+   "n": 5,
+   "delta_mean": 0.995,
+   "delta_sd": 0.718,
+   "se": 0.321,
+   "per_seed": [
+    2.115,
+    1.166,
+    0.519,
+    0.256,
+    0.918
+   ],
+   "verdict_n5_rule": "gain"
+  }
+ }
+}

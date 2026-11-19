@@ -1,0 +1,607 @@
+{
+ "rule": "05 3b X2",
+ "n_records": 45,
+ "by_H": {
+  "0.6": {
+   "reps": {
+    "twoscale": {
+     "name": "CosVI",
+     "n": 3,
+     "ll_grid_law": [
+      -5.413,
+      0.754
+     ],
+     "ll_twoscale_coords": [
+      -6.678,
+      1.2
+     ],
+     "drift_rmse": [
+      0.8,
+      0.051
+     ],
+     "sigma": [
+      0.516,
+      0.517
+     ]
+    },
+    "cosine": {
+     "name": "CosVI-32",
+     "n": 3,
+     "ll_grid_law": [
+      -6.357,
+      1.192
+     ],
+     "ll_twoscale_coords": [
+      -6.798,
+      0.775
+     ],
+     "drift_rmse": [
+      0.883,
+      0.059
+     ],
+     "sigma": [
+      0.527,
+      0.642
+     ]
+    },
+    "grid": {
+     "name": "exact grid",
+     "n": 3,
+     "ll_grid_law": [
+      -8.052,
+      1.355
+     ],
+     "ll_twoscale_coords": [
+      -10.343,
+      0.392
+     ],
+     "drift_rmse": [
+      0.956,
+      0.023
+     ],
+     "sigma": [
+      0.494,
+      0.481
+     ]
+    },
+    "markov": {
+     "name": "MA-fBm law, published",
+     "n": 3,
+     "ll_grid_law": [
+      -6.859,
+      0.994
+     ],
+     "ll_twoscale_coords": [
+      -8.662,
+      0.335
+     ],
+     "drift_rmse": [
+      1.03,
+      0.024
+     ],
+     "sigma": [
+      0.613,
+      0.589
+     ]
+    },
+    "markov_best": {
+     "name": "MA-fBm law, best",
+     "n": 3,
+     "ll_grid_law": [
+      -9.834,
+      1.508
+     ],
+     "ll_twoscale_coords": [
+      -12.244,
+      0.581
+     ],
+     "drift_rmse": [
+      1.008,
+      0.036
+     ],
+     "sigma": [
+      0.483,
+      0.464
+     ]
+    }
+   },
+   "paired_vs_cosvi": {
+    "cosine": {
+     "grid_law": {
+      "mean": 0.943,
+      "sd": 0.986,
+      "per_seed": [
+       -0.043,
+       1.929,
+       0.943
+      ],
+      "reading": "tied"
+     },
+     "twoscale_coords": {
+      "mean": 0.12,
+      "sd": 0.508,
+      "per_seed": [
+       0.044,
+       -0.345,
+       0.662
+      ],
+      "reading": "tied"
+     },
+     "drift_wins": "3/3"
+    },
+    "grid": {
+     "grid_law": {
+      "mean": 2.639,
+      "sd": 0.607,
+      "per_seed": [
+       3.147,
+       2.803,
+       1.966
+      ],
+      "reading": "ahead"
+     },
+     "twoscale_coords": {
+      "mean": 3.665,
+      "sd": 0.813,
+      "per_seed": [
+       3.903,
+       2.76,
+       4.333
+      ],
+      "reading": "ahead"
+     },
+     "drift_wins": "3/3"
+    },
+    "markov": {
+     "grid_law": {
+      "mean": 1.446,
+      "sd": 0.252,
+      "per_seed": [
+       1.685,
+       1.469,
+       1.183
+      ],
+      "reading": "ahead"
+     },
+     "twoscale_coords": {
+      "mean": 1.984,
+      "sd": 0.991,
+      "per_seed": [
+       2.592,
+       0.841,
+       2.519
+      ],
+      "reading": "ahead"
+     },
+     "drift_wins": "3/3"
+    },
+    "markov_best": {
+     "grid_law": {
+      "mean": 4.421,
+      "sd": 0.854,
+      "per_seed": [
+       5.375,
+       4.158,
+       3.729
+      ],
+      "reading": "ahead"
+     },
+     "twoscale_coords": {
+      "mean": 5.566,
+      "sd": 0.674,
+      "per_seed": [
+       5.602,
+       4.875,
+       6.222
+      ],
+      "reading": "ahead"
+     },
+     "drift_wins": "3/3"
+    }
+   }
+  },
+  "0.75": {
+   "reps": {
+    "twoscale": {
+     "name": "CosVI",
+     "n": 3,
+     "ll_grid_law": [
+      2.552,
+      1.73
+     ],
+     "ll_twoscale_coords": [
+      3.444,
+      1.701
+     ],
+     "drift_rmse": [
+      0.784,
+      0.05
+     ],
+     "sigma": [
+      0.529,
+      0.549
+     ]
+    },
+    "cosine": {
+     "name": "CosVI-32",
+     "n": 3,
+     "ll_grid_law": [
+      0.761,
+      2.391
+     ],
+     "ll_twoscale_coords": [
+      3.038,
+      2.179
+     ],
+     "drift_rmse": [
+      0.86,
+      0.104
+     ],
+     "sigma": [
+      0.517,
+      0.679
+     ]
+    },
+    "grid": {
+     "name": "exact grid",
+     "n": 3,
+     "ll_grid_law": [
+      1.279,
+      2.278
+     ],
+     "ll_twoscale_coords": [
+      -0.566,
+      1.806
+     ],
+     "drift_rmse": [
+      0.873,
+      0.036
+     ],
+     "sigma": [
+      0.461,
+      0.435
+     ]
+    },
+    "markov": {
+     "name": "MA-fBm law, published",
+     "n": 3,
+     "ll_grid_law": [
+      2.553,
+      2.509
+     ],
+     "ll_twoscale_coords": [
+      3.699,
+      1.295
+     ],
+     "drift_rmse": [
+      0.799,
+      0.022
+     ],
+     "sigma": [
+      0.608,
+      0.562
+     ]
+    },
+    "markov_best": {
+     "name": "MA-fBm law, best",
+     "n": 3,
+     "ll_grid_law": [
+      -0.414,
+      2.248
+     ],
+     "ll_twoscale_coords": [
+      -2.741,
+      1.863
+     ],
+     "drift_rmse": [
+      0.92,
+      0.044
+     ],
+     "sigma": [
+      0.452,
+      0.408
+     ]
+    }
+   },
+   "paired_vs_cosvi": {
+    "cosine": {
+     "grid_law": {
+      "mean": 1.791,
+      "sd": 0.679,
+      "per_seed": [
+       1.524,
+       2.563,
+       1.286
+      ],
+      "reading": "ahead"
+     },
+     "twoscale_coords": {
+      "mean": 0.406,
+      "sd": 0.558,
+      "per_seed": [
+       -0.086,
+       1.013,
+       0.292
+      ],
+      "reading": "tied"
+     },
+     "drift_wins": "3/3"
+    },
+    "grid": {
+     "grid_law": {
+      "mean": 1.273,
+      "sd": 0.814,
+      "per_seed": [
+       2.021,
+       1.393,
+       0.406
+      ],
+      "reading": "ahead"
+     },
+     "twoscale_coords": {
+      "mean": 4.01,
+      "sd": 0.466,
+      "per_seed": [
+       4.517,
+       3.913,
+       3.6
+      ],
+      "reading": "ahead"
+     },
+     "drift_wins": "3/3"
+    },
+    "markov": {
+     "grid_law": {
+      "mean": -0.001,
+      "sd": 1.57,
+      "per_seed": [
+       1.763,
+       -0.525,
+       -1.242
+      ],
+      "reading": "tied"
+     },
+     "twoscale_coords": {
+      "mean": -0.255,
+      "sd": 0.665,
+      "per_seed": [
+       0.388,
+       -0.939,
+       -0.215
+      ],
+      "reading": "tied"
+     },
+     "drift_wins": "2/3"
+    },
+    "markov_best": {
+     "grid_law": {
+      "mean": 2.966,
+      "sd": 0.829,
+      "per_seed": [
+       3.769,
+       3.016,
+       2.114
+      ],
+      "reading": "ahead"
+     },
+     "twoscale_coords": {
+      "mean": 6.185,
+      "sd": 0.381,
+      "per_seed": [
+       6.551,
+       6.213,
+       5.79
+      ],
+      "reading": "ahead"
+     },
+     "drift_wins": "3/3"
+    }
+   }
+  },
+  "0.9": {
+   "reps": {
+    "twoscale": {
+     "name": "CosVI",
+     "n": 3,
+     "ll_grid_law": [
+      13.279,
+      2.749
+     ],
+     "ll_twoscale_coords": [
+      17.149,
+      1.798
+     ],
+     "drift_rmse": [
+      0.735,
+      0.066
+     ],
+     "sigma": [
+      0.545,
+      0.608
+     ]
+    },
+    "cosine": {
+     "name": "CosVI-32",
+     "n": 3,
+     "ll_grid_law": [
+      15.081,
+      2.629
+     ],
+     "ll_twoscale_coords": [
+      16.45,
+      2.43
+     ],
+     "drift_rmse": [
+      0.842,
+      0.2
+     ],
+     "sigma": [
+      0.488,
+      0.797
+     ]
+    },
+    "grid": {
+     "name": "exact grid",
+     "n": 3,
+     "ll_grid_law": [
+      12.938,
+      3.165
+     ],
+     "ll_twoscale_coords": [
+      13.314,
+      2.682
+     ],
+     "drift_rmse": [
+      0.658,
+      0.013
+     ],
+     "sigma": [
+      0.404,
+      0.352
+     ]
+    },
+    "markov": {
+     "name": "MA-fBm law, published",
+     "n": 3,
+     "ll_grid_law": [
+      12.138,
+      0.531
+     ],
+     "ll_twoscale_coords": [
+      17.745,
+      0.302
+     ],
+     "drift_rmse": [
+      0.483,
+      0.033
+     ],
+     "sigma": [
+      0.559,
+      0.541
+     ]
+    },
+    "markov_best": {
+     "name": "MA-fBm law, best",
+     "n": 3,
+     "ll_grid_law": [
+      12.089,
+      2.941
+     ],
+     "ll_twoscale_coords": [
+      11.608,
+      2.799
+     ],
+     "drift_rmse": [
+      0.7,
+      0.025
+     ],
+     "sigma": [
+      0.405,
+      0.328
+     ]
+    }
+   },
+   "paired_vs_cosvi": {
+    "cosine": {
+     "grid_law": {
+      "mean": -1.802,
+      "sd": 2.895,
+      "per_seed": [
+       -4.752,
+       1.034,
+       -1.689
+      ],
+      "reading": "tied"
+     },
+     "twoscale_coords": {
+      "mean": 0.699,
+      "sd": 1.042,
+      "per_seed": [
+       0.034,
+       1.901,
+       0.163
+      ],
+      "reading": "tied"
+     },
+     "drift_wins": "2/3"
+    },
+    "grid": {
+     "grid_law": {
+      "mean": 0.341,
+      "sd": 1.188,
+      "per_seed": [
+       -0.086,
+       1.684,
+       -0.575
+      ],
+      "reading": "tied"
+     },
+     "twoscale_coords": {
+      "mean": 3.835,
+      "sd": 0.89,
+      "per_seed": [
+       4.488,
+       4.196,
+       2.821
+      ],
+      "reading": "ahead"
+     },
+     "drift_wins": "0/3"
+    },
+    "markov": {
+     "grid_law": {
+      "mean": 1.141,
+      "sd": 2.285,
+      "per_seed": [
+       -1.065,
+       0.989,
+       3.498
+      ],
+      "reading": "tied"
+     },
+     "twoscale_coords": {
+      "mean": -0.596,
+      "sd": 2.032,
+      "per_seed": [
+       -1.612,
+       -1.918,
+       1.744
+      ],
+      "reading": "tied"
+     },
+     "drift_wins": "0/3"
+    },
+    "markov_best": {
+     "grid_law": {
+      "mean": 1.19,
+      "sd": 1.13,
+      "per_seed": [
+       0.555,
+       2.494,
+       0.519
+      ],
+      "reading": "ahead"
+     },
+     "twoscale_coords": {
+      "mean": 5.541,
+      "sd": 1.009,
+      "per_seed": [
+       6.3,
+       5.928,
+       4.396
+      ],
+      "reading": "ahead"
+     },
+     "drift_wins": "1/3"
+    }
+   }
+  }
+ },
+ "gate": {
+  "no_representation_ahead_of_cosvi": true,
+  "drift_wins_vs_lifts": 12,
+  "drift_wins_required": 14,
+  "of": 18,
+  "verdict": "does not carry over"
+ }
+}

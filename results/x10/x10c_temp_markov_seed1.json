@@ -1,0 +1,189 @@
+{
+ "part": "c",
+ "series": "temp",
+ "rep": "markov",
+ "seed": 1,
+ "group_H": 0.7,
+ "H_profile": 0.7405524219635921,
+ "model_file": "n4v2_markov_seed1_s0.1.pt",
+ "windows_ok": 8,
+ "windows_total": 8,
+ "failures": [],
+ "score_sets": [
+  -58.01067178984213,
+  -57.73237332234292
+ ],
+ "score": -57.87152255609253,
+ "set_difference": 0.27829846749920506,
+ "archived_smooth_ll": -58.127262115478516,
+ "min_ess": 3.059405454601471,
+ "max_weight": 0.5030757270445932,
+ "flagged_windows_ess_below_5pct": [
+  1,
+  2,
+  7
+ ],
+ "seconds": 37.043853998184204,
+ "windows": [
+  {
+   "series": 0,
+   "mode_evaluations": 10,
+   "mode_gradient_inf": 3.649181387552214e-06,
+   "linearised_gap": 0.024972990224708187,
+   "sets": [
+    {
+     "log_score": -96.52379839441407,
+     "ess": 111.14924490859642,
+     "max_weight": 0.04349332660526645,
+     "draws": 512
+    },
+    {
+     "log_score": -96.12047036960402,
+     "ess": 54.52420971914709,
+     "max_weight": 0.09105784845703545,
+     "draws": 512
+    }
+   ]
+  },
+  {
+   "series": 1,
+   "mode_evaluations": 8,
+   "mode_gradient_inf": 1.2110532434661536e-06,
+   "linearised_gap": 0.03780598030965301,
+   "sets": [
+    {
+     "log_score": -57.16525723624135,
+     "ess": 42.31656916301649,
+     "max_weight": 0.07981564224301341,
+     "draws": 512
+    },
+    {
+     "log_score": -57.150733919472295,
+     "ess": 19.904047011839324,
+     "max_weight": 0.16668018053181563,
+     "draws": 512
+    }
+   ]
+  },
+  {
+   "series": 2,
+   "mode_evaluations": 7,
+   "mode_gradient_inf": 1.145221200093971e-07,
+   "linearised_gap": 0.02454208346744696,
+   "sets": [
+    {
+     "log_score": -50.45522310583319,
+     "ess": 14.359443562352888,
+     "max_weight": 0.24478150351948214,
+     "draws": 512
+    },
+    {
+     "log_score": -50.92777665937292,
+     "ess": 144.95856593710417,
+     "max_weight": 0.025231286920759086,
+     "draws": 512
+    }
+   ]
+  },
+  {
+   "series": 3,
+   "mode_evaluations": 9,
+   "mode_gradient_inf": 9.037819317936346e-07,
+   "linearised_gap": 0.024513608398581833,
+   "sets": [
+    {
+     "log_score": -59.09448379646255,
+     "ess": 61.43170483576155,
+     "max_weight": 0.08825379525862583,
+     "draws": 512
+    },
+    {
+     "log_score": -59.09705975499608,
+     "ess": 62.3313169301646,
+     "max_weight": 0.09492503457399974,
+     "draws": 512
+    }
+   ]
+  },
+  {
+   "series": 4,
+   "mode_evaluations": 7,
+   "mode_gradient_inf": 1.9770645770522677e-07,
+   "linearised_gap": 0.02197935984837749,
+   "sets": [
+    {
+     "log_score": -52.72300445725352,
+     "ess": 56.03369992323666,
+     "max_weight": 0.08179364696362124,
+     "draws": 512
+    },
+    {
+     "log_score": -52.685725501964335,
+     "ess": 81.31728541383679,
+     "max_weight": 0.0525896241097551,
+     "draws": 512
+    }
+   ]
+  },
+  {
+   "series": 5,
+   "mode_evaluations": 8,
+   "mode_gradient_inf": 8.326654829735047e-07,
+   "linearised_gap": 0.023586014303236105,
+   "sets": [
+    {
+     "log_score": -49.489243997167556,
+     "ess": 35.23157720659078,
+     "max_weight": 0.125019620440818,
+     "draws": 512
+    },
+    {
+     "log_score": -49.560122987642764,
+     "ess": 34.763392974801384,
+     "max_weight": 0.1254738731638126,
+     "draws": 512
+    }
+   ]
+  },
+  {
+   "series": 6,
+   "mode_evaluations": 7,
+   "mode_gradient_inf": 2.2146892098007243e-07,
+   "linearised_gap": 0.02512981674158661,
+   "sets": [
+    {
+     "log_score": -40.884919144619175,
+     "ess": 233.8378641190625,
+     "max_weight": 0.027677341827398023,
+     "draws": 512
+    },
+    {
+     "log_score": -40.86072714981231,
+     "ess": 211.50040314587875,
+     "max_weight": 0.023551552794722222,
+     "draws": 512
+    }
+   ]
+  },
+  {
+   "series": 7,
+   "mode_evaluations": 9,
+   "mode_gradient_inf": 3.3395736469543635e-06,
+   "linearised_gap": 0.026572914752671803,
+   "sets": [
+    {
+     "log_score": -57.74944418674559,
+     "ess": 23.855149267652344,
+     "max_weight": 0.15701391151211974,
+     "draws": 512
+    },
+    {
+     "log_score": -55.456370235878666,
+     "ess": 3.059405454601471,
+     "max_weight": 0.5030757270445932,
+     "draws": 512
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,67 @@
+{
+ "rule": "audit 18 Nov section 2, adopted",
+ "runs": {
+  "0.7|0": {
+   "authors_curve": 10.779130164132349,
+   "standard_fou": 10.812654401711194,
+   "own_lift": 4.205676488662366,
+   "train_hours": 6.257358877261479,
+   "n_paths": 256
+  },
+  "0.7|1": {
+   "authors_curve": 7.000591260418506,
+   "standard_fou": 6.839755891200425,
+   "own_lift": 3.4544094272610533,
+   "train_hours": 3.6572791612148285,
+   "n_paths": 256
+  },
+  "0.9|0": {
+   "authors_curve": 28.38640888717732,
+   "standard_fou": 18.87712945981003,
+   "own_lift": 7.164378066245695,
+   "train_hours": 5.291177674730619,
+   "n_paths": 256
+  },
+  "0.9|1": {
+   "authors_curve": 26.422613112640025,
+   "standard_fou": 17.060467017903413,
+   "own_lift": 5.125201801414376,
+   "train_hours": 5.145702372656928,
+   "n_paths": 256
+  }
+ },
+ "by_H": {
+  "0.7": {
+   "own_vs_standard_reference_discrepancy": 9.674616041185429,
+   "recomputed_own_lift_max_abs_sd_diff": 7.22013500098484e-08,
+   "readout_error_percentiles_2.5_50_97.5": {
+    "256": [
+     1.48,
+     3.232,
+     7.056
+    ],
+    "4096": [
+     0.383,
+     0.827,
+     1.704
+    ]
+   }
+  },
+  "0.9": {
+   "own_vs_standard_reference_discrepancy": 11.508429636537228,
+   "recomputed_own_lift_max_abs_sd_diff": 5.2410929235469084e-08,
+   "readout_error_percentiles_2.5_50_97.5": {
+    "256": [
+     1.43,
+     3.368,
+     7.705
+    ],
+    "4096": [
+     0.325,
+     0.812,
+     1.733
+    ]
+   }
+  }
+ }
+}

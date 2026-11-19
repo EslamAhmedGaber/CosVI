@@ -1,0 +1,16 @@
+{"name": "wait_for_g0_H07", "start": "2026-11-13 21:41:44", "status": "exit 0", "end": "2026-11-13 21:41:44"}
+{"name": "their_code_bridge_H0.9_theta1", "start": "2026-11-13 21:41:44", "status": "exit 0", "end": "2026-11-14 03:01:02"}
+{"name": "their_code_bridge_H0.6_theta1", "start": "2026-11-14 03:01:02", "status": "exit 0", "end": "2026-11-14 08:02:38"}
+{"name": "their_code_bridge_H0.8_theta1", "start": "2026-11-14 08:02:38", "status": "exit 0", "end": "2026-11-14 14:45:08"}
+{"name": "their_code_bridge_H0.7_theta0", "start": "2026-11-14 14:45:08", "status": "exit 0", "end": "2026-11-14 22:27:05"}
+{"name": "their_code_bridge_H0.9_theta0", "start": "2026-11-14 22:27:56", "status": "exit 0", "end": "2026-11-15 04:10:14"}
+{"name": "their_code_bridge_H0.6_theta0", "start": "2026-11-15 04:10:14", "status": "exit 0", "end": "2026-11-15 08:14:49"}
+{"name": "their_code_bridge_H0.8_theta0", "start": "2026-11-15 08:14:49", "status": "exit 0", "end": "2026-11-15 14:38:17"}
+{"name": "their_code_learnH_H0.9", "start": "2026-11-15 16:31:17", "status": "exit 0", "end": "2026-11-15 20:26:26"}
+{"name": "their_code_learnH_H0.6", "start": "2026-11-15 20:26:26", "status": "exit 0", "end": "2026-11-15 23:36:51"}
+{"name": "their_code_learnH_H0.75", "start": "2026-11-15 23:36:51", "status": "exit 0", "end": "2026-11-16 02:38:39"}
+{"name": "n7_exact", "start": "2026-11-16 02:38:39", "status": "exit 0", "end": "2026-11-16 03:18:26"}
+{"name": "x6_their_code_best_H0.7", "start": "2026-11-16 07:12:51", "status": "exit 0", "end": "2026-11-16 10:23:01"}
+{"name": "x6_their_code_best_H0.9", "start": "2026-11-16 10:23:01", "status": "exit 0", "end": "2026-11-16 13:42:14"}
+{"name": "x7_their_code_seed1_H0.7", "start": "2026-11-16 13:42:14", "status": "exit 0", "end": "2026-11-16 17:24:33"}
+{"name": "x7_their_code_seed1_H0.9", "start": "2026-11-16 17:24:34", "status": "exit 0", "end": "2026-11-16 22:34:56"}

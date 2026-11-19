@@ -1,0 +1,551 @@
+{
+ "J": [
+  16,
+  32,
+  64,
+  96,
+  128,
+  192,
+  256
+ ],
+ "m": [
+  2,
+  5,
+  10,
+  20,
+  40
+ ],
+ "results": {
+  "0.60": {
+   "m2_J16": {
+    "dlogp_mean": 0.006301673629299631,
+    "post_mean_err_sd_units_max": 0.07209193556792422,
+    "post_var_relerr_integrated_max": 0.0677880136040889
+   },
+   "m2_J32": {
+    "dlogp_mean": 0.0025984119919064243,
+    "post_mean_err_sd_units_max": 0.03287959203113502,
+    "post_var_relerr_integrated_max": 0.027866454435569333
+   },
+   "m2_J64": {
+    "dlogp_mean": 0.0011360093988386666,
+    "post_mean_err_sd_units_max": 0.008104767130882401,
+    "post_var_relerr_integrated_max": 0.01176679042127359
+   },
+   "m2_J96": {
+    "dlogp_mean": 0.0006934264128788837,
+    "post_mean_err_sd_units_max": 0.007197859367769101,
+    "post_var_relerr_integrated_max": 0.007393108656089455
+   },
+   "m2_J128": {
+    "dlogp_mean": 0.00048698670286519976,
+    "post_mean_err_sd_units_max": 0.004251514747572537,
+    "post_var_relerr_integrated_max": 0.005162366271407204
+   },
+   "m2_J192": {
+    "dlogp_mean": 0.00029914144183531557,
+    "post_mean_err_sd_units_max": 0.0029052256943293085,
+    "post_var_relerr_integrated_max": 0.003169069334308258
+   },
+   "m2_J256": {
+    "dlogp_mean": 0.00021217673197582165,
+    "post_mean_err_sd_units_max": 0.002054269758330771,
+    "post_var_relerr_integrated_max": 0.002251575533171583
+   },
+   "m5_J16": {
+    "dlogp_mean": 0.01773980153230261,
+    "post_mean_err_sd_units_max": 0.17850244451826322,
+    "post_var_relerr_integrated_max": 0.19536035463378773
+   },
+   "m5_J32": {
+    "dlogp_mean": 0.005899183713864354,
+    "post_mean_err_sd_units_max": 0.08294017054598869,
+    "post_var_relerr_integrated_max": 0.07896677748850345
+   },
+   "m5_J64": {
+    "dlogp_mean": 0.002803352346144283,
+    "post_mean_err_sd_units_max": 0.018273243661270953,
+    "post_var_relerr_integrated_max": 0.030456236987752867
+   },
+   "m5_J96": {
+    "dlogp_mean": 0.0017434372799055354,
+    "post_mean_err_sd_units_max": 0.016912495286631385,
+    "post_var_relerr_integrated_max": 0.020436768933407706
+   },
+   "m5_J128": {
+    "dlogp_mean": 0.0011816626271390351,
+    "post_mean_err_sd_units_max": 0.009920453096902572,
+    "post_var_relerr_integrated_max": 0.013900310931678735
+   },
+   "m5_J192": {
+    "dlogp_mean": 0.0007248645269968712,
+    "post_mean_err_sd_units_max": 0.0068555683231203025,
+    "post_var_relerr_integrated_max": 0.008609672110399633
+   },
+   "m5_J256": {
+    "dlogp_mean": 0.0005247090430541057,
+    "post_mean_err_sd_units_max": 0.0047776321882170925,
+    "post_var_relerr_integrated_max": 0.006133100660787667
+   },
+   "m10_J16": {
+    "dlogp_mean": 0.019893735078056272,
+    "post_mean_err_sd_units_max": 0.33649464389991385,
+    "post_var_relerr_integrated_max": 0.3917072806570967
+   },
+   "m10_J32": {
+    "dlogp_mean": 0.012906626603721438,
+    "post_mean_err_sd_units_max": 0.14450144051374902,
+    "post_var_relerr_integrated_max": 0.1433966647779975
+   },
+   "m10_J64": {
+    "dlogp_mean": 0.005458319272327738,
+    "post_mean_err_sd_units_max": 0.0291809364643091,
+    "post_var_relerr_integrated_max": 0.04704965683751873
+   },
+   "m10_J96": {
+    "dlogp_mean": 0.0033906716989465123,
+    "post_mean_err_sd_units_max": 0.02797742364728835,
+    "post_var_relerr_integrated_max": 0.03646586121366783
+   },
+   "m10_J128": {
+    "dlogp_mean": 0.00220155789391665,
+    "post_mean_err_sd_units_max": 0.015687162678454228,
+    "post_var_relerr_integrated_max": 0.023169747262099406
+   },
+   "m10_J192": {
+    "dlogp_mean": 0.0016028093706493608,
+    "post_mean_err_sd_units_max": 0.010983769699991892,
+    "post_var_relerr_integrated_max": 0.014713787821369353
+   },
+   "m10_J256": {
+    "dlogp_mean": 0.0010919401098339776,
+    "post_mean_err_sd_units_max": 0.0076895152058408306,
+    "post_var_relerr_integrated_max": 0.010594938230699276
+   },
+   "m20_J16": {
+    "dlogp_mean": 0.05974648395216313,
+    "post_mean_err_sd_units_max": 1.1548433622883647,
+    "post_var_relerr_integrated_max": 0.48432494912432345
+   },
+   "m20_J32": {
+    "dlogp_mean": 0.05966848998313612,
+    "post_mean_err_sd_units_max": 0.29483210228841156,
+    "post_var_relerr_integrated_max": 0.22750259564221356
+   },
+   "m20_J64": {
+    "dlogp_mean": 0.03994440913652557,
+    "post_mean_err_sd_units_max": 0.05738501037384873,
+    "post_var_relerr_integrated_max": 0.051967405653651724
+   },
+   "m20_J96": {
+    "dlogp_mean": 0.030859651496326457,
+    "post_mean_err_sd_units_max": 0.05467304052564154,
+    "post_var_relerr_integrated_max": 0.046743675410101895
+   },
+   "m20_J128": {
+    "dlogp_mean": 0.020537830998357088,
+    "post_mean_err_sd_units_max": 0.03222994440697716,
+    "post_var_relerr_integrated_max": 0.027455035887342983
+   },
+   "m20_J192": {
+    "dlogp_mean": 0.011265777939610366,
+    "post_mean_err_sd_units_max": 0.019838232496487217,
+    "post_var_relerr_integrated_max": 0.019181901510530525
+   },
+   "m20_J256": {
+    "dlogp_mean": 0.008928048877691275,
+    "post_mean_err_sd_units_max": 0.014873578022293745,
+    "post_var_relerr_integrated_max": 0.013378223282021632
+   },
+   "m40_J16": {
+    "dlogp_mean": -1.9945178289888255,
+    "post_mean_err_sd_units_max": 1.863040688204694,
+    "post_var_relerr_integrated_max": 0.4400982373609117
+   },
+   "m40_J32": {
+    "dlogp_mean": 0.003199512996831544,
+    "post_mean_err_sd_units_max": 0.8098837072268341,
+    "post_var_relerr_integrated_max": 0.15702507481224726
+   },
+   "m40_J64": {
+    "dlogp_mean": 0.06110286457927998,
+    "post_mean_err_sd_units_max": 0.10587331019693542,
+    "post_var_relerr_integrated_max": 0.028001006197777005
+   },
+   "m40_J96": {
+    "dlogp_mean": 0.06367264737544076,
+    "post_mean_err_sd_units_max": 0.10375770289771413,
+    "post_var_relerr_integrated_max": 0.025585184526341016
+   },
+   "m40_J128": {
+    "dlogp_mean": 0.041898053881334364,
+    "post_mean_err_sd_units_max": 0.05546035694948415,
+    "post_var_relerr_integrated_max": 0.01495639507555659
+   },
+   "m40_J192": {
+    "dlogp_mean": 0.0279525241170397,
+    "post_mean_err_sd_units_max": 0.04154964748045013,
+    "post_var_relerr_integrated_max": 0.010069567414717862
+   },
+   "m40_J256": {
+    "dlogp_mean": 0.01997596724396189,
+    "post_mean_err_sd_units_max": 0.028483315741020348,
+    "post_var_relerr_integrated_max": 0.007083973746336002
+   }
+  },
+  "0.75": {
+   "m2_J16": {
+    "dlogp_mean": -0.001041964490990388,
+    "post_mean_err_sd_units_max": 0.06993749711530581,
+    "post_var_relerr_integrated_max": 0.03495419838923706
+   },
+   "m2_J32": {
+    "dlogp_mean": -0.0003418396305432614,
+    "post_mean_err_sd_units_max": 0.027483091085705437,
+    "post_var_relerr_integrated_max": 0.01159806860687543
+   },
+   "m2_J64": {
+    "dlogp_mean": -0.00012150820563106013,
+    "post_mean_err_sd_units_max": 0.004945419007590545,
+    "post_var_relerr_integrated_max": 0.003961393100069896
+   },
+   "m2_J96": {
+    "dlogp_mean": -6.549451760382575e-05,
+    "post_mean_err_sd_units_max": 0.004214007911059358,
+    "post_var_relerr_integrated_max": 0.0022118621791722896
+   },
+   "m2_J128": {
+    "dlogp_mean": -4.209956824710037e-05,
+    "post_mean_err_sd_units_max": 0.0022136863363242526,
+    "post_var_relerr_integrated_max": 0.0014129773078854879
+   },
+   "m2_J192": {
+    "dlogp_mean": -2.2890532317254576e-05,
+    "post_mean_err_sd_units_max": 0.0013696567521283502,
+    "post_var_relerr_integrated_max": 0.0007678008553827578
+   },
+   "m2_J256": {
+    "dlogp_mean": -1.4899743004548326e-05,
+    "post_mean_err_sd_units_max": 0.0008867401814913049,
+    "post_var_relerr_integrated_max": 0.000500801448992238
+   },
+   "m5_J16": {
+    "dlogp_mean": 0.01377506642816817,
+    "post_mean_err_sd_units_max": 0.1400265456409582,
+    "post_var_relerr_integrated_max": 0.11176011350624107
+   },
+   "m5_J32": {
+    "dlogp_mean": 0.004016866450846956,
+    "post_mean_err_sd_units_max": 0.052294610511392677,
+    "post_var_relerr_integrated_max": 0.03683767692980078
+   },
+   "m5_J64": {
+    "dlogp_mean": 0.0015087823567334624,
+    "post_mean_err_sd_units_max": 0.007995305838655155,
+    "post_var_relerr_integrated_max": 0.01133444233733913
+   },
+   "m5_J96": {
+    "dlogp_mean": 0.0008134735512979497,
+    "post_mean_err_sd_units_max": 0.007580467065022764,
+    "post_var_relerr_integrated_max": 0.006839163147364638
+   },
+   "m5_J128": {
+    "dlogp_mean": 0.000519960230279759,
+    "post_mean_err_sd_units_max": 0.0037285942464547524,
+    "post_var_relerr_integrated_max": 0.004242310759959352
+   },
+   "m5_J192": {
+    "dlogp_mean": 0.00027932622838688914,
+    "post_mean_err_sd_units_max": 0.0024253973295433554,
+    "post_var_relerr_integrated_max": 0.0023283295931563557
+   },
+   "m5_J256": {
+    "dlogp_mean": 0.0001837627016088472,
+    "post_mean_err_sd_units_max": 0.001561398499751373,
+    "post_var_relerr_integrated_max": 0.001523252486194919
+   },
+   "m10_J16": {
+    "dlogp_mean": 0.011755431953225237,
+    "post_mean_err_sd_units_max": 0.20010807608230008,
+    "post_var_relerr_integrated_max": 0.21524352025430613
+   },
+   "m10_J32": {
+    "dlogp_mean": 0.011666627902063808,
+    "post_mean_err_sd_units_max": 0.06105103465217598,
+    "post_var_relerr_integrated_max": 0.06372859545344994
+   },
+   "m10_J64": {
+    "dlogp_mean": 0.004074795807371867,
+    "post_mean_err_sd_units_max": 0.01030369510572839,
+    "post_var_relerr_integrated_max": 0.016495582804677212
+   },
+   "m10_J96": {
+    "dlogp_mean": 0.0018445612944134383,
+    "post_mean_err_sd_units_max": 0.00769173980495947,
+    "post_var_relerr_integrated_max": 0.011723005199754364
+   },
+   "m10_J128": {
+    "dlogp_mean": 0.0013966868206821026,
+    "post_mean_err_sd_units_max": 0.0034694444810706502,
+    "post_var_relerr_integrated_max": 0.006733072217041796
+   },
+   "m10_J192": {
+    "dlogp_mean": 0.0007346630699589518,
+    "post_mean_err_sd_units_max": 0.0023458464421982025,
+    "post_var_relerr_integrated_max": 0.003801713255465445
+   },
+   "m10_J256": {
+    "dlogp_mean": 0.00045348649924603635,
+    "post_mean_err_sd_units_max": 0.0015312115448629007,
+    "post_var_relerr_integrated_max": 0.0025193233483837446
+   },
+   "m20_J16": {
+    "dlogp_mean": -0.11534607731452091,
+    "post_mean_err_sd_units_max": 0.5888167128591374,
+    "post_var_relerr_integrated_max": 0.2481377497233553
+   },
+   "m20_J32": {
+    "dlogp_mean": 0.020218186689116634,
+    "post_mean_err_sd_units_max": 0.11233114979369839,
+    "post_var_relerr_integrated_max": 0.09623188964114539
+   },
+   "m20_J64": {
+    "dlogp_mean": 0.00201242361905809,
+    "post_mean_err_sd_units_max": 0.025775075914160273,
+    "post_var_relerr_integrated_max": 0.017927762971368583
+   },
+   "m20_J96": {
+    "dlogp_mean": 0.0020889503834583324,
+    "post_mean_err_sd_units_max": 0.015566037839598333,
+    "post_var_relerr_integrated_max": 0.014449077726850498
+   },
+   "m20_J128": {
+    "dlogp_mean": 0.0010787922056993081,
+    "post_mean_err_sd_units_max": 0.010108945987062223,
+    "post_var_relerr_integrated_max": 0.007746803304557483
+   },
+   "m20_J192": {
+    "dlogp_mean": 0.0008010615936655085,
+    "post_mean_err_sd_units_max": 0.004771653101372109,
+    "post_var_relerr_integrated_max": 0.0048012729480701
+   },
+   "m20_J256": {
+    "dlogp_mean": 0.0004739662726922944,
+    "post_mean_err_sd_units_max": 0.003312703141547999,
+    "post_var_relerr_integrated_max": 0.00307615978419515
+   },
+   "m40_J16": {
+    "dlogp_mean": -0.8071022140884196,
+    "post_mean_err_sd_units_max": 1.155058031440785,
+    "post_var_relerr_integrated_max": 0.28116751629446857
+   },
+   "m40_J32": {
+    "dlogp_mean": -0.17018726203027085,
+    "post_mean_err_sd_units_max": 0.3978244520581496,
+    "post_var_relerr_integrated_max": 0.08671147989302108
+   },
+   "m40_J64": {
+    "dlogp_mean": -0.028820109048755427,
+    "post_mean_err_sd_units_max": 0.05624540292099695,
+    "post_var_relerr_integrated_max": 0.01583743419544625
+   },
+   "m40_J96": {
+    "dlogp_mean": -0.01844293941738826,
+    "post_mean_err_sd_units_max": 0.04560285100980046,
+    "post_var_relerr_integrated_max": 0.013148772394393772
+   },
+   "m40_J128": {
+    "dlogp_mean": -0.010219821514910877,
+    "post_mean_err_sd_units_max": 0.026965272447734053,
+    "post_var_relerr_integrated_max": 0.007147588564552109
+   },
+   "m40_J192": {
+    "dlogp_mean": -0.005931069606761241,
+    "post_mean_err_sd_units_max": 0.013824779163117707,
+    "post_var_relerr_integrated_max": 0.0042076882875257795
+   },
+   "m40_J256": {
+    "dlogp_mean": -0.003818926366371045,
+    "post_mean_err_sd_units_max": 0.009451435584921277,
+    "post_var_relerr_integrated_max": 0.002758401520164355
+   }
+  },
+  "0.90": {
+   "m2_J16": {
+    "dlogp_mean": -0.0007013949437475686,
+    "post_mean_err_sd_units_max": 0.018237472292030904,
+    "post_var_relerr_integrated_max": 0.015543083235652354
+   },
+   "m2_J32": {
+    "dlogp_mean": -0.00018597814175775885,
+    "post_mean_err_sd_units_max": 0.005576167965909513,
+    "post_var_relerr_integrated_max": 0.004163028520305713
+   },
+   "m2_J64": {
+    "dlogp_mean": -5.3744405355471424e-05,
+    "post_mean_err_sd_units_max": 0.0008546846548543894,
+    "post_var_relerr_integrated_max": 0.0011512036777158135
+   },
+   "m2_J96": {
+    "dlogp_mean": -2.564949707613007e-05,
+    "post_mean_err_sd_units_max": 0.0005932520803836607,
+    "post_var_relerr_integrated_max": 0.000570450070335626
+   },
+   "m2_J128": {
+    "dlogp_mean": -1.5098445119399173e-05,
+    "post_mean_err_sd_units_max": 0.0002760818808010759,
+    "post_var_relerr_integrated_max": 0.00033359449863445116
+   },
+   "m2_J192": {
+    "dlogp_mean": -7.2704112691890366e-06,
+    "post_mean_err_sd_units_max": 0.00015534776137640917,
+    "post_var_relerr_integrated_max": 0.00016040483357471577
+   },
+   "m2_J256": {
+    "dlogp_mean": -4.343286207930674e-06,
+    "post_mean_err_sd_units_max": 9.185815589288378e-05,
+    "post_var_relerr_integrated_max": 9.603689532360428e-05
+   },
+   "m5_J16": {
+    "dlogp_mean": 0.005180660853597497,
+    "post_mean_err_sd_units_max": 0.02829080869413221,
+    "post_var_relerr_integrated_max": 0.04163913658099628
+   },
+   "m5_J32": {
+    "dlogp_mean": 0.0008728389143059622,
+    "post_mean_err_sd_units_max": 0.010112390493107984,
+    "post_var_relerr_integrated_max": 0.011236097936753736
+   },
+   "m5_J64": {
+    "dlogp_mean": 0.00028614231097221496,
+    "post_mean_err_sd_units_max": 0.0014857331896561193,
+    "post_var_relerr_integrated_max": 0.0027926776430793115
+   },
+   "m5_J96": {
+    "dlogp_mean": 0.0001474062121015418,
+    "post_mean_err_sd_units_max": 0.0009624772307034568,
+    "post_var_relerr_integrated_max": 0.0014983317929999338
+   },
+   "m5_J128": {
+    "dlogp_mean": 8.411487269968098e-05,
+    "post_mean_err_sd_units_max": 0.00044022829100156483,
+    "post_var_relerr_integrated_max": 0.0008526816255385432
+   },
+   "m5_J192": {
+    "dlogp_mean": 3.8276762502631453e-05,
+    "post_mean_err_sd_units_max": 0.00025265537798424683,
+    "post_var_relerr_integrated_max": 0.0004134954483684657
+   },
+   "m5_J256": {
+    "dlogp_mean": 2.398154736096281e-05,
+    "post_mean_err_sd_units_max": 0.0001464274941586356,
+    "post_var_relerr_integrated_max": 0.0002482453522115833
+   },
+   "m10_J16": {
+    "dlogp_mean": 0.011156877851743375,
+    "post_mean_err_sd_units_max": 0.057891848376744555,
+    "post_var_relerr_integrated_max": 0.0689184188000473
+   },
+   "m10_J32": {
+    "dlogp_mean": 0.003857578462982758,
+    "post_mean_err_sd_units_max": 0.014076765039075078,
+    "post_var_relerr_integrated_max": 0.016666918381781654
+   },
+   "m10_J64": {
+    "dlogp_mean": 0.0011137313377258095,
+    "post_mean_err_sd_units_max": 0.0038555604887859406,
+    "post_var_relerr_integrated_max": 0.0036173322081671337
+   },
+   "m10_J96": {
+    "dlogp_mean": 0.0005168490237386081,
+    "post_mean_err_sd_units_max": 0.0015544972649263935,
+    "post_var_relerr_integrated_max": 0.002236345808023809
+   },
+   "m10_J128": {
+    "dlogp_mean": 0.00031865796049466153,
+    "post_mean_err_sd_units_max": 0.0010693939231564307,
+    "post_var_relerr_integrated_max": 0.00118703566839192
+   },
+   "m10_J192": {
+    "dlogp_mean": 0.00015174505995485532,
+    "post_mean_err_sd_units_max": 0.00047776981117502495,
+    "post_var_relerr_integrated_max": 0.0005903673883431491
+   },
+   "m10_J256": {
+    "dlogp_mean": 8.9755576563455e-05,
+    "post_mean_err_sd_units_max": 0.0002782919477160454,
+    "post_var_relerr_integrated_max": 0.0003589684114713455
+   },
+   "m20_J16": {
+    "dlogp_mean": -0.008716753889556016,
+    "post_mean_err_sd_units_max": 0.15566309572571996,
+    "post_var_relerr_integrated_max": 0.08085773791489818
+   },
+   "m20_J32": {
+    "dlogp_mean": 0.0018226858505311582,
+    "post_mean_err_sd_units_max": 0.02511557175379736,
+    "post_var_relerr_integrated_max": 0.02488003625327251
+   },
+   "m20_J64": {
+    "dlogp_mean": -4.66910485581451e-05,
+    "post_mean_err_sd_units_max": 0.006660826544842322,
+    "post_var_relerr_integrated_max": 0.004418312324218323
+   },
+   "m20_J96": {
+    "dlogp_mean": -4.302365398984875e-05,
+    "post_mean_err_sd_units_max": 0.0038737223182164354,
+    "post_var_relerr_integrated_max": 0.002868011661826669
+   },
+   "m20_J128": {
+    "dlogp_mean": -5.135137778857768e-05,
+    "post_mean_err_sd_units_max": 0.0021312399643198016,
+    "post_var_relerr_integrated_max": 0.0014671571587119652
+   },
+   "m20_J192": {
+    "dlogp_mean": 9.130978865812267e-06,
+    "post_mean_err_sd_units_max": 0.0009474754938805415,
+    "post_var_relerr_integrated_max": 0.0007790207228444456
+   },
+   "m20_J256": {
+    "dlogp_mean": -5.169311997477166e-06,
+    "post_mean_err_sd_units_max": 0.0006137288538142825,
+    "post_var_relerr_integrated_max": 0.00046055369964483793
+   },
+   "m40_J16": {
+    "dlogp_mean": -0.010041417761271276,
+    "post_mean_err_sd_units_max": 0.2631097998392172,
+    "post_var_relerr_integrated_max": 0.10911855505506024
+   },
+   "m40_J32": {
+    "dlogp_mean": 0.0006036251696265538,
+    "post_mean_err_sd_units_max": 0.056990626874669895,
+    "post_var_relerr_integrated_max": 0.027912920378920427
+   },
+   "m40_J64": {
+    "dlogp_mean": -0.0014931735015252911,
+    "post_mean_err_sd_units_max": 0.013182232302330043,
+    "post_var_relerr_integrated_max": 0.005274023654112406
+   },
+   "m40_J96": {
+    "dlogp_mean": -8.14600684719835e-05,
+    "post_mean_err_sd_units_max": 0.00604992361454584,
+    "post_var_relerr_integrated_max": 0.0035112893848354243
+   },
+   "m40_J128": {
+    "dlogp_mean": -7.855762032917823e-05,
+    "post_mean_err_sd_units_max": 0.003314158599033094,
+    "post_var_relerr_integrated_max": 0.0018272140925462922
+   },
+   "m40_J192": {
+    "dlogp_mean": -5.590545972538053e-05,
+    "post_mean_err_sd_units_max": 0.0016131793729028772,
+    "post_var_relerr_integrated_max": 0.0009199445907958863
+   },
+   "m40_J256": {
+    "dlogp_mean": -3.0316692964049707e-05,
+    "post_mean_err_sd_units_max": 0.0009820040358495877,
+    "post_var_relerr_integrated_max": 0.0005581030071423693
+   }
+  }
+ }
+}

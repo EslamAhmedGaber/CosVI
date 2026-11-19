@@ -1,0 +1,554 @@
+{
+ "rule": "helps if Delta > sd, hurts if Delta < -sd (paired over seeds); claim if helps at >= 2 of 3 H",
+ "rows": {
+  "classical": {
+   "pair": "base_cos",
+   "by_H": {
+    "0.60": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": 0.045,
+     "delta_grid_sd": 0.063,
+     "delta_grid_per_seed": [
+      0.025,
+      0.116,
+      -0.005
+     ],
+     "delta_twoscale_mean": -0.008,
+     "drift_rmse_ratio": 0.997,
+     "wallclock_ratio": 0.983,
+     "component_verdict": "no detectable effect"
+    },
+    "0.75": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": -0.006,
+     "delta_grid_sd": 0.027,
+     "delta_grid_per_seed": [
+      -0.012,
+      -0.03,
+      0.024
+     ],
+     "delta_twoscale_mean": -0.005,
+     "drift_rmse_ratio": 1.0,
+     "wallclock_ratio": 0.983,
+     "component_verdict": "no detectable effect"
+    },
+    "0.90": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": 0.0,
+     "delta_grid_sd": 0.006,
+     "delta_grid_per_seed": [
+      0.001,
+      0.006,
+      -0.006
+     ],
+     "delta_twoscale_mean": 0.012,
+     "drift_rmse_ratio": 1.0,
+     "wallclock_ratio": 0.983,
+     "component_verdict": "no detectable effect"
+    }
+   },
+   "claimed": false,
+   "kind": "component"
+  },
+  "heun": {
+   "pair": "base",
+   "by_H": {
+    "0.60": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": 0.006,
+     "delta_grid_sd": 0.011,
+     "delta_grid_per_seed": [
+      -0.006,
+      0.012,
+      0.014
+     ],
+     "delta_twoscale_mean": 0.012,
+     "drift_rmse_ratio": 1.006,
+     "wallclock_ratio": 0.564,
+     "component_verdict": "no detectable effect"
+    },
+    "0.75": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": -0.008,
+     "delta_grid_sd": 0.025,
+     "delta_grid_per_seed": [
+      0.011,
+      0.001,
+      -0.036
+     ],
+     "delta_twoscale_mean": 0.001,
+     "drift_rmse_ratio": 1.001,
+     "wallclock_ratio": 0.564,
+     "component_verdict": "no detectable effect"
+    },
+    "0.90": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": -0.004,
+     "delta_grid_sd": 0.003,
+     "delta_grid_per_seed": [
+      -0.006,
+      -0.001,
+      -0.006
+     ],
+     "delta_twoscale_mean": -0.018,
+     "drift_rmse_ratio": 1.0,
+     "wallclock_ratio": 0.564,
+     "component_verdict": "hurts"
+    }
+   },
+   "claimed": false,
+   "kind": "component"
+  },
+  "lr2": {
+   "pair": "base",
+   "by_H": {
+    "0.60": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": 1.087,
+     "delta_grid_sd": 0.114,
+     "delta_grid_per_seed": [
+      1.211,
+      0.987,
+      1.062
+     ],
+     "delta_twoscale_mean": 1.014,
+     "drift_rmse_ratio": 0.985,
+     "wallclock_ratio": 1.053,
+     "component_verdict": "helps"
+    },
+    "0.75": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": 0.239,
+     "delta_grid_sd": 0.145,
+     "delta_grid_per_seed": [
+      0.2,
+      0.117,
+      0.4
+     ],
+     "delta_twoscale_mean": 0.448,
+     "drift_rmse_ratio": 1.026,
+     "wallclock_ratio": 1.053,
+     "component_verdict": "helps"
+    },
+    "0.90": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": 0.158,
+     "delta_grid_sd": 0.087,
+     "delta_grid_per_seed": [
+      0.253,
+      0.139,
+      0.081
+     ],
+     "delta_twoscale_mean": 0.286,
+     "drift_rmse_ratio": 1.084,
+     "wallclock_ratio": 1.053,
+     "component_verdict": "helps"
+    }
+   },
+   "claimed": true,
+   "kind": "trade-off"
+  },
+  "lr4": {
+   "pair": "base",
+   "by_H": {
+    "0.60": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": 0.964,
+     "delta_grid_sd": 0.098,
+     "delta_grid_per_seed": [
+      1.075,
+      0.889,
+      0.928
+     ],
+     "delta_twoscale_mean": 0.89,
+     "drift_rmse_ratio": 0.974,
+     "wallclock_ratio": 1.058,
+     "component_verdict": "helps"
+    },
+    "0.75": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": 0.171,
+     "delta_grid_sd": 0.132,
+     "delta_grid_per_seed": [
+      0.135,
+      0.061,
+      0.318
+     ],
+     "delta_twoscale_mean": 0.383,
+     "drift_rmse_ratio": 1.007,
+     "wallclock_ratio": 1.058,
+     "component_verdict": "helps"
+    },
+    "0.90": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": 0.154,
+     "delta_grid_sd": 0.082,
+     "delta_grid_per_seed": [
+      0.249,
+      0.113,
+      0.1
+     ],
+     "delta_twoscale_mean": 0.272,
+     "drift_rmse_ratio": 1.065,
+     "wallclock_ratio": 1.058,
+     "component_verdict": "helps"
+    }
+   },
+   "claimed": true,
+   "kind": "trade-off"
+  },
+  "lr8": {
+   "pair": "base",
+   "by_H": {
+    "0.60": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": 0.784,
+     "delta_grid_sd": 0.08,
+     "delta_grid_per_seed": [
+      0.866,
+      0.779,
+      0.706
+     ],
+     "delta_twoscale_mean": 0.699,
+     "drift_rmse_ratio": 0.966,
+     "wallclock_ratio": 1.062,
+     "component_verdict": "helps"
+    },
+    "0.75": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": 0.14,
+     "delta_grid_sd": 0.111,
+     "delta_grid_per_seed": [
+      0.132,
+      0.034,
+      0.255
+     ],
+     "delta_twoscale_mean": 0.347,
+     "drift_rmse_ratio": 1.012,
+     "wallclock_ratio": 1.062,
+     "component_verdict": "helps"
+    },
+    "0.90": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": 0.174,
+     "delta_grid_sd": 0.094,
+     "delta_grid_per_seed": [
+      0.283,
+      0.123,
+      0.116
+     ],
+     "delta_twoscale_mean": 0.296,
+     "drift_rmse_ratio": 1.073,
+     "wallclock_ratio": 1.062,
+     "component_verdict": "helps"
+    }
+   },
+   "claimed": true,
+   "kind": "trade-off"
+  },
+  "mf": {
+   "pair": "base",
+   "by_H": {
+    "0.60": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": 0.982,
+     "delta_grid_sd": 0.373,
+     "delta_grid_per_seed": [
+      1.323,
+      0.584,
+      1.038
+     ],
+     "delta_twoscale_mean": 1.134,
+     "drift_rmse_ratio": 0.994,
+     "wallclock_ratio": 1.048,
+     "component_verdict": "helps"
+    },
+    "0.75": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": 0.394,
+     "delta_grid_sd": 0.186,
+     "delta_grid_per_seed": [
+      0.39,
+      0.21,
+      0.582
+     ],
+     "delta_twoscale_mean": 0.499,
+     "drift_rmse_ratio": 1.055,
+     "wallclock_ratio": 1.048,
+     "component_verdict": "helps"
+    },
+    "0.90": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": 0.197,
+     "delta_grid_sd": 0.131,
+     "delta_grid_per_seed": [
+      0.244,
+      0.298,
+      0.048
+     ],
+     "delta_twoscale_mean": 0.21,
+     "drift_rmse_ratio": 1.113,
+     "wallclock_ratio": 1.048,
+     "component_verdict": "helps"
+    }
+   },
+   "claimed": true,
+   "kind": "trade-off"
+  },
+  "raw": {
+   "pair": "base_cos",
+   "by_H": {
+    "0.60": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": 0.064,
+     "delta_grid_sd": 0.04,
+     "delta_grid_per_seed": [
+      0.059,
+      0.106,
+      0.027
+     ],
+     "delta_twoscale_mean": -0.007,
+     "drift_rmse_ratio": 0.995,
+     "wallclock_ratio": 1.0,
+     "component_verdict": "helps"
+    },
+    "0.75": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": 0.019,
+     "delta_grid_sd": 0.082,
+     "delta_grid_per_seed": [
+      0.041,
+      -0.072,
+      0.087
+     ],
+     "delta_twoscale_mean": 0.025,
+     "drift_rmse_ratio": 1.002,
+     "wallclock_ratio": 1.0,
+     "component_verdict": "no detectable effect"
+    },
+    "0.90": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": 0.167,
+     "delta_grid_sd": 0.049,
+     "delta_grid_per_seed": [
+      0.187,
+      0.111,
+      0.204
+     ],
+     "delta_twoscale_mean": 0.24,
+     "drift_rmse_ratio": 1.133,
+     "wallclock_ratio": 1.0,
+     "component_verdict": "helps"
+    }
+   },
+   "claimed": true,
+   "kind": "component"
+  },
+  "s4": {
+   "pair": "base",
+   "by_H": {
+    "0.60": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": 0.108,
+     "delta_grid_sd": 0.264,
+     "delta_grid_per_seed": [
+      0.032,
+      0.401,
+      -0.11
+     ],
+     "delta_twoscale_mean": 0.002,
+     "drift_rmse_ratio": 0.989,
+     "wallclock_ratio": 0.568,
+     "component_verdict": "no detectable effect"
+    },
+    "0.75": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": -0.005,
+     "delta_grid_sd": 0.217,
+     "delta_grid_per_seed": [
+      -0.052,
+      -0.195,
+      0.231
+     ],
+     "delta_twoscale_mean": 0.115,
+     "drift_rmse_ratio": 1.029,
+     "wallclock_ratio": 0.568,
+     "component_verdict": "no detectable effect"
+    },
+    "0.90": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": 0.449,
+     "delta_grid_sd": 0.132,
+     "delta_grid_per_seed": [
+      0.444,
+      0.32,
+      0.584
+     ],
+     "delta_twoscale_mean": 0.314,
+     "drift_rmse_ratio": 1.052,
+     "wallclock_ratio": 0.568,
+     "component_verdict": "helps"
+    }
+   },
+   "claimed": false,
+   "kind": "trade-off"
+  },
+  "s8": {
+   "pair": "base",
+   "by_H": {
+    "0.60": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": 0.148,
+     "delta_grid_sd": 0.357,
+     "delta_grid_per_seed": [
+      0.092,
+      0.529,
+      -0.177
+     ],
+     "delta_twoscale_mean": 0.118,
+     "drift_rmse_ratio": 1.038,
+     "wallclock_ratio": 0.766,
+     "component_verdict": "no detectable effect"
+    },
+    "0.75": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": -0.076,
+     "delta_grid_sd": 0.205,
+     "delta_grid_per_seed": [
+      0.04,
+      -0.313,
+      0.044
+     ],
+     "delta_twoscale_mean": 0.026,
+     "drift_rmse_ratio": 0.996,
+     "wallclock_ratio": 0.766,
+     "component_verdict": "no detectable effect"
+    },
+    "0.90": {
+     "seeds": [
+      0,
+      1,
+      2
+     ],
+     "delta_grid_mean": 0.253,
+     "delta_grid_sd": 0.095,
+     "delta_grid_per_seed": [
+      0.242,
+      0.163,
+      0.353
+     ],
+     "delta_twoscale_mean": 0.202,
+     "drift_rmse_ratio": 1.021,
+     "wallclock_ratio": 0.766,
+     "component_verdict": "helps"
+    }
+   },
+   "claimed": false,
+   "kind": "trade-off"
+  }
+ }
+}
