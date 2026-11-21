@@ -1,7 +1,7 @@
 """E1-a: two-scale whitened coordinates (TSW) in the linear model, exact computation.
 
 Representation (Section 3.1 of the paper): on a fine grid t_n = n h (h = T/N),
-    B(t_n) = A(t_n) xi + R(t_n),  xi ~ N(0, I_J)  (projection cosine coordinates, Paper 1),
+    B(t_n) = A(t_n) xi + R(t_n),  xi ~ N(0, I_J)  (projection cosine coordinates, CosChaos),
     R_grid = L_R eta,  eta ~ N(0, I_{N-1}),  L_R = chol(Cov R on the interior grid),  R(0) = R(T) = 0,
 R independent of xi, R piecewise linear between grid points.  On the grid the prior of B is EXACT (no truncation);
 the only model error is the linear interpolation of the small residual between grid points.

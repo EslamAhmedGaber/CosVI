@@ -1,4 +1,4 @@
-"""One visual identity for every figure of Paper 4 (both Elsevier layouts), in the family look of CosChaos.
+"""One visual identity for every figure of the CosVI paper (both Elsevier layouts), in the family look of CosChaos.
 
 Text is set by LaTeX with Latin Modern (the body font of the manuscript), so labels and mathematics in the figures
 match the text exactly.  Sizes are print sizes: one-column layout 6.30 in wide (text width 6.48 in); two-column layout
@@ -39,7 +39,7 @@ STYLE = {
     "grid":    dict(color=C["grid"], ls="-.", marker="D", mfc=C["grid"], lw=1.3, ms=3.4, zorder=4, label="exact grid"),
     "ma":      dict(color=C["ma"], ls="--", marker="s", mfc="white", lw=1.3, ms=3.8, zorder=3, label="MA-fBm law, published nodes"),
     "ma_best": dict(color=C["ma_best"], ls=":", marker="s", mfc=C["ma_best"], lw=1.4, ms=3.6, zorder=3, label="MA-fBm law, best nodes"),
-    "their":   dict(color=C["their"], ls=":", marker="^", mfc=C["their"], lw=1.4, ms=4.2, zorder=3, label="MA-fBm (their system)"),
+    "their":   dict(color=C["their"], ls=":", marker="^", mfc=C["their"], lw=1.4, ms=4.2, zorder=3, label="MA-fBm system (Daems et al.)"),
     "ref":     dict(color=C["ref"], ls="-", marker=None, lw=1.0, zorder=7, label="exact"),
     "grey":    dict(color=C["grey"], ls=":", marker=None, lw=1.0, zorder=1, label=""),
 }
@@ -103,7 +103,7 @@ def note(ax, x, y, text, xy_text, color="#333333", size=7.0, **kw):
 def save(fig, name, layout):
     os.makedirs(FIGS[layout], exist_ok=True)
     fig.savefig(os.path.join(FIGS[layout], name + ".pdf"), bbox_inches="tight", pad_inches=0.02)
-    fig.savefig(os.path.join(FIGS[layout], name + ".png"), dpi=220, bbox_inches="tight", pad_inches=0.02)
+    fig.savefig(os.path.join(FIGS[layout], name + ".png"), dpi=300, bbox_inches="tight", pad_inches=0.02)
     plt.close(fig)
 
 

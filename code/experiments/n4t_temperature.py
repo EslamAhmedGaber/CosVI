@@ -1,6 +1,6 @@
 r"""X3 (16 Nov 2026): a second real series — Northern-Hemisphere monthly temperature anomalies, 1854-1989.
 
-Protocol fixed in 05_EXPERIMENTS.md section 3b (X3) before any run.  Data: `results/n4/data/nhemi_temp.csv`, parsed
+Protocol fixed before any run.  Data: `results/n4/data/nhemi_temp.csv`, parsed
 as text by n4_prepare_data.py from CRAN longmemo 1.1-4 (the archive downloaded on 13 Nov for the Nile; nothing from it
 is executed).  The 1632 monthly values form 32 consecutive windows of 51 months (as the Nile's 51-year windows: the
 first value of a window is its initial value, the next 50 are observations).  Test windows: every fourth window

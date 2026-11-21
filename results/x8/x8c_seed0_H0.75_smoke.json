@@ -1,6 +1,6 @@
 {
  "part": "c",
- "rule": "05 3b X8(c)",
+ "rule": "X8(c)",
  "H_true": 0.75,
  "seed": 0,
  "arms": [

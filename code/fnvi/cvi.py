@@ -1,10 +1,10 @@
 """Cosine-coordinate variational inference (CVI) for neural SDEs driven by fractional Brownian motion, H >= 1/2.
 
     dX = f_theta(X, t) dt + g_theta(X, t) dB_H(t)   on [0, T]
-    B_H  ~  B^J(t) = A(t) xi,  xi ~ N(0, I_J)  (whitened cosine coordinates, Paper 1)
+    B_H  ~  B^J(t) = A(t) xi,  xi ~ N(0, I_J)  (whitened cosine coordinates, CosChaos)
 
 so that X is the solution of a random ODE  dX/dt = f + g * (a(t) @ xi)  with a = dA/dt.  For H > 1/2 the smooth
-approximation converges to the pathwise (Young) solution; no correction term (see 02_THEORY.md, Sec. T4).
+approximation converges to the pathwise (Young) solution; no correction term (Young integral, H > 1/2).
 
 Variational posterior: q(xi) Gaussian (mean-field, full, or low-rank + diagonal), closed-form KL to N(0, I).
 ELBO_J = E_q[log p(y | X(xi))] - KL(q || N(0, I))  <= log p_J(y)  (evidence of the truncated model).

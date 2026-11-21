@@ -1,5 +1,5 @@
 """N4 data preparation: parse the Nile minima (and the Northern-hemisphere temperature series) from the R *text*
-files of CRAN package longmemo 1.1-4 (downloaded 13 Nov 2026 with the author's permission; tarball SHA-256
+files of CRAN package longmemo 1.1-4 (downloaded 13 Nov 2026; tarball SHA-256
 390849c9…34a0f9; package licence GPL-2 | GPL-3). Nothing from the package is executed: the numbers are read with a
 regular expression. Outputs: work/results/n4/data/nile_min.csv, nhemi_temp.csv, provenance.json, plus classical
 Hurst estimates (aggregated variance, R/S, Whittle for fractional Gaussian noise) as reference values.

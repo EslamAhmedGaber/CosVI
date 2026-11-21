@@ -1,4 +1,4 @@
-r"""Summarise X10 (proposal sensitivity; 05_EXPERIMENTS.md section 3b, protocol fixed 18 Nov 2026, 19:28; this
+r"""Summarise X10 (proposal sensitivity; protocol fixed 18 Nov 2026, 19:28; this
 summariser written before any X10 result was read).
 
 (a) N2 cases (CosVI-trained oracle-H model, seeds 1-2, H in {0.6, 0.75, 0.9}); joint-proposal evidences ev_J of the
@@ -31,8 +31,8 @@ def cls(v):
 
 def part_a():
     out, holds = {}, []
-    review = os.path.join(X10, "review_n2_oracle_cases.json")   # stored copy of the independent check of 18 Nov
-    rv = {(c["H"], c["seed"]): c for c in json.load(open(review))} if os.path.exists(review) else {}
+    cand = os.path.join(X10, "n2_joint_candidates.json")   # joint-minus-product candidate contrasts, six N2 cases
+    rv = {(c["H"], c["seed"]): c for c in json.load(open(cand))} if os.path.exists(cand) else {}
     for s in (1, 2):
         for H in (0.6, 0.75, 0.9):
             r = {m: rec("a", "twoscale", m, H, s) for m in ("twoscale", "grid", "markov")}
@@ -55,7 +55,7 @@ def part_a():
                    "gap_archived": {m: reps[m]["iwae_own_K512"][-1] - reps[m]["elbo_own"][-1] for m in ev},
                    "min_ess": {m: r[m]["min_ess"] for m in r}, "max_weight": {m: r[m]["max_weight"] for m in r}}
             if (H, s) in rv and "independent_scores" in rv[(H, s)]:
-                row["review_twoscale_score"] = float(np.mean(rv[(H, s)]["independent_scores"]))
+                row["candidate_twoscale_score"] = float(np.mean(rv[(H, s)]["independent_scores"]))
             out[f"{H}|{s}"] = row
     verdict = ("holds" if holds and len(holds) == 6 and all(holds) else
                "incomplete" if len(holds) < 6 else "qualified")

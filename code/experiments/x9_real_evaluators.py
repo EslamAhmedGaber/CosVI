@@ -1,4 +1,4 @@
-r"""X9: the evaluator check on the real series (05_EXPERIMENTS.md section 3b, protocol fixed 18 Nov 2026 15:20).
+r"""X9: the evaluator check on the real series (protocol fixed 18 Nov 2026 15:20).
 
 Saved globals of CosVI, CosVI-64, the exact grid and the MA-fBm laws (published, tuned), one job per series and
 training seed, all five models side by side as groups, each at its profile group (grid value nearest its profile H).
@@ -79,7 +79,7 @@ def run(series, seed, steps, K, tag):
     for p in glob.parameters():
         p.requires_grad_(False)
     Ye = torch.as_tensor(Yte, dtype=torch.float32, device=dev)
-    res = {"rule": "05 3b X9", "series": series, "seed": seed, "steps": steps, "K": K, "models": info, "evaluators": {}}
+    res = {"rule": "X9", "series": series, "seed": seed, "steps": steps, "K": K, "models": info, "evaluators": {}}
     t0 = time.time()
     for i, (name, (kind, kw)) in enumerate(EVAL):
         Mm = torch.as_tensor(np.stack([np.stack(build(kind, h, v2.T, v2.N, **kw), 0) for h in Hs], 0), dtype=torch.float32, device=dev)

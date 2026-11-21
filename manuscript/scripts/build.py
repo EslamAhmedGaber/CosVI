@@ -1,41 +1,43 @@
-"""Rebuild the manuscript: numbers -> figures (optional) -> both PDFs -> page renders, with a log report.
-Run: python build.py [--figures]   (pdflatex with elsarticle; Python with matplotlib and PyMuPDF for page renders)."""
-import os, subprocess, sys, shutil, re
-HERE = os.path.dirname(os.path.abspath(__file__)); MAN = os.path.dirname(HERE); SRC = os.path.join(MAN, "source")
+"""Regenerate the numeric material and, when supplied, compile the article sources."""
+import argparse
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+
+SCRIPTS = Path(__file__).resolve().parent
+ROOT = SCRIPTS.parent.parent
+SOURCE = SCRIPTS.parent / "source"
 
 
-def run(cmd, cwd):
-    r = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True)
-    if r.returncode != 0:
-        print(r.stdout[-2000:], r.stderr[-2000:]); raise SystemExit(f"failed: {cmd}")
-    return r.stdout
+def run_script(name):
+    subprocess.run([sys.executable, "-X", "utf8", str(SCRIPTS / name)], cwd=ROOT, check=True)
 
 
-run([sys.executable, "-X", "utf8", "make_macros.py"], HERE); print("ok make_macros.py")
-if "--figures" in sys.argv:
-    for s in sorted(f for f in os.listdir(HERE) if f.startswith("fig") and f.endswith(".py")):
-        run([sys.executable, "-X", "utf8", s], HERE); print("ok", s)
-for lay in ("one_column", "two_columns"):
-    for _ in range(3):
-        subprocess.run(["pdflatex", "-interaction=nonstopmode", f"{lay}.tex"], cwd=SRC, capture_output=True)
-    log = open(os.path.join(SRC, f"{lay}.log"), encoding="latin-1").read()
-    errs = re.findall(r"^! .*", log, re.M)
-    undef = sorted(set(re.findall(r"(?:Reference|Citation) `([^']+)' on page \d+ undefined", log)))
-    over = len(re.findall(r"Overfull \\hbox", log))
-    pages = re.findall(r"Output written on .*?\((\d+) pages", log)
-    print(f"{lay}: pages {pages[-1] if pages else '?'}, errors {len(errs)}, undefined {len(undef)}, overfull {over}")
-    for e in errs[:5]:
-        print("   ", e)
-    if undef:
-        print("    undefined:", ", ".join(undef[:20]))
-    shutil.copy(os.path.join(SRC, f"{lay}.pdf"), os.path.join(MAN, f"CosVI_{lay}.pdf"))
-try:
-    import fitz
-    rev = os.path.join(MAN, "review", "pages"); os.makedirs(rev, exist_ok=True)
-    for lay in ("one_column", "two_columns"):
-        d = fitz.open(os.path.join(MAN, f"CosVI_{lay}.pdf"))
-        for i, pg in enumerate(d):
-            pg.get_pixmap(dpi=80).save(os.path.join(rev, f"{lay}_p{i + 1:02d}.png"))
-        print(lay, "page renders", d.page_count)
-except ImportError:
-    print("PyMuPDF not available: page renders skipped")
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--figures", action="store_true", help="render all figures before compiling")
+    args = parser.parse_args()
+    run_script("make_macros.py")
+    run_script("make_tables.py")
+    if args.figures:
+        for path in sorted(SCRIPTS.glob("fig*.py")):
+            run_script(path.name)
+    if not (SOURCE / "CosVI_manuscript_src.tex").is_file():
+        print("Numerical material regenerated. Article sources are supplied in the journal archive.")
+        return
+    run_script("flatten_submission.py")
+    release = ROOT.parent if ROOT.name == "CosVI_code_and_results" else ROOT / "release_build"
+    flat = release / "CosVI_LaTeX_source"
+    for name in ("CosVI_manuscript", "CosVI_supplementary_material"):
+        with tempfile.TemporaryDirectory() as work:
+            command = ["pdflatex", "-interaction=nonstopmode", "-halt-on-error",
+                       f"-output-directory={work}", f"{name}.tex"]
+            for _ in range(3):
+                subprocess.run(command, cwd=flat, check=True, stdout=subprocess.DEVNULL)
+            pdf = Path(work, name + ".pdf")
+            (release / pdf.name).write_bytes(pdf.read_bytes())
+
+
+if __name__ == "__main__":
+    main()

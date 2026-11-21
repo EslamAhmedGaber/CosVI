@@ -12,18 +12,18 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import style as S
 
 STAGES = [
-    (r"Once per value of $H$", r"for every $H$ of the grid", "#3A93C9", "#EEF6FC",
-     ["Gram matrix $G$,\nCholesky factor $L$",
-      "residual covariance $C_R$,\nfactor $L_R$",
-      "noise map $\\Phi$\n(exact law on the grid)"]),
-    (r"Every training step", r"repeated 5000 times", S.C["cosvi"], "#EAF1F8",
-     ["draw $\\boldsymbol z=\\mu_j+U_j\\boldsymbol\\epsilon$ and $x_0$",
+    (r"Once per value of $H$", r"for every $H$ on the grid", "#3A93C9", "#EEF6FC",
+     ["Gram matrix $G$, factor $L$\n(fast Chebyshev--asymptotic)",
+      "residual covariance $C_R \\succ 0$,\nCholesky factor $L_R$",
+      "noise map $\\Phi$\n(exact fBm law on grid)"]),
+    (r"Every training step", r"iterated by Adam", S.C["cosvi"], "#EAF1F8",
+     ["draw $(\\boldsymbol z, x_0) \\sim q_j$\n(full, joint, or $O(N)$)",
       "noise rates $\\Phi\\boldsymbol z$",
       "solve $\\dot X=f_\\theta(X)+\\sigma\\,\\Phi\\boldsymbol z$\nby Runge--Kutta",
-      "ELBO with closed-form KL;\nAdam step"]),
+      "ELBO with closed-form KL;\nAdam update"]),
     (r"Evaluation", r"of any trained model", "#4D4D4D", "#F3F3F3",
-     ["select $\\hat H$:\nbest training bound",
-      "freeze $(f_\\theta,\\sigma,\\hat H)$;\nrefit $q$ on held-out series",
+     ["select $\\widehat H$:\nbest training bound",
+      "freeze $(f_\\theta,\\sigma,\\widehat H)$;\nrefit $q$ on held-out series",
       "importance sampling\nunder a common evaluator"]),
 ]
 
@@ -35,7 +35,7 @@ def draw(layout):
     fig = plt.figure(figsize=(W, H))
     ax = fig.add_axes([0, 0, 1, 1]); ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.set_axis_off()
     fs = 7.5 if layout == "two_columns" else 7.3
-    xs = [0.155, 0.5, 0.845]; cw = 0.296; bw = 0.264
+    xs = [0.146, 0.5, 0.854]; cw = 0.282; bw = 0.252
     top, bottom = 0.755, 0.045                       # extent of the boxes
     frames = []
     for (head, sub, col, fill, items), cx in zip(STAGES, xs):

@@ -1,4 +1,4 @@
-r"""Summarise X2 (two-dimensional damped Duffing system; 05_EXPERIMENTS.md section 3b, rule fixed 16 Nov 07:03).
+r"""Summarise X2 (two-dimensional damped Duffing system; rule fixed 16 Nov 2026 07:03).
 
 Rule: per H, paired Delta_r = ll(CosVI) - ll(r) over data seeds 0-2 (held-out log-likelihood per test series under
 the exact grid law, grid-coordinate refit = primary; two-scale refit = secondary); CosVI "ahead" if Delta > sd,
@@ -26,7 +26,7 @@ def main():
     for f in glob.glob(os.path.join(R, "n8_*_seed*_H*.json")):
         d = json.load(open(f))
         runs[(d["rep"], round(d["H_true"], 2), d["seed"])] = d
-    res = {"rule": "05 3b X2", "n_records": len(runs), "by_H": {}}
+    res = {"rule": "X2", "n_records": len(runs), "by_H": {}}
     wins_total, ahead_any = 0, False
     for H in (0.6, 0.75, 0.9):
         row = {"reps": {}, "paired_vs_cosvi": {}}

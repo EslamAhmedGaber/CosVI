@@ -1,6 +1,6 @@
 {
  "part": "b",
- "rule": "05 3b X8(b)",
+ "rule": "X8(b)",
  "H_true": 0.75,
  "seed": 4,
  "refit": 2000,

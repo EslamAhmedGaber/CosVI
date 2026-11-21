@@ -1,4 +1,4 @@
-r"""N7, accuracy at convergence (exact, no training; protocol fixed in 05_EXPERIMENTS.md on 15 Nov 2026, 21:59,
+r"""N7, accuracy at convergence (exact, no training; protocol fixed on 15 Nov 2026, 21:59,
 before any run).
 
 Model: dX = -X dt + dB_H (standard fBm), X(0) = 0, observations every 0.2 on (0, T] (m = 5T), s_obs = 0.1.
@@ -109,4 +109,4 @@ if __name__ == "__main__":
             if not a.no_save:                                   # write after every case (long run)
                 os.makedirs(OUT, exist_ok=True)
                 with open(os.path.join(OUT, "n7_exact.json"), "w") as fh:
-                    json.dump({"protocol": "05_EXPERIMENTS.md, fixed 15 Nov 2026 21:59", "rows": rows}, fh, indent=1)
+                    json.dump({"protocol": "fixed 15 Nov 2026 21:59, before the runs", "rows": rows}, fh, indent=1)

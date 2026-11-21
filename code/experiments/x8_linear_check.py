@@ -1,4 +1,4 @@
-r"""X8(a): exact linear-Gaussian check of the common-interpolation control (05_EXPERIMENTS.md section 3b, X8, protocol
+r"""X8(a): exact linear-Gaussian check of the common-interpolation control (protocol
 fixed 18 Nov 2026 14:35).  CPU, float64, no training.
 
 Model: dX = -X dt + sigma dB_H, X(0) ~ N(0, 1), sigma = 0.5, T = 5, RK4 with N = 80 steps whose stages are forced by
@@ -56,7 +56,7 @@ def scores(Jm, y):
 
 
 def main():
-    res = {"rule": "05 3b X8(a)", "settings": {"T": T, "N": N, "J": J, "sigma": SIG, "s_obs": S_OBS, "n_data": NDATA},
+    res = {"rule": "X8(a)", "settings": {"T": T, "N": N, "J": J, "sigma": SIG, "s_obs": S_OBS, "n_data": NDATA},
            "by_H": {}}
     for H in (0.6, 0.75, 0.9):
         h = T / N; t = h * np.arange(1, N + 1)

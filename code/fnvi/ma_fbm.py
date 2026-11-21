@@ -10,7 +10,7 @@ int_0^T E|B_hat(t) - B(t)|^2 dt (their Prop. 5).  Here w is obtained by a weight
 Wiener-integral kernels (numerically stable equivalent of their normal equations A w = b).
 
 All errors are exact up to quadrature (no Monte Carlo).  The trained competitor itself is NOT this file: it is
-the authors' public code (work/external/MAFBM), see the G0 protocol.
+the authors' public code, which is not redistributed here (see the G0 runs).
 """
 import numpy as np
 from scipy.special import gamma as Gamma

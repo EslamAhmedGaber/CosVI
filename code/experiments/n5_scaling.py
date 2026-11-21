@@ -1,4 +1,4 @@
-r"""N5 (cost per training step) and the GPU cost part of N7 (protocols fixed in 05_EXPERIMENTS.md on 15 Nov 2026,
+r"""N5 (cost per training step) and the GPU cost part of N7 (protocols fixed on 15 Nov 2026,
 21:59, before any run).
 
 Time per training step = median of 30 CUDA-graph replays after 5 warm-up replays (forward, backward, Adam update);
@@ -303,7 +303,7 @@ if __name__ == "__main__":
     a = ap.parse_args()
     torch.manual_seed(0)
     info = {"gpu": torch.cuda.get_device_name(0), "torch": torch.__version__, "started": time.strftime("%Y-%m-%d %H:%M"),
-            "protocol": "05_EXPERIMENTS.md, fixed 15 Nov 2026 21:59"}
+            "protocol": "fixed 15 Nov 2026 21:59, before the runs"}
     res = sweep_n5(a.quick) if a.sweep == "n5" else sweep_n7(a.quick)
     res["info"] = info
     if a.sweep == "n5":

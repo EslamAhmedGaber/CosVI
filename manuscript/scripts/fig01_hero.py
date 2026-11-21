@@ -83,27 +83,28 @@ def draw(layout):
     Hs = np.array([0.6, 0.75, 0.9])
     ax.fill_between([0.55, 0.915], [0.50, 0.865], [0.60, 0.965], color="#EEEEEE", lw=0, zorder=0)
     ax.plot([0.55, 0.915], [0.55, 0.915], color=S.C["ref"], lw=0.8, zorder=1)
-    ax.errorbar(Hs, [portb[H][0] for H in Hs], yerr=[portb[H][1] for H in Hs], color=S.C["their"], ls=":", lw=1.0,
-                marker="D", ms=3.4, mfc="white", mec=S.C["their"], capsize=1.5, zorder=3, label="their system, best nodes")
+    ax.errorbar(Hs - 0.008, [portb[H][0] for H in Hs], yerr=[portb[H][1] for H in Hs], color=S.C["their"], ls=":", lw=1.0,
+                marker="D", ms=3.4, mfc="white", mec=S.C["their"], capsize=1.5, zorder=3, label="MA-fBm system, best nodes")
     ax.errorbar(Hs, [port[H][0] for H in Hs], yerr=[port[H][1] for H in Hs], color=S.C["their"], ls="-", lw=1.2,
-                marker="^", ms=4.2, mfc=S.C["their"], mec=S.C["their"], capsize=1.5, zorder=3, label="their system (port)")
+                marker="^", ms=4.2, mfc=S.C["their"], mec=S.C["their"], capsize=1.5, zorder=3, label="MA-fBm system (port)")
     ax.plot(Hs, [code[H] for H in Hs], color=S.C["their"], ls="none", marker="*", ms=6.0, zorder=4,
-            label="their own code, one path")
+            label="MA-fBm public code, one path")
     ax.errorbar(Hs, [joint[H][0] for H in Hs], yerr=[joint[H][1] for H in Hs], color=S.C["cosvi_j"], ls="--", lw=1.0,
                 marker="o", ms=3.6, mfc="white", mec=S.C["cosvi_j"], capsize=1.5, zorder=4, label=r"\CosVI-32, joint gradient")
-    ax.errorbar(Hs, [cosvi[H][0] for H in Hs], yerr=[cosvi[H][1] for H in Hs], color=S.C["cosvi"], ls="-", lw=1.9,
+    ax.errorbar(Hs + 0.005, [cosvi[H][0] for H in Hs], yerr=[cosvi[H][1] for H in Hs], color=S.C["cosvi"], ls="-", lw=1.9,
                 marker="o", ms=4.6, mfc=S.C["cosvi"], mec=S.C["cosvi"], capsize=1.8, zorder=6, label=r"\CosVI, profile")
-    ax.set_xlim(0.55, 1.10); ax.set_ylim(0.48, 0.98)
+    ax.set_xlim(0.54, 1.13); ax.set_ylim(0.48, 0.98)
     ax.set_xticks(Hs); ax.set_xlabel(r"true Hurst index $H$")
     ax.set_ylabel(r"estimated $\widehat H$")
     ax.set_title(r"learning the Hurst index")
-    lab = dict(fontsize=6.5, va="center", ha="left")
-    ax.text(0.918, cosvi[0.9][0], r"\CosVI", color=S.C["cosvi"], **lab)
-    ax.text(0.918, joint[0.9][0] + 0.004, r"\CosVI-32, joint", color="#3A93C9", **lab)
-    ax.text(0.918, port[0.9][0] + 0.010, r"their system", color=S.C["their"], **lab)
-    ax.text(0.918, code[0.9] - 0.014, r"their code", color=S.C["their"], **lab)
-    ax.text(0.585, portb[0.6][0] + 0.058, r"their system,", color=S.C["their"], **lab)
-    ax.text(0.585, portb[0.6][0] + 0.028, r"best nodes", color=S.C["their"], **lab)
+    lab = dict(fontsize=6.3, va="center", ha="left")
+    ax.text(0.922, cosvi[0.9][0], r"\CosVI", color=S.C["cosvi"], **lab)
+    ax.text(0.922, joint[0.9][0] + 0.015, r"\CosVI-32,", color="#3A93C9", **lab)
+    ax.text(0.922, joint[0.9][0] - 0.011, r"joint", color="#3A93C9", **lab)
+    ax.text(0.922, port[0.9][0] + 0.011, r"MA-fBm sys.", color=S.C["their"], **lab)
+    ax.text(0.922, code[0.9] - 0.015, r"MA-fBm code", color=S.C["their"], **lab)
+    ax.text(0.560, portb[0.6][0] + 0.068, r"MA-fBm sys.,", color=S.C["their"], **lab)
+    ax.text(0.560, portb[0.6][0] + 0.038, r"best nodes", color=S.C["their"], **lab)
     S.clean(ax); S.panel_label(ax, "b", x=-0.22)
     # (c) benchmark
     ax = fig.add_subplot(outer[0, 2])
@@ -118,23 +119,23 @@ def draw(layout):
     ev = [n3m("twoscale", th, H) for th, H in cfg]
     for x, a, b in zip(xs, et, ev):
         ax.plot([x, x], [b, a], color="#DDDDDD", lw=0.8, zorder=1)
-    ax.plot(xs, et, ls="none", marker="^", ms=4.4, color=S.C["their"], label="MA-fBm, their code", zorder=3)
+    ax.plot(xs, et, ls="none", marker="^", ms=4.4, color=S.C["their"], label="MA-fBm code", zorder=3)
     ax.plot([xs[k] + 0.18 for k in e1], list(e1.values()), ls="none", marker="^", ms=3.8, mfc="white", mec=S.C["their"],
-            color=S.C["their"], label="their code, seed 1", zorder=3)
+            color=S.C["their"], label="MA-fBm, seed 1", zorder=3)
     ax.plot(xs, ec, ls="none", marker="o", ms=3.8, mfc="white", mec=S.C["cosvi_j"], mew=1.0, color=S.C["cosvi_j"],
             label=r"\CosVI-32", zorder=4)
     ax.plot(xs, ev, ls="none", marker="o", ms=4.4, color=S.C["cosvi"], label=r"\CosVI", zorder=5)
     ax.axhline(5, color=S.C["grey"], ls="--", lw=0.7)
-    ax.text(xs[0] - 0.12, 4.3, r"5\,\% (ours)", fontsize=6.2, color="#666666", ha="left", va="top")
+    ax.text(xs[0] - 0.12, 4.3, r"5\,\% tolerance", fontsize=6.1, color="#666666", ha="left", va="top")
     ax.set_yscale("log"); ax.set_ylim(0.005, 900)
     ax.set_yticks([0.01, 0.1, 1, 10]); ax.set_yticklabels([r"$0.01$", r"$0.1$", r"$1$", r"$10$"])
     ax.set_xticks(xs); ax.set_xticklabels([rf"${H:.1f}$" for th, H in cfg], fontsize=6.6)
     ax.axvline((xs[3] + xs[4]) / 2, color="#E3E3E3", lw=0.6, zorder=0)
-    ax.text(xs[:4].mean(), 0.0068, r"$\theta=1$", ha="center", fontsize=6.6, color="#555555")
-    ax.text(xs[4:].mean(), 0.0068, r"$\theta=0$", ha="center", fontsize=6.6, color="#555555")
+    ax.text(xs[:4].mean(), 0.0068, r"$\theta_{\rm OU}=1$", ha="center", fontsize=6.5, color="#555555")
+    ax.text(xs[4:].mean(), 0.0068, r"$\theta_{\rm OU}=0$", ha="center", fontsize=6.5, color="#555555")
     ax.set_xlabel(r"Hurst index $H$")
     ax.set_ylabel(r"posterior std error (\%)")
-    ax.set_title(r"their benchmark, their code")
+    ax.set_title(r"published bridge benchmark")
     ax.legend(loc="upper center", fontsize=6.0, handletextpad=0.2, borderaxespad=0.15, labelspacing=0.2, ncol=2,
               columnspacing=0.8)
     S.clean(ax); S.panel_label(ax, "c", x=-0.22)

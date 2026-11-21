@@ -6,15 +6,19 @@
  },
  "by_H": {
   "0.6": {
-   "total_pl": 2.4351785819206406,
+   "total_pl": 2.43517858192064,
    "total_grid": 2.435178581920556,
-   "share_cosine_block": 0.9655061579882959,
+   "share_cosine_block": 0.9655061579882961,
    "share_best_J_grid": 0.2429767436069761,
-   "share_best_J_pl": 0.9655061579882959,
+   "share_best_J_pl": 0.9655061579882961,
    "n90_pl": 7,
    "n99_pl": 43,
    "n90_grid": 66,
-   "n99_grid": 78
+   "n99_grid": 78,
+   "precision_condition_pl": 435.08315573478643,
+   "precision_condition_grid": 435.08315573481536,
+   "observation_covariance_max_difference": 4.829470157119431e-15,
+   "top_eigenvalue_max_difference": 1.9273471707492718e-12
   },
   "0.75": {
    "total_pl": 2.742710337293899,
@@ -25,7 +29,11 @@
    "n90_pl": 4,
    "n99_pl": 19,
    "n90_grid": 62,
-   "n99_grid": 76
+   "n99_grid": 76,
+   "precision_condition_pl": 687.4615324929771,
+   "precision_condition_grid": 687.461532493084,
+   "observation_covariance_max_difference": 1.942890293094024e-15,
+   "top_eigenvalue_max_difference": 8.615330671091215e-13
   },
   "0.9": {
    "total_pl": 3.212078152449563,
@@ -36,7 +44,11 @@
    "n90_pl": 2,
    "n99_pl": 8,
    "n90_grid": 51,
-   "n99_grid": 71
+   "n99_grid": 71,
+   "precision_condition_pl": 1078.867433254419,
+   "precision_condition_grid": 1078.8674332545277,
+   "observation_covariance_max_difference": 9.992007221626409e-16,
+   "top_eigenvalue_max_difference": 6.821210263296962e-13
   }
  }
 }

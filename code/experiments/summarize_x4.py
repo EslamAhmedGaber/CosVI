@@ -1,4 +1,4 @@
-r"""Summarise X4 (calibration of the latent-path uncertainty; 05_EXPERIMENTS.md section 3b, rule fixed 16 Nov 07:03,
+r"""Summarise X4 (calibration of the latent-path uncertainty; rule fixed 16 Nov 2026 07:03,
 seeds amended 07:12 before any run).
 
 Per representation and H_true: mean +- sd over the available seeds of coverage of the central 50 % and 90 % intervals,
@@ -37,7 +37,7 @@ def verdict(diffs):
 
 
 def main():
-    res = {"rule": "05 3b X4", "by": {}}
+    res = {"rule": "X4", "by": {}}
     for H in (0.6, 0.75, 0.9):
         base = runs("twoscale", H)
         for rep in REPS:

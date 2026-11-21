@@ -1,6 +1,6 @@
-"""Display names of every method and representation in Paper 4: the single source for figures, tables and macros.
+"""Display names of every method and representation in the CosVI paper: the single source for figures, tables and macros.
 
-Decided by the author on 14 Nov 2026: our method is called CosVI (cosine-coordinate variational inference).
+Our method is called CosVI (cosine-coordinate variational inference).
 
 * CosVI    = variational inference in whitened coordinates with the two-scale map: a cosine block (J = 16) carrying
              the long memory plus the whitened residual on the time grid, so the prior law is exact on the grid.

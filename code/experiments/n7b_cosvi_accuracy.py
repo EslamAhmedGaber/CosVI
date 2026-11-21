@@ -1,7 +1,7 @@
-r"""N7(b), post hoc (19 Nov 2026; suggested by an independent review of 18 Nov and recomputed here): does CosVI meet the
+r"""N7(b), post hoc (19 Nov 2026): does CosVI meet the
 N7 accuracy criterion at every horizon, instead of being assumed to?
 
-The N7 protocol (05_EXPERIMENTS.md, fixed 15 Nov 2026 21:59; n7_horizon_exact.py) scores a representation by the mean
+The N7 protocol (fixed 15 Nov 2026 21:59, before the runs; n7_horizon_exact.py) scores a representation by the mean
 over the observation times of |s - s_exact| / s_exact, where s is the posterior standard deviation of X at the
 observation times under the representation's exact (linear-Gaussian) inference and s_exact that of the true model
 dX = -X dt + dB_H, X(0) = 0, observations every 0.2 on (0, T], s_obs = 0.1; a representation qualifies if the error is
@@ -67,7 +67,7 @@ def main():
             print(f"T={T:5.1f} H={H}: N={N}, D={maps[0].shape[1]}, error {100 * e:.5f} %  ({time.time() - t0:.0f}s)",
                   flush=True)
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
-    json.dump({"protocol": "N7 criterion (05_EXPERIMENTS.md, 15 Nov 2026 21:59), CosVI configuration of n7_cost.json",
+    json.dump({"protocol": "N7 criterion (fixed 15 Nov 2026 21:59, before the runs), CosVI configuration of n7_cost.json",
                "rows": rows, "all_qualify": all(r["qualifies_2pct"] for r in rows),
                "max_err": max(r["err"] for r in rows)}, open(OUT, "w"), indent=1)
 

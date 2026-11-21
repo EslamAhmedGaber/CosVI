@@ -1,4 +1,4 @@
-r"""Summarise X8 (coordinates versus solver; 05_EXPERIMENTS.md section 3b, protocol fixed 18 Nov 2026 14:35).
+r"""Summarise X8 (coordinates versus solver; protocol fixed 18 Nov 2026 14:35).
 
 (a) exact linear-Gaussian check: pass flags and differences (x8a_linear_check.json).
 (b) saved N1b-protocol models under two evaluators (smooth = CosVI's solver; pl = the grid's solver in CosVI-PL
@@ -92,7 +92,7 @@ def part_c():
 
 
 def main():
-    res = {"rule": "05 3b X8"}
+    res = {"rule": "X8"}
     fa = os.path.join(R, "x8a_linear_check.json")
     if os.path.exists(fa):
         a = json.load(open(fa))

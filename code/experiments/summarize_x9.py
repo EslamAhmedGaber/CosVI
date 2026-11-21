@@ -1,4 +1,4 @@
-r"""Summarise X9 (evaluator check on the real series; 05_EXPERIMENTS.md section 3b, protocol fixed 18 Nov 2026 15:20).
+r"""Summarise X9 (evaluator check on the real series; protocol fixed 18 Nov 2026 15:20).
 
 Per series and comparator r: paired Delta_r = ll(CosVI) - ll(r) over training seeds 0-2 under each evaluator
 (smooth = CosVI's solver, pl = the grid's solver); ahead / tied / behind at +-1 sd.  "Robust to the evaluation map"
@@ -15,7 +15,7 @@ NAMES = {"twoscale": "CosVI", "cosine64": "CosVI-64", "grid": "exact grid", "mar
 
 
 def main():
-    res = {"rule": "05 3b X9", "by_series": {}}
+    res = {"rule": "X9", "by_series": {}}
     robust_all = True
     for series in ("nile", "temp"):
         runs = [json.load(open(f)) for f in sorted(glob.glob(os.path.join(R, f"x9_{series}_seed[0-9].json")))]

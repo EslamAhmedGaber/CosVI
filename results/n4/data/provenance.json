@@ -1,0 +1,30 @@
+{
+ "source": "CRAN package longmemo 1.1-4 (https://cran.r-project.org/src/contrib/longmemo_1.1-4.tar.gz)",
+ "downloaded": "2026-11-13",
+ "tarball_sha256": "390849c9c3ff648a9fb6f7b3610d58fc9081aadf5ca7793359678efc8934a0f9",
+ "package_licence": "GPL-2 | GPL-3",
+ "series": {
+  "nile_min": {
+   "n": 663,
+   "mean": 1148.1251885369531,
+   "sd": 88.74729568537524,
+   "H_whittle_fgn": 0.8388477296202717,
+   "H_aggregated_variance": 0.8539058367092786,
+   "H_RS": 0.8611835256925819,
+   "years": [
+    622,
+    1284
+   ],
+   "description": "yearly minimal water levels, Roda gauge near Cairo (Tousson 1925; Beran 1994 dataset no. 1)"
+  },
+  "nhemi_temp": {
+   "n": 1632,
+   "mean": -0.14947916666666664,
+   "sd": 0.31546298665341627,
+   "H_whittle_fgn": 0.8347158085747253,
+   "H_aggregated_variance": 0.8840263490190536,
+   "H_RS": 0.7949312938944916,
+   "description": "Northern hemisphere temperature series as shipped in longmemo (see man/NhemiTemp.Rd)"
+  }
+ }
+}

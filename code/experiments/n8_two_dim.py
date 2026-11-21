@@ -1,6 +1,6 @@
 r"""X2 (16 Nov 2026): a two-dimensional neural SDE — the damped Duffing system, the 2-D extension of the N1 double well.
 
-Protocol fixed in 05_EXPERIMENTS.md section 3b (X2) before any run.
+Protocol fixed before any run.
 Truth : dX1 = X2 dt + sigma dB1,  dX2 = (X1 - X1^3 - 0.5 X2) dt + sigma dB2,  independent standard fBm channels with
         the same H, sigma = 0.5 (as N1), X(0) ~ U([-1.5, 1.5]^2), T = 5.
 Data  : exact fBm (Davies-Harte, 8192 steps) + Heun; 20 observations of both coordinates (every 0.25) with s = 0.05;

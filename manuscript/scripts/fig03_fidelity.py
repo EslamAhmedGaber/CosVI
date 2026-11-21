@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import style as S
 
-G1 = json.load(open(os.path.join(S.WORK, "pilot_checks", "results", "g1_pilot.json")))
+G1 = S.load(os.path.join("g1", "g1_pilot.json"))
 HS = ["0.60", "0.75", "0.90"]
 DIMS = [int(d) for d in G1["dims"]]
 

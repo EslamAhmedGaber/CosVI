@@ -40,7 +40,7 @@
      "grid": 0.07503242145992171,
      "markov": 0.059799364398629616
     },
-    "review_twoscale_score": 3.0945976164998306
+    "candidate_twoscale_score": 3.0945976164998306
    },
    "0.75|1": {
     "ev_joint": {
@@ -81,7 +81,7 @@
      "grid": 0.039474951611606086,
      "markov": 0.0240021301707136
     },
-    "review_twoscale_score": 8.021214011166279
+    "candidate_twoscale_score": 8.021214011166279
    },
    "0.9|1": {
     "ev_joint": {
@@ -122,7 +122,7 @@
      "grid": 0.018644933147433495,
      "markov": 0.030452358100549366
     },
-    "review_twoscale_score": 14.338535683039577
+    "candidate_twoscale_score": 14.338535683039577
    },
    "0.6|2": {
     "ev_joint": {
@@ -163,7 +163,7 @@
      "grid": 0.08788744254220864,
      "markov": 0.14590438557284377
     },
-    "review_twoscale_score": 2.835614388049743
+    "candidate_twoscale_score": 2.835614388049743
    },
    "0.75|2": {
     "ev_joint": {
@@ -204,7 +204,7 @@
      "grid": 0.053642499407476694,
      "markov": 0.015055953574731473
     },
-    "review_twoscale_score": 7.565255668236555
+    "candidate_twoscale_score": 7.565255668236555
    },
    "0.9|2": {
     "ev_joint": {
@@ -245,7 +245,7 @@
      "grid": 0.06932265107108125,
      "markov": 0.16514764695284634
     },
-    "review_twoscale_score": 13.23927509746558
+    "candidate_twoscale_score": 13.23927509746558
    }
   },
   "cases_complete": 6,

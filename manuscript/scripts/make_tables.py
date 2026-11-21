@@ -1,7 +1,8 @@
-"""Tables generated from the stored results (no number typed by hand).  Writes source/tables/tab_*.tex.
-Revised 18 Nov 2026: three references for the bridge benchmark and both CosVI variants;
-real-data table (Nile, temperature); appendix tables for the two-dimensional system (X2) and the coordinates-versus-
-solver control (X8).  Run: python make_tables.py"""
+"""Tables generated from the stored JSON results (zero numbers typed by hand).
+
+Writes source/tables/tab_*.tex for both the main manuscript and the standalone Supplementary Material.
+Run: python -X utf8 make_tables.py
+"""
 import os, sys, json, glob
 import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -12,7 +13,6 @@ os.makedirs(OUT, exist_ok=True)
 
 
 def write(name, body):
-    # every tabular is capped at the line width (adjustbox max width: scales down only, in the layout that needs it)
     i = body.find(r"\begin{tabular}")
     j = body.find(r"\end{tabular}")
     if i >= 0 and j > i:
@@ -32,9 +32,22 @@ def n3(rep, H, th):
     return e.mean(), e.min(), e.max()
 
 
+def fmt_num(x):
+    return f"{x:,.0f}".replace(",", "{,}")
+
+
+def fmt_sci(v):
+    s = f"{v:.1e}"
+    mant, exp = s.split("e")
+    return rf"${mant}\times 10^{{{int(exp)}}}$"
+
+
+# =====================================================================
+# MAIN MANUSCRIPT TABLES
+# =====================================================================
+
 def tab_benchmark():
-    """Table 3: the published bridge benchmark. Their code against three references (seed 0; seed 1 where run);
-    CosVI-32 and CosVI against the exact posterior of the simulated model (three seeds)."""
+    """Main Table 3: published bridge benchmark with collision-free theta_OU."""
     rows = []
     for th in (1.0, 0.0):
         for H in (0.6, 0.7, 0.8, 0.9):
@@ -48,26 +61,24 @@ def tab_benchmark():
             rows.append((th, H, cells, n3("cosine", H, th), n3("twoscale", H, th)))
     fmt = lambda cells, i, nd=1: "/".join(f"{c[i]:.{nd}f}" for c in cells)
     body = [r"\begin{widetable}",
-            r"\caption{The published bridge benchmark ($T=2$, $X(0)=0$, one noisy observation at $T$): integrated error of the posterior standard deviation (\%).}\label{tab:benchmark}",
+            r"\caption{Published bridge benchmark: integrated posterior standard-deviation error (\%) against three exact references.}\label{tab:benchmark}",
             r"\centering\footnotesize\setlength{\tabcolsep}{3.2pt}",
             r"\begin{tabular}{@{}cc ccc c cc@{}}",
             r"\toprule",
-            r" & & \multicolumn{4}{c}{\MAfBm, the authors' code} & \CosVI-32 & \CosVI\\\cmidrule(lr){3-6}\cmidrule(lr){7-7}\cmidrule(l){8-8}",
-            r"$\theta$ & $H$ & authors' curve & standard & own lift & hours & standard & standard\\",
+            r" & & \multicolumn{4}{c}{\MAfBm, authors' JAX code} & \CosVI-32 & \CosVI\\\cmidrule(lr){3-6}\cmidrule(lr){7-7}\cmidrule(l){8-8}",
+            r"$\theta_{\mathrm{OU}}$ & $H$ & authors' curve & standard & own lift & hours & standard & standard\\",
             r"\midrule"]
     for th, H, cells, cj, cv in rows:
         body.append(rf"{th:.0f} & {H:.1f} & {fmt(cells, 0)} & {fmt(cells, 1)} & {fmt(cells, 2)} & {fmt(cells, 3)} & "
                     rf"{cj[0]:.2f} ({cj[1]:.2f}--{cj[2]:.2f}) & \bfseries {cv[0]:.3f} ({cv[1]:.3f}--{cv[2]:.3f})\\")
         if th == 1.0 and H == 0.9:
             body.append(r"\addlinespace")
-    body += [r"\bottomrule", r"\end{tabular}",
-             r"\par\smallskip\parbox{0.97\linewidth}{\footnotesize The authors' code is scored against three references; \CosVI-32 and \CosVI{} against the exact posterior of the simulated model (the ``standard'' reference). Authors' code: 2000 steps on one CPU, 256 posterior paths; seed 0, and seed 1 after the slash where it was run. References: the analytic curve their code compares against (stationary process conditioned at zero), the exact posterior of the simulated model (standard fBm, started at zero), and the exact posterior of the lift as coded. A perfect fit read out from 256 paths would show \ReadoutLo--\ReadoutHi\,\% against its own exact posterior (central 95\,\% range, $\theta=1$, $H\in\{0.7,0.9\}$), so the own-lift column cannot separate training error from read-out noise. \CosVI-32 and \CosVI: mean (range) over three seeds, 2000 steps, standard deviation read from the fitted Gaussian (no sampling), median timed loop \NthreeCosJSec\,s on one GPU after the linear maps are precomputed.}",
-             r"\end{widetable}"]
+    body += [r"\bottomrule", r"\end{tabular}", r"\end{widetable}"]
     write("tab_benchmark.tex", "\n".join(body) + "\n")
 
 
 def tab_trained():
-    """Table 4: trained neural SDEs on the double well, all representations and the competitor's system (seeds 0-2)."""
+    """Main Table 4: double well at true H (3 seeds)."""
     s = S.load("summary_trained.json")
     rows = [("twoscale", r"\textbf{\CosVI}"), ("cosine", r"\CosVI-32"), ("grid", "exact grid"),
             ("markov", r"\MAfBm{} law, published"), ("markov_tuned", r"\MAfBm{} law, tuned"), ("markov_best", r"\MAfBm{} law, best"),
@@ -76,7 +87,7 @@ def tab_trained():
     best_ll = {H: max(s[f"{k}|{H}"]["ll_oracle"][0] for k, _ in rows) for H in Hs}
     best_rm = {H: min(s[f"{k}|{H}"]["rmse_oracle"][0] for k, _ in rows) for H in Hs}
     body = [r"\begin{widetable}",
-            r"\caption{Trained neural SDEs on the double well at the true $H$: held-out log-likelihood per test series and drift error, mean $\pm$ sd over three data seeds.}\label{tab:trained}",
+            r"\caption{Trained neural SDEs on the double well at the true $H$: held-out log-likelihood and occupation-weighted drift RMSE (mean $\pm$ SD, three seeds).}\label{tab:trained}",
             r"\centering\footnotesize\setlength{\tabcolsep}{3.0pt}",
             r"\begin{tabular}{@{}l" + "cc" * 3 + r"@{}}",
             r"\toprule",
@@ -92,25 +103,63 @@ def tab_trained():
             if abs(ll - best_ll[H]) < 1e-9: a = r"{\boldmath" + a + "}"
             if abs(rm - best_rm[H]) < 1e-9: b = r"{\boldmath" + b + "}"
             cells += [a, b]
-        pre = ""  # CSDA guide (18 Nov 2026): no shading in table cells; CosVI is named in bold instead
-        body.append(pre + name + " & " + " & ".join(cells) + r"\\")
+        body.append(name + " & " + " & ".join(cells) + r"\\")
         if k == "markov_best":
             body.append(r"\addlinespace")
-    body += [r"\bottomrule", r"\end{tabular}",
-             r"\par\smallskip\parbox{0.97\linewidth}{\footnotesize Held-out log-likelihood (higher is better): exact grid law, test posteriors refitted in grid coordinates with the grid's discrete likelihood, importance sampling with $K=512$. Drift error: occupation-weighted (lower is better). Rows above the gap: one variational inference with different noise representations (paired by seed: same data and initial weights); below: the competitor's full system through the validated port. Bold: best mean in the column; paired differences and their spread are in the text, and differences within the seed spread are not claimed.}",
-             r"\end{widetable}"]
+    body += [r"\bottomrule", r"\end{tabular}", r"\end{widetable}"]
     write("tab_trained.tex", "\n".join(body) + "\n")
 
 
+def tab_structq_main():
+    """Main Table 5: structured joint variational families on the 1-D double well (X11b)."""
+    p = os.path.join(S.RES, "x11", "x11b_structured_q.json")
+    body = [r"\begin{widetable}",
+            r"\caption{Structured joint variational families on the double well: local parameters per series, training ELBO, and held-out log-likelihood under the joint PL evaluator (three seeds).}\label{tab:structq}",
+            r"\centering\footnotesize\setlength{\tabcolsep}{3.0pt}",
+            r"\begin{tabular}{@{}lccccccc@{}}",
+            r"\toprule",
+            r" & & \multicolumn{2}{c}{$H=0.6$} & \multicolumn{2}{c}{$H=0.75$} & \multicolumn{2}{c}{$H=0.9$}\\"
+            r"\cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(l){7-8}",
+            r"Model / variational family & params/ser. & ELBO & log-lik. & ELBO & log-lik. & ELBO & log-lik.\\",
+            r"\midrule"]
+    if os.path.exists(p):
+        d = json.load(open(p))
+        if "summary" in d:
+            sm = d["summary"]
+            order = [
+                ("pl_prod_full", r"\CosVI-PL, product full $q(\bz)q(x_0)$"),
+                ("pl_joint_full", r"\textbf{\CosVI-PL, JointFull $q(\bz,x_0)$}"),
+                ("pl_block_joint", r"\textbf{\CosVI-PL, BlockJoint $\mathcal{O}(J^2+N)$}"),
+                ("pl_prec_lr16", r"\textbf{\CosVI-PL, PrecLR ($r=16$, $\mathcal{O}(rN)$)}"),
+                ("grid_joint_full", r"Exact grid, JointFull $q(\bz,x_0)$"),
+            ]
+            for k, nm in order:
+                if k not in sm["0.75"]:
+                    continue
+                npar = fmt_num(sm["0.75"][k]["local_params_per_series"])
+                cells = []
+                for H in ("0.6", "0.75", "0.9"):
+                    v = sm[H][k]
+                    cells += [rf"${v['elbo_train'][0]:+.2f}$", rf"${v['ll_joint'][0]:+.2f}\pm{v['ll_joint'][1]:.2f}$"]
+                body.append(f"{nm} & {npar} & " + " & ".join(cells) + r"\\")
+                if k == "pl_prec_lr16":
+                    body.append(r"\addlinespace")
+        else:
+            body.append(r"\multicolumn{8}{c}{\textbf{?? X11b training in progress}}\\")
+    else:
+        body.append(r"\multicolumn{8}{c}{\textbf{?? X11b results pending}}\\")
+    body += [r"\bottomrule", r"\end{tabular}", r"\end{widetable}"]
+    write("tab_structq_main.tex", "\n".join(body) + "\n")
+
+
 def tab_real():
-    """Table 5: real long-memory series. Held-out log-likelihood per test window under the exact law (two-scale refit)
-    at the profile H, and the profile H, mean +- sd over three training seeds."""
+    """Main Table 6: real long-memory series (Nile & NH temperature)."""
     s4 = S.load(os.path.join("n4", "summary_n4_s0.1.json"))
     x3 = S.load(os.path.join("n4t", "x3_summary.json"))["by"]
     nile_c = {m: [json.load(open(f)) for f in sorted(glob.glob(os.path.join(S.RES, "n4", f"n4c_{m}_seed*.json")))] for m in ("joint", "oracle")}
     rows = [("twoscale", r"\textbf{\CosVI}"), ("cosine64", r"\CosVI-64"), ("grid", "exact grid"),
             ("markov", r"\MAfBm{} law, published"), ("markov_tuned", r"\MAfBm{} law, tuned"),
-            ("competitor_joint", r"\MAfBm{} system, $H$ learned"), ("competitor_oracle", r"\MAfBm{} system, $H$ fixed")]
+            ("competitor_joint", r"\MAfBm{} system, $H$ learned$^{\dagger}$"), ("competitor_oracle", r"\MAfBm{} system, $H$ fixed$^{\dagger}$")]
     cell = lambda m, s, nd=2: rf"${m:.{nd}f}\pm{s:.{nd}f}$"
     nile, temp = {}, {}
     for k, _ in rows:
@@ -123,65 +172,81 @@ def tab_real():
         v = x3[k]; temp[k] = (v["ll"][0], v["ll"][1], v["H"][0], v["H"][1])
     bn = max(v[0] for v in nile.values()); bt = max(v[0] for v in temp.values())
     body = [r"\begin{table}[!tbp]",
-            r"\caption{Real long-memory series: held-out log-likelihood per test window at the profile estimate of $H$, and that estimate; mean $\pm$ sd over three training seeds.}\label{tab:real}",
-            r"\centering\footnotesize\setlength{\tabcolsep}{2.2pt}",
+            r"\caption{Real long-memory series: held-out log-likelihood per test window and profile $\Hhat$ (three training seeds; $^{\dagger}$full-system port with rescaled time units, Supplementary Section~S.2).}\label{tab:real}",
+            r"\centering\footnotesize\setlength{\tabcolsep}{3.0pt}",
             r"\begin{tabular}{@{}lcccc@{}}", r"\toprule",
             r" & \multicolumn{2}{c}{Nile minima} & \multicolumn{2}{c}{NH temperature}\\\cmidrule(lr){2-3}\cmidrule(l){4-5}",
             r"Representation & log-lik. & $\Hhat$ & log-lik. & $\Hhat$\\", r"\midrule"]
     for k, name in rows:
         n, tp = nile[k], temp[k]
-        nd = 1 if abs(n[0]) >= 100 else 2
-        a = cell(n[0], n[1], nd); b = cell(tp[0], tp[1], 1 if abs(tp[0]) >= 100 else 2)
+        a = cell(n[0], n[1], 1 if abs(n[0]) >= 100 else 2)
+        b = cell(tp[0], tp[1], 1 if abs(tp[0]) >= 100 else 2)
         if abs(n[0] - bn) < 1e-9: a = r"{\boldmath" + a + "}"
         if abs(tp[0] - bt) < 1e-9: b = r"{\boldmath" + b + "}"
-        pre = ""  # CSDA guide (18 Nov 2026): no shading in table cells; CosVI is named in bold instead
         h1 = f"{n[2]:.2f}" if not k.endswith("oracle") else "fixed"
         h2 = f"{tp[2]:.2f}" if not k.endswith("oracle") else "fixed"
-        body.append(pre + name + f" & {a} & {h1} & {b} & {h2}" + r"\\")
+        body.append(name + f" & {a} & {h1} & {b} & {h2}" + r"\\")
         if k == "markov_tuned":
             body.append(r"\addlinespace")
-    body += [r"\bottomrule", r"\end{tabular}",
-             r"\par\smallskip\parbox{0.97\linewidth}{\footnotesize Held-out log-likelihood (higher is better) under the smooth-stage evaluator: test posteriors refitted in the coordinates of \CosVI, importance sampling with $K=1024$. Nile: 13 windows of 51 years, the last three held out, $s=0.1$; classical estimates of $H$ \NfourClassMin--\NfourClassMax. Temperature: 32 windows of 51 months, every fourth held out (interleaved), $s=0.1$; classical estimates \XthreeClassMin--\XthreeClassMax. The competitor's system: $H$ fixed at the classical value 0.84 in the fixed rows. Bold: best mean in the column.}",
-             r"\end{table}"]
+    body += [r"\bottomrule", r"\end{tabular}", r"\end{table}"]
     write("tab_real.tex", "\n".join(body) + "\n")
 
 
-def tab_twodim():
-    """Table D.2: the two-dimensional damped Duffing system (X2): paired differences against CosVI and drift wins."""
-    x2 = S.load(os.path.join("n8", "x2_summary.json"))
-    names = {"cosine": r"\CosVI-32", "grid": "exact grid", "markov": r"\MAfBm{} law, published", "markov_best": r"\MAfBm{} law, best"}
+# =====================================================================
+# SUPPLEMENTARY MATERIAL TABLES (S.1 .. S.8)
+# =====================================================================
+
+def tab_ablation():
+    """Table S.1: N6 ablation."""
+    n6 = S.load(os.path.join("n6", "n6_summary.json"))["rows"]
+    order = [("raw", r"raw coordinates, prior $\N(0,G)$", r"\CosVI-32"), ("classical", "classical cosine coordinates", r"\CosVI-32"),
+             ("mf", r"mean-field $q$", r"\CosVI"), ("lr2", r"additive low-rank $q$, $r=2$", r"\CosVI"), ("lr4", r"additive low-rank $q$, $r=4$", r"\CosVI"),
+             ("lr8", r"additive low-rank $q$, $r=8$", r"\CosVI"), ("heun", "Heun instead of RK4", r"\CosVI"),
+             ("s4", r"$S=4$ samples", r"\CosVI"), ("s8", r"$S=8$ samples", r"\CosVI")]
+    mark = {"helps": r"$+$", "hurts": r"$-$", "no detectable effect": r"$\circ$"}
     body = [r"\begin{widetable}",
-            r"\caption{Two-dimensional damped Duffing system: paired held-out log-likelihood difference $\Delta=\ell(\text{\CosVI})-\ell(r)$ per test series and drift wins of \CosVI; three data seeds.}\label{tab:twodim}",
+            r"\caption{Single-component ablation on the double well: paired held-out likelihood lost when one component is replaced (mean $\pm$ SD, three seeds; $+$/$-$/$\circ$ = base helps/hurts/unresolved), and relative training time.}\label{tab:sm-ablation}",
+            r"\centering\footnotesize\setlength{\tabcolsep}{2.8pt}",
+            r"\begin{tabular}{@{}lcccc@{}}", r"\toprule",
+            r"Variant (base) & $H=0.6$ & $H=0.75$ & $H=0.9$ & time\\", r"\midrule"]
+    for k, name, base in order:
+        r = n6[k]; cells = []
+        for H in ("0.60", "0.75", "0.90"):
+            c = r["by_H"][H]
+            cells.append(rf"${c['delta_grid_mean']:+.2f}\pm{c['delta_grid_sd']:.2f}$\,{mark[c['component_verdict']]}")
+        body.append(rf"{name} ({base}) & " + " & ".join(cells) + rf" & {r['by_H']['0.60']['wallclock_ratio']:.2f}\\")
+    body += [r"\bottomrule", r"\end{tabular}", r"\end{widetable}"]
+    write("tab_ablation.tex", "\n".join(body) + "\n")
+
+
+def tab_fiveseed():
+    """Table S.2: X1(ii) five-seed paired gains."""
+    p2 = S.load(os.path.join("n1b", "x1_summary.json")).get("part_ii", {})
+    names = {"grid": "exact grid", "markov": r"\MAfBm{} law, published", "markov_best": r"\MAfBm{} law, best"}
+    body = [r"\begin{widetable}",
+            r"\caption{Double well over five data seeds: paired gain $\ell(\text{\CosVI})-\ell(r)$ in held-out log-likelihood at true $H$, reported as mean (SE) and verdict under $|\text{mean}|>2$\,SE.}\label{tab:sm-fiveseed}",
             r"\centering\footnotesize\setlength{\tabcolsep}{3.0pt}",
-            r"\begin{tabular}{@{}lcccccc@{}}", r"\toprule",
-            r" & \multicolumn{2}{c}{$H=0.6$} & \multicolumn{2}{c}{$H=0.75$} & \multicolumn{2}{c}{$H=0.9$}\\"
-            r"\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(l){6-7}",
-            r"Comparator $r$ & $\Delta$ & drift wins & $\Delta$ & drift wins & $\Delta$ & drift wins\\", r"\midrule"]
+            r"\begin{tabular}{@{}lccc@{}}", r"\toprule",
+            r"Comparator $r$ & $H=0.6$ & $H=0.75$ & $H=0.9$\\", r"\midrule"]
     for r, nm in names.items():
         cells = []
-        for H in ("0.6", "0.75", "0.9"):
-            p = x2["by_H"][H]["paired_vs_cosvi"][r]
-            cells += [rf"${p['grid_law']['mean']:+.2f}\pm{p['grid_law']['sd']:.2f}$", p["drift_wins"]]
+        for H in (0.6, 0.75, 0.9):
+            v = p2[f"{r}|{H}"]
+            mark = {"gain": "gain", "loss": "loss", "not distinguishable": "n.d."}[v["verdict_n5_rule"]]
+            cells.append(rf"${v['delta_mean']:+.2f}$ (${v['se']:.2f}$) {mark}")
         body.append(nm + " & " + " & ".join(cells) + r"\\")
-    g = x2["gate"]
-    body += [r"\bottomrule", r"\end{tabular}",
-             rf"\par\smallskip\parbox{{0.97\linewidth}}{{\footnotesize $\Delta$: mean $\pm$ sd under the exact grid law (grid-coordinate refit); positive favours \CosVI{{}}. Drift wins: seeds in which \CosVI's drift error is lower. Gate fixed before the runs: no comparator ahead of \CosVI{{}} at any $H$ ($\Delta<-$sd) and \CosVI's drift error lower than both \MAfBm{{}} laws in at least {g['drift_wins_required']} of {g['of']} paired comparisons. Observed: no comparator ahead; drift {g['drift_wins_vs_lifts']} of {g['of']}. The gate fails.}}",
-             r"\end{widetable}"]
-    write("tab_twodim.tex", "\n".join(body) + "\n")
+    body += [r"\bottomrule", r"\end{tabular}", r"\end{widetable}"]
+    write("tab_fiveseed.tex", "\n".join(body) + "\n")
 
 
 def tab_x8():
-    """Table D.3: coordinates versus solver (X8 c): contrasts per H under both evaluators and for the drift."""
-    f = os.path.join(S.RES, "x8", "x8_summary.json")
-    x8 = json.load(open(f)) if os.path.exists(f) else {}
-    cc = x8.get("c", {}).get("by_H", {})
-    body = [r"\begin{widetable}",
-            r"\caption{Coordinates or solver? Paired contrasts on the double well, mean (SE) over five data seeds; positive favours the first-named arm.}\label{tab:x8}",
-            r"\centering\footnotesize\setlength{\tabcolsep}{3.0pt}",
-            r"\begin{tabular}{@{}llccc@{}}", r"\toprule",
-            r"$H$ & contrast & log-lik., PL evaluator & log-lik., smooth evaluator & drift RMSE reduction\\", r"\midrule"]
+    """Table S.3: X8c coordinates vs solver + X11a four-arm Haar-random rotation control."""
+    x8 = json.load(open(os.path.join(S.RES, "x8", "x8_summary.json")))
+    cc = x8["c"]["by_H"]
+    xa_path = os.path.join(S.RES, "x11", "x11a_rotated_grid.json")
+    xa = json.load(open(xa_path)) if os.path.exists(xa_path) else None
+
     def raw_drift(H, first, second):
-        """Drift-error reduction rmse(second) - rmse(first) from the per-seed records (the summary rounds to 1e-3)."""
         v = []
         for s in range(5):
             r = json.load(open(os.path.join(S.RES, "x8", f"x8c_seed{s}_H{float(H):.2f}.json")))
@@ -198,137 +263,226 @@ def tab_x8():
         star = r"$^{\ast}$" if x["verdict"].startswith("present") else ""
         return rf"${m / 10**e:+.1f}\cdot10^{{{e}}}$ (${se / 10**e:.1f}\cdot10^{{{e}}}$)" + star
 
-    if len(cc) == 3:
+    body = [r"\begin{widetable}",
+            r"\caption{Coordinates versus solver (top, X8c) and four-arm Haar-random rotated-coordinate causal control (bottom, X11a) on the double well over five seeds; $^{\ast}$ marks $|\text{mean}|>2$\,SE.}\label{tab:sm-x8}",
+            r"\centering\footnotesize\setlength{\tabcolsep}{3.0pt}",
+            r"\begin{tabular}{@{}llccc@{}}", r"\toprule",
+            r"$H$ & Contrast & log-lik., PL eval. & log-lik., smooth eval. & drift RMSE red.\\", r"\midrule"]
+    for H in ("0.6", "0.75", "0.9"):
+        for con, nm in (("coordinate", "coordinates (PL $-$ grid)"), ("solver", r"solver (\CosVI{} $-$ PL)"), ("total", r"total (\CosVI{} $-$ grid)")):
+            v = cc[H]["contrasts"][con]
+            drift = mk_small(H, v["drift"]) if con == "solver" else mk(v["drift"], 3)
+            body.append((f"{H}" if con == "coordinate" else "") + f" & {nm} & {mk(v['pl'])} & {mk(v['smooth'])} & {drift}" + r"\\")
+        if H != "0.9":
+            body.append(r"\addlinespace")
+    body += [r"\midrule",
+             r"$H$ & Rotated-coordinate contrast (X11a) & log-lik.\ gain (SE) & train ELBO gain & wins / seeds\\", r"\midrule"]
+    if xa and "summary" in xa:
+        nseeds = len(xa["seeds"])
         for H in ("0.6", "0.75", "0.9"):
-            for con, nm in (("coordinate", "coordinates"), ("solver", "solver"), ("total", "total")):
-                v = cc[H]["contrasts"][con]
-                drift = mk_small(H, v["drift"]) if con == "solver" else mk(v["drift"], 3)
-                body.append((f"{H}" if con == "coordinate" else "") + f" & {nm} & {mk(v['pl'])} & {mk(v['smooth'])} & {drift}" + r"\\")
+            cs = xa["summary"][H]["contrasts_vs_pl"]
+            for comp, nm in (("grid", "aligned PL $-$ exact grid"), ("rot_grid", "aligned PL $-$ rotated grid"), ("rot_pl", "aligned PL $-$ rotated PL")):
+                c = cs[comp]
+                st = r"$^{\ast}$" if c["ll_verdict_2se"].startswith("present") else ""
+                body.append((f"{H}" if comp == "grid" else "") +
+                            rf" & {nm} & ${c['ll_gain_mean']:+.2f}$ (${c['ll_gain_se']:.2f}$){st} & "
+                            rf"${c['elbo_gain_mean']:+.2f}$ (${c['elbo_gain_se']:.2f}$) & {c['ll_wins']}/{nseeds}\\")
             if H != "0.9":
                 body.append(r"\addlinespace")
     else:
-        body.append(r"\multicolumn{5}{c}{\textbf{?? results pending}}\\")
-    body += [r"\bottomrule", r"\end{tabular}",
-             r"\par\smallskip\parbox{0.97\linewidth}{\footnotesize Coordinate effect: \CosVI-PL $-$ exact grid (same law and solver); solver effect: \CosVI{} $-$ \CosVI-PL (same coordinates). Held-out log-likelihood per test series under the grid's solver (PL evaluator, primary) and \CosVI's solver (smooth-stage evaluator); drift error as a reduction. $^{\ast}$: effect present by the rule fixed before the runs, $|\text{mean}|>2\,\text{SE}$. The three arms of a seed are trained side by side with common initial weights and random numbers (settings of Section~\ref{sec:double-well}, 5000 steps).}",
-             r"\end{widetable}"]
+        body.append(r"\multicolumn{5}{c}{\textbf{?? X11a rotated-coordinate control pending}}\\")
+    body += [r"\bottomrule", r"\end{tabular}", r"\end{widetable}"]
     write("tab_x8.tex", "\n".join(body) + "\n")
 
 
-def tab_fiveseed():
-    """Table D.4: five data seeds (X1 ii): paired gain of CosVI at the oracle H, rule |mean| > 2 SE."""
-    p2 = S.load(os.path.join("n1b", "x1_summary.json")).get("part_ii", {})
-    names = {"grid": "exact grid", "markov": r"\MAfBm{} law, published", "markov_best": r"\MAfBm{} law, best"}
-    body = [r"\begin{table}[!tbp]",
-            r"\caption{Double well, five data seeds: paired gain $\Delta=\ell(\text{\CosVI})-\ell(r)$ of held-out log-likelihood per test series at the true $H$, mean (SE), and its reading.}\label{tab:fiveseed}",
-            r"\centering\footnotesize\setlength{\tabcolsep}{2.4pt}",
-            r"\begin{tabular}{@{}lccc@{}}", r"\toprule",
-            r"Comparator $r$ & $H=0.6$ & $H=0.75$ & $H=0.9$\\", r"\midrule"]
-    ok = p2 and all(v["n"] == 5 for v in p2.values())
-    for r, nm in names.items():
-        cells = []
-        for H in (0.6, 0.75, 0.9):
-            v = p2.get(f"{r}|{H}")
-            if ok and v:
-                mark = {"gain": "gain", "loss": "loss", "not distinguishable": "n.d."}[v["verdict_n5_rule"]]
-                cells.append(rf"${v['delta_mean']:+.2f}$ (${v['se']:.2f}$) {mark}")
-            else:
-                cells.append(r"\textbf{??}")
-        body.append(nm + " & " + " & ".join(cells) + r"\\")
-    body += [r"\bottomrule", r"\end{tabular}",
-             r"\par\smallskip\parbox{0.97\linewidth}{\footnotesize Exact grid law. Reading by the rule fixed before the runs: gain if the mean exceeds 2\,SE, loss if it is below $-2$\,SE. Seeds 0--2 from the main runs, seeds 3--4 trained with the grid of $H$ extended to $0.95$, which leaves the group at the true $H$ unchanged in law. n.d.: not distinguishable.}",
-             r"\end{table}"]
-    write("tab_fiveseed.tex", "\n".join(body) + "\n")
-
-
 def tab_evaluators():
-    """Table D.5: does a ranking depend on the evaluator? X8(b) double well and X9 real series."""
-    f8 = os.path.join(S.RES, "x8", "x8_summary.json"); f9 = os.path.join(S.RES, "x9", "x9_summary.json")
-    b = json.load(open(f8)).get("b", {}).get("by_H", {}) if os.path.exists(f8) else {}
-    x9 = json.load(open(f9)).get("by_series", {}) if os.path.exists(f9) else {}
+    """Table S.4: Evaluator invariance across X8(b) double well and X9 real series."""
+    b = json.load(open(os.path.join(S.RES, "x8", "x8_summary.json")))["b"]["by_H"]
+    x9 = json.load(open(os.path.join(S.RES, "x9", "x9_summary.json")))["by_series"]
     names = {"cosine": r"\CosVI-$J$", "cosine64": r"\CosVI-64", "grid": "exact grid", "markov": r"\MAfBm{} law, publ.",
              "markov_tuned": r"\MAfBm{} law, tuned", "markov_best": r"\MAfBm{} law, best"}
     rd = {"ahead": "a", "tied": "t", "behind": "b"}
     cell = lambda p: rf"${p['mean']:+.2f}\pm{p['sd']:.2f}$\,{rd[p['reading']]}"
     body = [r"\begin{widetable}",
-            r"\caption{Does a ranking depend on the evaluator? Paired held-out log-likelihood difference $\ell(\text{\CosVI})-\ell(r)$ under \CosVI's solver and under the grid's solver.}\label{tab:evaluators}",
-            r"\centering\footnotesize\setlength{\tabcolsep}{2.4pt}",
-            r"\begin{tabular}{@{}l" + "cc" * 3 + r"@{}}", r"\toprule"]
-    if len(b) == 3:
-        body += [r" & \multicolumn{2}{c}{double well, $H=0.6$} & \multicolumn{2}{c}{$H=0.75$} & \multicolumn{2}{c}{$H=0.9$}\\"
-                 r"\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(l){6-7}",
-                 r"Comparator & smooth & PL & smooth & PL & smooth & PL\\", r"\midrule"]
-        reps = [r for r in names if any(r in b[H] for H in b)]
-        for r in reps:
-            cells = []
-            for H in ("0.6", "0.75", "0.9"):
-                p = b[H].get(r)
-                cells += [cell(p["smooth"]), cell(p["pl"])] if p else ["--", "--"]
-            body.append(names[r] + " & " + " & ".join(cells) + r"\\")
-    else:
-        body.append(r"\multicolumn{7}{c}{\textbf{?? double-well evaluator check pending}}\\")
-    body.append(r"\midrule")
-    rerun_note = ""
-    if len(x9) == 2:
-        # X9 refits the local posteriors before scoring, so its smooth column is a fresh run of the Table 5 evaluator;
-        # the largest change of a paired seed mean against the stored Table 5 scores is stated in the note
-        diffs = []
+            r"\caption{Evaluator invariance: paired held-out differences $\ell(\text{\CosVI})-\ell(r)$ under smooth-stage and PL evaluators (a/t/b = ahead/unresolved/behind at $\pm 1$\,SD).}\label{tab:sm-evaluators}",
+            r"\centering\footnotesize\setlength{\tabcolsep}{2.6pt}",
+            r"\begin{tabular}{@{}lcccccc@{}}", r"\toprule",
+            r" & \multicolumn{2}{c}{double well, $H=0.6$} & \multicolumn{2}{c}{$H=0.75$} & \multicolumn{2}{c}{$H=0.9$}\\"
+            r"\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(l){6-7}",
+            r"Comparator & smooth & PL & smooth & PL & smooth & PL\\", r"\midrule"]
+    reps = [r for r in names if any(r in b[H] for H in b)]
+    for r in reps:
+        cells = []
+        for H in ("0.6", "0.75", "0.9"):
+            p = b[H].get(r)
+            cells += [cell(p["smooth"]), cell(p["pl"])] if p else ["--", "--"]
+        body.append(names[r] + " & " + " & ".join(cells) + r"\\")
+    body += [r"\midrule",
+             r" & \multicolumn{2}{c}{Nile minima} & \multicolumn{2}{c}{NH temperature} & & \\\cmidrule(lr){2-3}\cmidrule(lr){4-5}",
+             r"Comparator & smooth & PL & smooth & PL & & \\", r"\midrule"]
+    for r in ("cosine64", "grid", "markov", "markov_tuned"):
+        cells = []
         for s in ("nile", "temp"):
-            new, old = [], []
-            for k in range(3):
-                d = json.load(open(os.path.join(S.RES, "x9", f"x9_{s}_seed{k}.json")))
-                new.append(d["evaluators"]["smooth"]["mean"]); old.append([m["stored_smooth_ll"] for m in d["models"]])
-            new, old = np.array(new), np.array(old)
-            diffs += list(np.abs((new[:, :1] - new[:, 1:]).mean(0) - (old[:, :1] - old[:, 1:]).mean(0)))
-        rerun_note = (rf" Both evaluators refit the local posteriors of the real series, so a paired mean in the smooth "
-                      rf"column differs from Table~\ref{{tab:real}} by at most {np.ceil(max(diffs) * 10) / 10:.1f} nats.")
-        body += [r" & \multicolumn{2}{c}{Nile} & \multicolumn{2}{c}{temperature} & & \\\cmidrule(lr){2-3}\cmidrule(lr){4-5}",
-                 r"Comparator & smooth & PL & smooth & PL & & \\", r"\midrule"]
-        for r in ("cosine64", "grid", "markov", "markov_tuned"):
-            cells = []
-            for s in ("nile", "temp"):
-                p = x9[s]["paired_vs_cosvi"][r]
-                cells += [cell(p["smooth"]), cell(p["pl"])]
-            body.append(names[r] + " & " + " & ".join(cells) + r" & & \\")
-    else:
-        body.append(r"\multicolumn{7}{c}{\textbf{?? real-data evaluator check pending}}\\")
-    body += [r"\bottomrule", r"\end{tabular}",
-             r"\par\smallskip\parbox{0.97\linewidth}{\footnotesize Mean $\pm$ sd over seeds, smooth-stage evaluator (\CosVI's solver) and PL evaluator (the grid's solver), with the reading a/t/b: \CosVI{} ahead, tied, behind at $\pm1$ sd. Double well: per test series at the true $H$, saved models; real series: per test window at each profile $H$, three seeds." + rerun_note + "}",
-             r"\end{widetable}"]
+            p = x9[s]["paired_vs_cosvi"][r]
+            cells += [cell(p["smooth"]), cell(p["pl"])]
+        body.append(names[r] + " & " + " & ".join(cells) + r" & & \\")
+    body += [r"\bottomrule", r"\end{tabular}", r"\end{widetable}"]
     write("tab_evaluators.tex", "\n".join(body) + "\n")
 
 
-def tab_ablation():
-    """Table D.1: N6 ablation, paired Delta = ll(base) - ll(variant) (grid yardstick), verdict by the fixed rule."""
-    n6 = S.load(os.path.join("n6", "n6_summary.json"))["rows"]
-    order = [("raw", r"raw coordinates, prior $\N(0,G)$", r"\CosVI-32"), ("classical", "classical cosine coordinates", r"\CosVI-32"),
-             ("mf", r"mean-field $q$", r"\CosVI"), ("lr2", r"low-rank $q$, $r=2$", r"\CosVI"), ("lr4", r"low-rank $q$, $r=4$", r"\CosVI"),
-             ("lr8", r"low-rank $q$, $r=8$", r"\CosVI"), ("heun", "Heun instead of RK4", r"\CosVI"),
-             ("s4", r"$S=4$ samples", r"\CosVI"), ("s8", r"$S=8$ samples", r"\CosVI")]
-    mark = {"helps": r"$+$", "hurts": r"$-$", "no detectable effect": r"$\circ$"}
+def tab_twodim():
+    """Table S.5: 2-D damped Duffing (X2 + X11c PL evaluator & 2-D BlockJoint)."""
+    x2 = S.load(os.path.join("n8", "x2_summary.json"))
+    names = {"cosine": r"\CosVI-32", "grid": "exact grid", "markov": r"\MAfBm{} law, published", "markov_best": r"\MAfBm{} law, best"}
     body = [r"\begin{widetable}",
-            r"\caption{Ablation on the double well: paired $\Delta=\ell(\text{base})-\ell(\text{variant})$ of held-out log-likelihood in nats per test series (exact grid law; mean $\pm$ sd, three seeds) and training time relative to the base.}\label{tab:ablation}",
-            r"\centering\footnotesize\setlength{\tabcolsep}{2.6pt}",
-            r"\begin{tabular}{@{}lcccc@{}}", r"\toprule",
-            r"Variant (base) & $H=0.6$ & $H=0.75$ & $H=0.9$ & time\\", r"\midrule"]
-    for k, name, base in order:
-        r = n6[k]; cells = []
-        for H in ("0.60", "0.75", "0.90"):
-            c = r["by_H"][H]
-            cells.append(rf"${c['delta_grid_mean']:+.2f}\pm{c['delta_grid_sd']:.2f}$\,{mark[c['component_verdict']]}")
-        body.append(rf"{name} ({base}) & " + " & ".join(cells) + rf" & {r['by_H']['0.60']['wallclock_ratio']:.2f}\\")
-    body += [r"\bottomrule", r"\end{tabular}",
-             r"\par\smallskip\parbox{0.97\linewidth}{\footnotesize $+$: the base component helps ($\Delta$ above its sd); $-$: it hurts; $\circ$: no detectable effect. Rule fixed before the runs.}",
-             r"\end{widetable}"]
-    write("tab_ablation.tex", "\n".join(body) + "\n")
+            r"\caption{Two-dimensional damped Duffing system: paired contrasts against \CosVI{} (top, X2) and comparisons under two evaluators (bottom, X11c; three seeds).}\label{tab:sm-twodim}",
+            r"\centering\footnotesize\setlength{\tabcolsep}{2.8pt}",
+            r"\begin{tabular}{@{}lcccccc@{}}", r"\toprule",
+            r" & \multicolumn{2}{c}{$H=0.6$} & \multicolumn{2}{c}{$H=0.75$} & \multicolumn{2}{c}{$H=0.9$}\\"
+            r"\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(l){6-7}",
+            r"Comparator $r$ (X2, grid eval.) & $\Delta$ log-lik. & drift wins & $\Delta$ log-lik. & drift wins & $\Delta$ log-lik. & drift wins\\", r"\midrule"]
+    for r, nm in names.items():
+        cells = []
+        for H in ("0.6", "0.75", "0.9"):
+            p = x2["by_H"][H]["paired_vs_cosvi"][r]
+            cells += [rf"${p['grid_law']['mean']:+.2f}\pm{p['grid_law']['sd']:.2f}$", p["drift_wins"]]
+        body.append(nm + " & " + " & ".join(cells) + r"\\")
+    xc_path = os.path.join(S.RES, "x11", "x11c_duffing_and_nile.json")
+    body += [r"\midrule",
+             r"Configuration (X11c, params/ser.) & PL / grid LL & drift RMSE & PL / grid LL & drift RMSE & PL / grid LL & drift RMSE\\", r"\midrule"]
+    if os.path.exists(xc_path):
+        df = json.load(open(xc_path)).get("duffing", [])
+        cmap = [
+            ("cosvi_pl_full", r"\textbf{\CosVI-PL, 2-D full}"),
+            ("cosvi_pl_block", r"\textbf{\CosVI-PL, 2-D BlockJoint}"),
+            ("grid_full", r"Exact grid, 2-D full"),
+            ("markov_pub_full", r"\MAfBm{} law, publ., 2-D full"),
+        ]
+        for ck, nm in cmap:
+            sub_all = [r for r in df if r["config"] == ck]
+            if not sub_all:
+                continue
+            npar = fmt_num(sub_all[0]["local_params_per_series"])
+            cells = []
+            for H in (0.6, 0.75, 0.9):
+                sub = [r for r in sub_all if abs(r["H"] - H) < 1e-6]
+                ll = [r["ll_pl"] for r in sub]
+                grid = [r["ll_grid"] for r in sub]
+                dr = [r["drift_rmse"] for r in sub]
+                cells += [rf"${np.mean(ll):+.2f}/{np.mean(grid):+.2f}$", rf"${np.mean(dr):.3f}\pm{np.std(dr, ddof=1):.3f}$"]
+            body.append(f"{nm} ({npar}) & " + " & ".join(cells) + r"\\")
+    else:
+        body.append(r"\multicolumn{7}{c}{\textbf{?? X11c 2-D Duffing results pending}}\\")
+    body += [r"\bottomrule", r"\end{tabular}", r"\end{widetable}"]
+    write("tab_twodim.tex", "\n".join(body) + "\n")
+
+
+def tab_fasthfc():
+    """Table S.6: Fast Chebyshev-asymptotic engine, Simpson-exact check, and exact linear KL gaps."""
+    fh = S.load(os.path.join("x11", "fast_hfc_benchmark.json"))
+    sx = S.load(os.path.join("x11", "simpson_exact_check.json"))["by_H"]
+    body = [r"\begin{widetable}",
+            r"\caption{Single-thread timings and separate accuracy checks (top): scalar functions use 30-digit \texttt{mpmath}; $Q,\dot Q,G$ use the previous double-precision solver. Bottom: Simpson-exact covariance and linear-Gaussian KL gaps.}\label{tab:sm-fasthfc}",
+            r"\centering\footnotesize\setlength{\tabcolsep}{3.0pt}",
+            r"\begin{tabular}{@{}lccccc@{}}", r"\toprule",
+            r"Coordinate build ($T,N,J,H$) & Reference (ms) & Fast engine (ms) & Speedup & Max abs.\ diff. & Separate accuracy check\\", r"\midrule"]
+    ac = fh["accuracy"]
+    wtxt = rf"$|\Delta N_H|\approx${fmt_sci(ac['worst_N'])}"
+    wtxt2 = rf"$|\Delta M_H|\approx${fmt_sci(ac['worst_M'])}"
+    wtxt3 = rf"$|\Delta Q|\approx${fmt_sci(ac['worst_Q'])}"
+    wtxt4 = rf"$|\Delta \dot Q|\approx${fmt_sci(ac['worst_dQ'])}"
+    wtxt5 = rf"$|\Delta G|\approx${fmt_sci(ac['worst_G'])}"
+    notes = [wtxt, wtxt2, wtxt3, wtxt4, wtxt5, "--", "--", "--"]
+    for idx, r in enumerate(fh["benchmark"]["rows"]):
+        lbl = f"{r['kind']} ($T={r['T']:.0f},N={r['N']},J={r['J']},H={r['H']:.2f}$)" if r["N"] > 0 else f"Gram $G$ ($J={r['J']},H={r['H']:.2f}$)"
+        body.append(f"{lbl} & {r['slow_ms']:.2f} & {r['fast_ms']:.2f} & $\\mathbf{{{r['speedup']:.1f}\\times}}$ & {fmt_sci(r['max_abs_diff'])} & {notes[idx]}\\\\")
+    body += [r"\midrule",
+             r"$H$ ($\kappa_2(C_R)$) & Raw \CosVI{} cov.\ err. & \CosVI-EX cov.\ err. & $\Delta\log p$ (raw / EX) & KL gap: MF (grid / \CosVI) & KL gap: Prod / Block / Joint\\", r"\midrule"]
+    for Hk in ("0.60", "0.75", "0.90"):
+        v = sx[Hk]; lc = v["linear_check"]
+        body.append(rf"${Hk}$ (${v['cond_CR']:.1f}$) & {fmt_sci(v['cov_relerr']['raw_twoscale'])} & {fmt_sci(v['cov_relerr']['simpson_exact'])} & "
+                    rf"${lc['max_logev_diff_raw_vs_grid']:.4f}$ / ${lc['max_logev_diff_simpson_exact_vs_grid']:.4f}$ & "
+                    rf"${lc['exact_gap_mf_grid']:.1f}$ / ${lc['exact_gap_mf_cosvi']:.1f}$ & "
+                    rf"${lc['exact_gap_product_full']:.2f}$ / ${lc['exact_gap_block_joint_J16']:.2f}$ / $0.00$\\")
+    body += [r"\bottomrule", r"\end{tabular}", r"\end{widetable}"]
+    write("tab_fasthfc.tex", "\n".join(body) + "\n")
+
+
+def tab_structq_sm():
+    """Table S.7: Long-horizon GPU VRAM scaling (X11b) + Nile structured families (X11c)."""
+    xb_p = os.path.join(S.RES, "x11", "x11b_structured_q.json")
+    xc_p = os.path.join(S.RES, "x11", "x11c_duffing_and_nile.json")
+    body = [r"\begin{widetable}",
+            r"\caption{Long-horizon GPU peak VRAM and parameter scaling ($M=16$, $S=16$, top) and Nile structured variational families (bottom, three seeds).}\label{tab:sm-structq}",
+            r"\centering\footnotesize\setlength{\tabcolsep}{3.0pt}",
+            r"\begin{tabular}{@{}lccccc@{}}", r"\toprule",
+            r"Grid steps $N$ ($D$) & JointFull params (MiB) & BlockJoint params (MiB) & PrecLR $r=8$ params (MiB) & PrecLR $r=16$ params (MiB) & Block mem.\ reduction\\", r"\midrule"]
+    if os.path.exists(xb_p) and "scaling" in json.load(open(xb_p)):
+        sc = json.load(open(xb_p))["scaling"]
+        for Ns in (80, 200, 400, 800, 1600):
+            row = {r["family"]: r for r in sc if r["N"] == Ns}
+            if not row:
+                continue
+            Ds = row["block_joint"]["D"]
+            def fmtc(f):
+                r = row[f]
+                mem = "OOM" if "error" in r else f"{r['peak_mem_MB']:.0f}\\,MB"
+                return f"{fmt_num(r['local_params_per_series'])} ({mem})"
+            red = r"$\infty$ (avoids OOM)" if "error" in row["joint_full"] else rf"${row['joint_full']['peak_mem_MB'] / row['block_joint']['peak_mem_MB']:.1f}\times$"
+            body.append(f"${Ns}$ (${Ds}$) & {fmtc('joint_full')} & {fmtc('block_joint')} & {fmtc('prec_lr8')} & {fmtc('prec_lr16')} & {red}\\\\")
+    else:
+        body.append(r"\multicolumn{6}{c}{\textbf{?? X11b memory scaling pending}}\\")
+    body += [r"\midrule",
+             r"Nile family ($N=200,D=215$) & Params/win. & Profile $\Hhat$ & Train ELBO & Held-out PL log-lik. & Min.\ ESS (JointFull)\\", r"\midrule"]
+    if os.path.exists(xc_p) and "nile" in json.load(open(xc_p)):
+        nl = json.load(open(xc_p))["nile"]
+        for f, nm in (("prod_full", r"Product full $q(\bz)q(x_0)$"), ("joint_full", r"\textbf{JointFull $q(\bz,x_0)$}"),
+                      ("block_joint", r"\textbf{BlockJoint $\mathcal{O}(J^2+N)$}"), ("prec_lr16", r"\textbf{PrecLR ($r=16$, $\mathcal{O}(rN)$)}")):
+            sub = [r for r in nl if r["family"] == f]
+            if not sub:
+                continue
+            body.append(f"{nm} & {fmt_num(sub[0]['local_params_per_window'])} & ${np.mean([r['H_profile'] for r in sub]):.3f}$ & "
+                        rf"${np.mean([r['elbo_at_best_H'] for r in sub]):+.2f}$ & "
+                        rf"${np.mean([r['ll_test_at_profile_group'] for r in sub]):+.2f}\pm{np.std([r['ll_test_at_profile_group'] for r in sub], ddof=1):.2f}$ & "
+                        rf"${min(r['min_ess_at_profile'] for r in sub):.1f}$\\")
+    else:
+        body.append(r"\multicolumn{6}{c}{\textbf{?? X11c Nile structured families pending}}\\")
+    body += [r"\bottomrule", r"\end{tabular}", r"\end{widetable}"]
+    write("tab_structq.tex", "\n".join(body) + "\n")
+
+
+def tab_n7clean():
+    """Table S.8: X11d clean standard-scale qualifying lifts vs CosVI."""
+    nc = S.load(os.path.join("x11", "n7_clean_summary.json"))["by_H"]
+    body = [r"\begin{widetable}",
+            r"\caption{Long-horizon matched-accuracy ($2\,\%$) projection comparing \CosVI{} strictly against standard-scale qualifying Markovian lifts (projected 2000-step GPU seconds).}\label{tab:sm-n7clean}",
+            r"\centering\footnotesize\setlength{\tabcolsep}{3.0pt}",
+            r"\begin{tabular}{@{}ccccccc@{}}", r"\toprule",
+            r"$H$ & $T$ ($m$) & \CosVI{} config.\ (s) & Cheapest std.\ lift (s) & Ratio & Publ.\ rescaled err.\ (\%) & Publ.\ coded err.\ (\%)\\", r"\midrule"]
+    for Hk in ("0.60", "0.75", "0.90"):
+        for idx, r in enumerate(nc[Hk]):
+            body.append((f"${Hk}$" if idx == 0 else "") +
+                        rf" & ${r['T']:.0f}$ (${r['m']}$) & {r['cosvi_cheapest'][0]} ({r['cosvi_cheapest'][1]:.0f}) & "
+                        rf"{r['lift_std_cheapest'][0]} ({r['lift_std_cheapest'][1]:.0f}) & "
+                        rf"$\mathbf{{{r['ratio_std_lift_over_cosvi']:.2f}\times}}$ & "
+                        rf"{100*r['err_lift_published_rescaled']:.2f} & {100*r['err_lift_published_coded']:.2f}\\")
+        if Hk != "0.90":
+            body.append(r"\addlinespace")
+    body += [r"\bottomrule", r"\end{tabular}", r"\end{widetable}"]
+    write("tab_n7clean.tex", "\n".join(body) + "\n")
 
 
 if __name__ == "__main__":
     tab_benchmark()
     tab_trained()
+    tab_structq_main()
     tab_real()
-    tab_twodim()
-    tab_x8()
-    tab_fiveseed()
-    tab_evaluators()
     tab_ablation()
-    print("ok tables")
+    tab_fiveseed()
+    tab_x8()
+    tab_evaluators()
+    tab_twodim()
+    tab_fasthfc()
+    tab_structq_sm()
+    tab_n7clean()
+    print("ok all 12 tables (4 main + 8 SM)")

@@ -40,16 +40,16 @@ def draw(layout):
     t = np.array(d["times"]); ex = np.array(d["std_ref_true"]); th = np.array(d["std_empirical"])
     au = np.array(d["std_ref_authors"]); own = np.array(d["std_ref_ownmodel"]); se = d["mc_std_relative_se"]
     ax.fill_between(t, th * (1 - 2 * se), th * (1 + 2 * se), color=S.C["their"], alpha=0.16, lw=0, zorder=1)
-    ax.plot(t, au, color=S.C["grey"], ls=":", lw=1.2, zorder=2, label="authors' analytic curve")
-    ax.plot(t, own, color=S.C["ma"], ls="--", lw=1.1, zorder=2, label="exact posterior of the lift as coded")
-    ax.plot(t, th, color=S.C["their"], ls="-", lw=1.4, zorder=3, label="authors' code, fitted (seed 0)")
-    ax.plot(t, ex, **S.st("ref", label="exact posterior, standard model", lw=1.1))
+    ax.plot(t, au, color=S.C["grey"], ls=":", lw=1.2, zorder=2, label="Daems et al. curve")
+    ax.plot(t, own, color=S.C["ma"], ls="--", lw=1.1, zorder=2, label="exact, lift as coded")
+    ax.plot(t, th, color=S.C["their"], ls="-", lw=1.4, zorder=3, label="Daems et al. fit, seed 0")
+    ax.plot(t, ex, **S.st("ref", label="exact, standard model", lw=1.1))
     tc, cj, ecj = ours("cosine", 0.9); tv, cv, ecv = ours("twoscale", 0.9)
     ax.plot(tc, cj, color=S.C["cosvi_j"], ls=(0, (4, 2)), lw=1.6, zorder=8, label=r"\CosVI-32")
     ax.plot(tv, cv, color=S.C["cosvi"], ls=(0, (1.2, 1.6)), lw=2.0, zorder=9, label=r"\CosVI")
     ax.set_xlim(0, 2.0); ax.set_ylim(0, None)
     ax.set_xlabel(r"time $t$"); ax.set_ylabel(r"posterior std of $X_t$")
-    ax.text(0.98, 0.97, r"$H=0.9$, $\theta=1$", transform=ax.transAxes, ha="right", va="top", fontsize=7.4)
+    ax.text(0.98, 0.97, r"$H=0.9$, $\theta_{\rm OU}=1$", transform=ax.transAxes, ha="right", va="top", fontsize=7.4)
     S.clean(ax)
     ax.legend(loc="lower center", fontsize=6.0, handlelength=2.1, labelspacing=0.18, borderaxespad=0.1, ncol=2,
               bbox_to_anchor=(0.5, 1.01), columnspacing=0.8)
@@ -87,13 +87,13 @@ def draw(layout):
     for H, x0 in ((0.7, xs[:2].mean()), (0.9, xs[2:].mean())):
         ax.text(x0, 33, rf"$H={H}$", ha="center", fontsize=7.0, color="#333333")
     ax.set_ylabel(r"integrated std error (\%)")
-    handles = [Line2D([], [], ls="none", label="vs authors' curve", **mk["authors_curve"]),
+    handles = [Line2D([], [], ls="none", label="vs Daems et al. curve", **mk["authors_curve"]),
                Line2D([], [], ls="none", label="vs standard model", **mk["standard_fou"]),
                Line2D([], [], ls="none", label="vs lift as coded", **mk["own_lift"]),
-               Patch(color=S.C["warm"], label=r"perfect fit, 256 paths (95\,\%)"),
+               Patch(color=S.C["warm"], label=r"exact fit, 256 paths (95\,\%)"),
                Line2D([], [], ls="none", marker="o", ms=4.4, mfc=S.C["cosvi"], mec=S.C["cosvi"], label=r"\CosVI"),
                Line2D([], [], ls="none", marker="o", ms=4.0, mfc="white", mec=S.C["cosvi_j"], label=r"\CosVI-32"),
-               Line2D([], [], color=S.C["grey"], ls="--", lw=0.7, label=r"5\,\%, our tolerance")]
+               Line2D([], [], color=S.C["grey"], ls="--", lw=0.7, label=r"5\,\% tolerance")]
     ax.legend(handles=handles, loc="lower center", fontsize=6.0, handletextpad=0.3, labelspacing=0.25, borderaxespad=0.1,
               bbox_to_anchor=(0.5, 1.01), ncol=3, columnspacing=0.9)
     S.clean(ax)

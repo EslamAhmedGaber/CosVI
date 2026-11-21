@@ -1,4 +1,4 @@
-r"""Summarise N6 (ablations) with the reading rule fixed in 05_EXPERIMENTS.md (15 Nov 2026, about 21:38, before any run).
+r"""Summarise N6 (ablations) with the reading rule fixed on 15 Nov 2026 (about 21:38, before any run).
 
 Per variant and H_true: paired Delta = ll(base) - ll(variant) over data seeds (grid yardstick, oracle H; base =
 base_cos for 'classical' and 'raw', base otherwise), mean and sd (n = number of seeds).

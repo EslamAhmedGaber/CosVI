@@ -1,4 +1,4 @@
-r"""X8(b, c): coordinates versus solver on the N1b task (05_EXPERIMENTS.md section 3b, X8; protocol fixed 18 Nov 2026,
+r"""X8(b, c): coordinates versus solver on the N1b task (protocol fixed 18 Nov 2026,
 14:35, before any X8 run).
 
 Two evaluators, used for every model in both parts (oracle group H = H_true; test posteriors refitted with the
@@ -96,7 +96,7 @@ def part_b(H, seed, refit, K, tag):
     Ye = torch.as_tensor(Yte, dtype=torch.float32, device=dev)
     t0 = time.time()
     ev = evaluate(glob, Ye, H, seed, refit, K, dev)
-    res = {"part": "b", "rule": "05 3b X8(b)", "H_true": H, "seed": seed, "refit": refit, "K": K,
+    res = {"part": "b", "rule": "X8(b)", "H_true": H, "seed": seed, "refit": refit, "K": K,
            "models": [{"rep": r, "file": os.path.basename(f), "source": s} for r, f, s in found],
            "sigma": glob.sigma().cpu().tolist(), "drift_rmse_occupation": drift_rmse(glob, occ, dev),
            "test_loglik": ev, "eval_seconds": time.time() - t0}
@@ -136,7 +136,7 @@ def part_c(H, seed, steps, refit, K, tag):
     Ye = torch.as_tensor(Yte, dtype=torch.float32, device=dev)
     t1 = time.time()
     ev = evaluate(glob, Ye, H, seed, refit, K, dev)
-    res = {"part": "c", "rule": "05 3b X8(c)", "H_true": H, "seed": seed, "arms": arms, "names": ["CosVI", "CosVI-PL", "exact grid"],
+    res = {"part": "c", "rule": "X8(c)", "H_true": H, "seed": seed, "arms": arms, "names": ["CosVI", "CosVI-PL", "exact grid"],
            "D": D, "steps": steps, "refit": refit, "K": K, "train_seconds": train_s, "eval_seconds": time.time() - t1,
            "sigma": glob.sigma().cpu().tolist(), "drift_rmse_occupation": drift_rmse(glob, occ, dev),
            "elbo_train_own_model": elbo_tr.tolist(), "inert_block_check": inert, "test_loglik": ev, "history": hist}

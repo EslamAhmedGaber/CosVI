@@ -11,6 +11,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import style as S
 
 OUT = os.path.join(S.MAN, "source", "tables", "numbers.tex")
+os.makedirs(os.path.dirname(OUT), exist_ok=True)
 M, MISSING = {}, []
 
 
@@ -55,8 +56,8 @@ def num(x):
     return f"{x:,.0f}".replace(",", "{,}")
 
 
-# ------------------------------------------------------------------ G1 noise fidelity (pilot_checks/results/g1_pilot.json)
-g1 = json.load(open(os.path.join(S.WORK, "pilot_checks", "results", "g1_pilot.json")))
+# ------------------------------------------------------------------ G1 noise fidelity (results/g1/g1_pilot.json)
+g1 = J(os.path.join("g1", "g1_pilot.json"))
 dims = g1["dims"]
 c = lambda H, d: g1["cosine"][H][str(d)]["projection"]["rel_int_mse"]
 t = lambda H, d: g1["ma_I_tuned"][H][str(d)]["rel_int_mse"]
@@ -265,7 +266,7 @@ assert n7b["all_qualify"], "N7(b): a case misses the 2 % criterion"
 put("NsevenCosviErrMax", f"{100 * n7b['max_err']:.4f}"); put("NsevenCosviCases", str(len(n7b["rows"])))
 
 # ------------------------------------------------------------------ X10 (a): N2 under a proposal that keeps the x0-noise coupling
-# (post hoc, CPU; results/x10/x10_summary.json) and the independent check's candidate contrast (stored in results/x10)
+# (post hoc, CPU; results/x10/x10_summary.json) and the candidate contrasts of the six N2 cases (stored in results/x10)
 x10p = os.path.join(S.RES, "x10", "x10_summary.json")
 x10 = json.load(open(x10p)) if os.path.exists(x10p) else None
 if x10 and x10["a"]["verdict"] in ("holds", "qualified"):
@@ -321,7 +322,7 @@ if x10 and x10.get("c") and x10["c"]["robust"] is not None:
 else:
     for k in ("XtenCShiftMin", "XtenCShiftMax", "XtenCChanged", "XtenCRows", "XtenCMinEssTemp", "XtenCMinEssNile"):
         missing(k, "X10(c) pending")
-rvp = os.path.join(S.RES, "x10", "review_n2_oracle_cases.json")   # stored copy of the independent check of 18 Nov
+rvp = os.path.join(S.RES, "x10", "n2_joint_candidates.json")   # joint-minus-product candidate contrasts, six N2 cases
 if os.path.exists(rvp):
     rv = [c for c in json.load(open(rvp)) if "mean_joint_minus_product" in c]
     put("RevCandMin", f"{min(c['mean_joint_minus_product'] for c in rv):.2f}")
@@ -513,7 +514,7 @@ if len(cc) == 3 and all(len(cc[H]["seeds"]) == 5 for H in cc):
     put("XeightCoordAbsMin", f"{min(cm):.2f}"); put("XeightCoordAbsMax", f"{max(cm):.2f}")
     coords = [cc[H]["contrasts"]["coordinate"]["pl"]["per_seed"] for H in cc]
     put("XeightCoordPositive", str(sum(x > 0 for c in coords for x in c))); put("XeightCoordRuns", str(sum(len(c) for c in coords)))
-    # the sentences are written for each possible outcome of the rule fixed before the runs (05 3b X8)
+    # the sentences are written for each possible outcome of the rule fixed before the runs (X8)
     ABS = {"coordinates": "a controlled comparison with a common solver attributes its advantage over the exact grid, which has the same law on the grid, to the coordinates",
            "solver": "a controlled comparison with a common solver attributes its advantage over the exact grid, which has the same law on the grid, to the smoother within-step noise of its solver rather than to the coordinates",
            "both": "a controlled comparison with a common solver attributes its advantage over the exact grid, which has the same law on the grid, to both the coordinates and the smoother within-step noise of its solver",
@@ -553,7 +554,7 @@ if len(bs) == 2 and all(len(v["seeds"]) == 3 for v in bs.values()):
         put(f"XnineMinEss{nm[s].capitalize()[:4]}", f"{min(e['smooth']['min_ess'], e['pl']['min_ess']):.0f}")
     pm = bs["nile"]["paired_vs_cosvi"]["markov"]
     put("XnineNileMaSmooth", f"{pm['smooth']['mean']:.1f}"); put("XnineNileMaPl", f"{pm['pl']['mean']:.1f}")
-    # abstract clause on the real data, by the X9 rule fixed before the runs (05 3b, 15:20): the Nile claim is stated
+    # abstract clause on the real data, by the X9 rule fixed before the runs (fixed 18 Nov 2026 15:20): the Nile claim is stated
     # for both evaluators only if the Nile reading is unchanged; otherwise it names the evaluator under which it holds
     nile = bs["nile"]
     nile_same = nile["robust_to_evaluation_map"]
@@ -567,6 +568,212 @@ if len(bs) == 2 and all(len(v["seeds"]) == 3 for v in bs.values()):
         put("XnineAbstract", r"On the Nile minima \CosVI{} fits best under its own solver but not under the grid's.")
 else:
     missing("XnineSentence", "X9 incomplete"); missing("XnineAbstract", "X9 incomplete")
+
+# ------------------------------------------------------------------ 19 Nov 2026: mechanism, real-data score stability, timings
+# (i) linear analogue: the two coordinate systems give the observations the same covariance, so the posterior precision
+#     of the noise coordinates has the same spectrum (x8d_sensitivity_share.py)
+xd = J(os.path.join("x8", "x8d_sensitivity_share.json"))["by_H"]
+for H, nmH in (("0.6", "Six"), ("0.75", "SevenFive"), ("0.9", "Nine")):
+    r = xd[H]
+    assert abs(r["precision_condition_pl"] / r["precision_condition_grid"] - 1) < 1e-9, "condition numbers differ"
+    put(f"SensCond{nmH}", f"{r['precision_condition_pl']:.2f}")
+put("SensNinetyCosSevenFive", str(xd["0.75"]["n90_pl"])); put("SensNinetyGridSevenFive", str(xd["0.75"]["n90_grid"]))
+# (ii) real series: five readouts of the same models, window influence (x9_window_audit.py)
+au = J(os.path.join("x9", "x9_window_audit.json"))["series"]
+spread = max(max(c["gap_seed_mean"].values()) - min(c["gap_seed_mean"].values())
+             for s in au.values() for c in s["by_comparison"].values())
+repl = max(abs(x) for s in au.values() for c in s["by_comparison"].values() for x in c["replicate_difference_A_minus_B"])
+put("AuditReadoutSpread", f"{np.ceil(spread * 10) / 10:.1f}", note="largest spread of a seed-mean paired gap over 5 readouts")
+put("AuditReplicateMax", f"{np.ceil(repl * 10) / 10:.1f}", note="largest per-seed difference of two primary-evaluator runs")
+assert all(c["stable_sign"] for c in au["nile"]["by_comparison"].values()), "a Nile comparison is not stable"
+tc = au["temp"]["by_comparison"]
+assert not tc["cosine64"]["stable_sign"] and not tc["markov"]["stable_sign"], "temperature stability changed: revise the text"
+assert tc["grid"]["stable_sign"] and tc["markov_tuned"]["stable_sign"], "temperature stability changed: revise the text"
+wc, wm = tc["cosine64"]["window_gap_seed_mean"], tc["markov"]["window_gap_seed_mean"]
+nwin = len(wc["B"])
+put("AuditEarlyCosJ", f"{abs(np.mean([v[0] for v in wc.values()])):.0f}")
+put("AuditEarlyMa", f"{abs(np.mean([v[0] for v in wm.values()])):.0f}")
+put("AuditLateMa", f"{np.mean([v[-1] for v in wm.values()]):.0f}")
+assert all(v[0] < 0 for v in wc.values()) and all(v[0] < 0 for v in wm.values()) and all(v[-1] > 0 for v in wm.values())
+woc = [float(np.mean(v[1:])) for v in wc.values()]; wol = [float(np.mean(v[:-1])) for v in wm.values()]
+assert min(woc) > 0 and max(wol) < 0, "single-window reversal changed: revise the text"
+put("AuditWithoutEarlyMin", f"{min(woc):.1f}"); put("AuditWithoutEarlyMax", f"{max(woc):.1f}")
+put("AuditWithoutLateMin", f"{abs(max(wol)):.1f}"); put("AuditWithoutLateMax", f"{abs(min(wol)):.1f}")
+TEST_T = list(range(3, 32, 4))                         # temperature test windows k (n4t_temperature.TEST), 51 months each
+yr = lambda m: 1854 + m // 12
+put("AuditEarlyDates", f"{yr(51 * TEST_T[0])}--{yr(51 * TEST_T[0] + 50)}")
+put("AuditLateDates", f"{yr(51 * TEST_T[-1])}--{yr(51 * TEST_T[-1] + 50)}")
+assert nwin == len(TEST_T)
+ess_low, ess_tot, wmax = {}, {}, 0.0
+for s in ("nile", "temp"):
+    lo = tot = 0
+    for k in range(3):
+        e = J(os.path.join("x9", f"x9_{s}_seed{k}.json"))["evaluators"]["smooth"]
+        a = np.array(e["ess"]); lo += int((a < 10).sum()); tot += a.size
+        if s == "temp":
+            wmax = max(wmax, float(np.max(e["max_weight"])))
+    ess_low[s], ess_tot[s] = lo, tot
+put("AuditEssLowNile", str(ess_low["nile"])); put("AuditEssTotNile", str(ess_tot["nile"]))
+put("AuditEssLowTemp", str(ess_low["temp"])); put("AuditEssTotTemp", str(ess_tot["temp"]))
+put("AuditWmaxTemp", f"{100 * wmax:.0f}")
+# the X9 smooth column is a fresh refit of the Table 5 evaluator: largest change of a paired seed mean
+diffs = []
+for s in ("nile", "temp"):
+    new, old = [], []
+    for k in range(3):
+        d = J(os.path.join("x9", f"x9_{s}_seed{k}.json"))
+        new.append(d["evaluators"]["smooth"]["mean"]); old.append([m["stored_smooth_ll"] for m in d["models"]])
+    new, old = np.array(new), np.array(old)
+    diffs += list(np.abs((new[:, :1] - new[:, 1:]).mean(0) - (old[:, :1] - old[:, 1:]).mean(0)))
+put("XnineRefitMax", f"{np.ceil(max(diffs) * 10) / 10:.1f}")
+# (iii) end-to-end time of one profile run (all candidate H trained side by side in one GPU job) and its held-out refits
+def minutes(pattern, key):
+    v = [json.load(open(f))[key] for f in glob.glob(os.path.join(S.RES, pattern))]
+    assert v, pattern
+    return f"{np.median(v) / 60:.0f}"
+put("TimeDwTrain", minutes(os.path.join("n1b", "n1b_twoscale_seed[0-2]_H0.??.json"), "train_seconds"))
+put("TimeDwEval", minutes(os.path.join("n1b", "n1b_twoscale_seed[0-2]_H0.??.json"), "eval_seconds"))
+put("TimeNileTrain", minutes(os.path.join("n4", "n4v2_twoscale_seed*_s0.1.json"), "train_seconds"))
+put("TimeNileEval", minutes(os.path.join("n4", "n4v2_twoscale_seed*_s0.1.json"), "eval_seconds"))
+put("TimeTempTrain", minutes(os.path.join("n4t", "n4t_twoscale_seed*_s0.1.json"), "train_seconds"))
+put("TimeTempEval", minutes(os.path.join("n4t", "n4t_twoscale_seed*_s0.1.json"), "eval_seconds"))
+
+# ------------------------------------------------------------------ X11: fast_hfc, simpson_exact, n7_clean, x11a, x11b, x11c
+def _fmt_sci(v):
+    s = f"{v:.1e}"
+    mant, exp = s.split("e")
+    return rf"{mant}\times 10^{{{int(exp)}}}"
+
+if exists("x11/fast_hfc_benchmark.json"):
+    fh = J("x11/fast_hfc_benchmark.json")
+    ac = fh["accuracy"]
+    put("FastHfcErrN", _fmt_sci(ac["worst_N"]))
+    put("FastHfcErrM", _fmt_sci(ac["worst_M"]))
+    put("FastHfcErrQ", _fmt_sci(ac["worst_Q"]))
+    put("FastHfcErrDq", _fmt_sci(ac["worst_dQ"]))
+    put("FastHfcErrG", _fmt_sci(ac["worst_G"]))
+    brows = fh["benchmark"]["rows"]
+    _by = {(r["kind"], r["N"], r["J"], r["H"]): r for r in brows}
+    put("FastHfcSpeedTwoscaleSmall", f"{_by[('twoscale', 80, 16, 0.75)]['speedup']:.1f}")
+    put("FastHfcSpeedTwoscaleMed", f"{_by[('twoscale', 200, 16, 0.75)]['speedup']:.1f}")
+    put("FastHfcSpeedCosineMed", f"{_by[('cosine', 200, 64, 0.75)]['speedup']:.1f}")
+    put("FastHfcSpeedCosineBig", f"{_by[('cosine', 200, 256, 0.75)]['speedup']:.0f}")
+    put("FastHfcSpeedCosineLong", f"{_by[('cosine', 2500, 64, 0.75)]['speedup']:.1f}")
+    put("FastHfcSlowCosineBigMs", num(_by[('cosine', 200, 256, 0.75)]['slow_ms']))
+    put("FastHfcFastCosineBigMs", f"{_by[('cosine', 200, 256, 0.75)]['fast_ms']:.1f}")
+    put("FastHfcBankSec", f"{fh['benchmark']['h_bank_99H_N200_J64_fast_s']:.2f}")
+else:
+    for k in ("FastHfcErrN", "FastHfcErrM", "FastHfcErrQ", "FastHfcErrDq", "FastHfcErrG",
+              "FastHfcSpeedTwoscaleSmall", "FastHfcSpeedTwoscaleMed", "FastHfcSpeedCosineMed",
+              "FastHfcSpeedCosineBig", "FastHfcSpeedCosineLong", "FastHfcSlowCosineBigMs",
+              "FastHfcFastCosineBigMs", "FastHfcBankSec"):
+        missing(k, "x11/fast_hfc_benchmark.json")
+
+if exists("x11/simpson_exact_check.json"):
+    sx = J("x11/simpson_exact_check.json")["by_H"]
+    put("SimpCovErrSix", _fmt_sci(sx["0.60"]["cov_relerr"]["simpson_exact"]))
+    put("SimpCovErrSevenFive", _fmt_sci(sx["0.75"]["cov_relerr"]["simpson_exact"]))
+    put("SimpCovErrNine", _fmt_sci(sx["0.90"]["cov_relerr"]["simpson_exact"]))
+    put("SimpCovErrMax", _fmt_sci(max(v["cov_relerr"]["simpson_exact"] for v in sx.values())))
+    put("SimpLinEvidSix", f"{sx['0.60']['linear_check']['max_logev_diff_simpson_exact_vs_grid']:.4f}")
+    put("SimpLinEvidSevenFive", f"{sx['0.75']['linear_check']['max_logev_diff_simpson_exact_vs_grid']:.4f}")
+    put("SimpLinEvidNine", f"{sx['0.90']['linear_check']['max_logev_diff_simpson_exact_vs_grid']:.4f}")
+    for Hk, nm in (("0.60", "Six"), ("0.75", "SevenFive"), ("0.90", "Nine")):
+        lc = sx[Hk]["linear_check"]
+        put(f"LinGapMfGrid{nm}", f"{lc['exact_gap_mf_grid']:.1f}")
+        put(f"LinGapMfCosvi{nm}", f"{lc['exact_gap_mf_cosvi']:.1f}")
+        put(f"LinGapBlock{nm}", f"{lc['exact_gap_block_joint_J16']:.2f}")
+        put(f"LinGapProd{nm}", f"{lc['exact_gap_product_full']:.2f}")
+        put(f"CondCr{nm}", f"{sx[Hk]['cond_CR']:.1f}")
+else:
+    for k in ("SimpCovErrSix", "SimpCovErrSevenFive", "SimpCovErrNine", "SimpCovErrMax",
+              "SimpLinEvidSix", "SimpLinEvidSevenFive", "SimpLinEvidNine",
+              "LinGapMfGridSix", "LinGapMfGridSevenFive", "LinGapMfGridNine",
+              "LinGapMfCosviSix", "LinGapMfCosviSevenFive", "LinGapMfCosviNine",
+              "LinGapBlockSix", "LinGapBlockSevenFive", "LinGapBlockNine",
+              "LinGapProdSix", "LinGapProdSevenFive", "LinGapProdNine",
+              "CondCrSix", "CondCrSevenFive", "CondCrNine"):
+        missing(k, "x11/simpson_exact_check.json")
+
+if exists("x11/n7_clean_summary.json"):
+    nc = J("x11/n7_clean_summary.json")["by_H"]
+    rats = [r["ratio_std_lift_over_cosvi"] for v in nc.values() for r in v]
+    put("NsevenStdRatioMin", f"{min(rats):.1f}")
+    put("NsevenStdRatioMax", f"{max(rats):.1f}")
+    put("NsevenPubRescaledNineErr", f"{100 * nc['0.90'][0]['err_lift_published_rescaled']:.1f}")
+    put("NsevenPubCodedNineErr", f"{100 * nc['0.90'][0]['err_lift_published_coded']:.1f}")
+else:
+    for k in ("NsevenStdRatioMin", "NsevenStdRatioMax", "NsevenPubRescaledNineErr", "NsevenPubCodedNineErr"):
+        missing(k, "x11/n7_clean_summary.json")
+
+if exists("x11/x11a_rotated_grid.json"):
+    xa = J("x11/x11a_rotated_grid.json")
+    ls = xa["linear_sensitivity"]
+    sm = xa["summary"]
+    for Hk, nm in (("0.6", "Six"), ("0.75", "SevenFive"), ("0.9", "Nine")):
+        put(f"XelevenASensTopPl{nm}", f"{100 * ls[Hk]['twoscale_pl']['share_best_16']:.1f}")
+        put(f"XelevenASensTopRotPl{nm}", f"{100 * ls[Hk]['rot_pl']['share_best_16']:.1f}")
+        for comp, cn in (("rot_pl", "RotPl"), ("rot_grid", "RotGrid"), ("grid", "Grid")):
+            c = sm[Hk]["contrasts_vs_pl"][comp]
+            put(f"XelevenAPlVs{cn}{nm}", sgn(c["ll_gain_mean"]))
+            put(f"XelevenAPlVs{cn}SE{nm}", f"{c['ll_gain_se']:.2f}")
+    put("XelevenAPlWinsRotPl", str(sum(sm[H]["contrasts_vs_pl"]["rot_pl"]["ll_wins"] for H in ("0.6", "0.75", "0.9"))))
+    put("XelevenAPlWinsRotGrid", str(sum(sm[H]["contrasts_vs_pl"]["rot_grid"]["ll_wins"] for H in ("0.6", "0.75", "0.9"))))
+    put("XelevenATotalRuns", str(3 * len(xa["seeds"])))
+else:
+    for Hk, nm in (("0.6", "Six"), ("0.75", "SevenFive"), ("0.9", "Nine")):
+        for pfx in ("XelevenASensTopPl", "XelevenASensTopRotPl",
+                    "XelevenAPlVsRotPl", "XelevenAPlVsRotPlSE",
+                    "XelevenAPlVsRotGrid", "XelevenAPlVsRotGridSE",
+                    "XelevenAPlVsGrid", "XelevenAPlVsGridSE"):
+            missing(f"{pfx}{nm}", "x11a pending")
+    for k in ("XelevenAPlWinsRotPl", "XelevenAPlWinsRotGrid", "XelevenATotalRuns"):
+        missing(k, "x11a pending")
+
+if exists("x11/x11b_structured_q.json") and "summary" in J("x11/x11b_structured_q.json"):
+    xb = J("x11/x11b_structured_q.json")
+    sxb = xb["summary"]
+    put("XelevenBParamsProd", num(sxb["0.75"]["pl_prod_full"]["local_params_per_series"]))
+    put("XelevenBParamsJoint", num(sxb["0.75"]["pl_joint_full"]["local_params_per_series"]))
+    put("XelevenBParamsBlock", num(sxb["0.75"]["pl_block_joint"]["local_params_per_series"]))
+    put("XelevenBParamsPrecSixteen", num(sxb["0.75"]["pl_prec_lr16"]["local_params_per_series"]))
+    eg = [sxb[H]["paired"]["joint_minus_prod_elbo"][0] for H in ("0.6", "0.75", "0.9")]
+    put("XelevenBJointElboGainMin", f"{min(eg):.2f}")
+    put("XelevenBJointElboGainMax", f"{max(eg):.2f}")
+    put("XelevenBJointMinEssMin", f"{min(sxb[H]['pl_joint_full']['min_ess_joint'] for H in ('0.6', '0.75', '0.9')):.0f}")
+    put("XelevenBProdMinEssMin", f"{min(r['ll_test_prod_min_ess'] for r in xb['rows'] if r['variant'] == 'pl_prod_full'):.0f}")
+    sc = xb["scaling"]
+    sc_big = {r["family"]: r for r in sc if r["N"] == 1600}
+    put("XelevenBParamsFullBig", num(sc_big["joint_full"]["local_params_per_series"]))
+    put("XelevenBParamsBlockBig", num(sc_big["block_joint"]["local_params_per_series"]))
+    put("XelevenBMemFullBig", "OOM" if "error" in sc_big["joint_full"] else f"{sc_big['joint_full']['peak_mem_MB']:.0f}")
+    put("XelevenBMemBlockBig", f"{sc_big['block_joint']['peak_mem_MB']:.0f}")
+    put("XelevenBMemPrecBig", f"{sc_big['prec_lr16']['peak_mem_MB']:.0f}")
+else:
+    for k in ("XelevenBParamsProd", "XelevenBParamsJoint", "XelevenBParamsBlock", "XelevenBParamsPrecSixteen",
+              "XelevenBJointElboGainMin", "XelevenBJointElboGainMax", "XelevenBJointMinEssMin",
+              "XelevenBProdMinEssMin", "XelevenBParamsFullBig", "XelevenBParamsBlockBig",
+              "XelevenBMemFullBig", "XelevenBMemBlockBig", "XelevenBMemPrecBig"):
+        missing(k, "x11b pending")
+
+if exists("x11/x11c_duffing_and_nile.json") and "nile" in J("x11/x11c_duffing_and_nile.json"):
+    xc = J("x11/x11c_duffing_and_nile.json")
+    df_ = xc["duffing"]
+    nl_ = xc["nile"]
+    put("XelevenCDuffParamsFull", num(next(r["local_params_per_series"] for r in df_ if r["config"] == "cosvi_pl_full")))
+    put("XelevenCDuffParamsBlock", num(next(r["local_params_per_series"] for r in df_ if r["config"] == "cosvi_pl_block")))
+    n_by = {f: [r for r in nl_ if r["family"] == f] for f in ("prod_full", "joint_full", "block_joint", "prec_lr16")}
+    put("XelevenCNileParamsFull", num(n_by["joint_full"][0]["local_params_per_window"]))
+    put("XelevenCNileParamsBlock", num(n_by["block_joint"][0]["local_params_per_window"]))
+    put("XelevenCNileParamsPrec", num(n_by["prec_lr16"][0]["local_params_per_window"]))
+    eg_n = np.mean([a["elbo_at_best_H"] - b["elbo_at_best_H"] for a, b in zip(n_by["joint_full"], n_by["prod_full"])])
+    put("XelevenCNileJointElboGain", f"{eg_n:+.2f}")
+    put("XelevenCNileJointMinEss", f"{min(r['min_ess_at_profile'] for r in n_by['joint_full']):.0f}")
+else:
+    for k in ("XelevenCDuffParamsFull", "XelevenCDuffParamsBlock", "XelevenCNileParamsFull",
+              "XelevenCNileParamsBlock", "XelevenCNileParamsPrec", "XelevenCNileJointElboGain",
+              "XelevenCNileJointMinEss"):
+        missing(k, "x11c pending")
 
 os.makedirs(os.path.dirname(OUT), exist_ok=True)
 with open(OUT, "w", encoding="utf-8") as fh:

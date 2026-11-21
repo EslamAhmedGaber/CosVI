@@ -1,4 +1,4 @@
-"""Write the GPU and CPU job queues of the full campaign requested by the author on 13 Nov ("all tests at all values").
+"""Write the GPU and CPU job queues that ran every experiment of the paper.
 Run once:  python make_queues.py   then start   python queue_runner.py queue_gpu.jsonl status_gpu.jsonl   (and cpu)."""
 import json, os
 

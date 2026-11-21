@@ -1,11 +1,11 @@
-r"""N6: ablations of CosVI's components on the N1 double-well task (protocol fixed in 05_EXPERIMENTS.md on
+r"""N6: ablations of CosVI's components on the N1 double-well task (protocol fixed on
 15 Nov 2026, about 21:38, before any run; batching amended about 21:56, before any run).
 
 Settings of N1b (data, drift MLP, sigma, N = 80, 5000 Adam steps, N1b learning rates and cosine decay), oracle H only
 (H fixed at H_true), one component changed at a time:
   base        CosVI: two-scale (J = 16 + residual), whitened coordinates, q full, RK4, S = 16
   base_cos    CosVI-J: cosine J = 32, projection coordinates, otherwise base
-  classical   cosine J = 32 in Paper 1's classical coordinates                                  (pair: base_cos)
+  classical   cosine J = 32 in CosChaos's classical coordinates                                 (pair: base_cos)
   raw         cosine J = 32, q over Z = L xi with prior N(0, G), initialised at the prior         (pair: base_cos)
   mf          q mean-field (diagonal)                                                             (pair: base)
   lr2/4/8     q low-rank plus diagonal, rank r; U initialised at 0.01 N(0, 1)                     (pair: base)

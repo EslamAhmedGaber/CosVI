@@ -1,4 +1,4 @@
-r"""X10(c): the proposal check on the real series (05_EXPERIMENTS.md section 3b; protocol fixed 18 Nov 2026, 19:46,
+r"""X10(c): the proposal check on the real series (protocol fixed 18 Nov 2026, 19:46,
 before any X10(c) run).  CPU only.
 
 Frozen saved globals of CosVI, CosVI-64, the exact grid and the MA-fBm laws (published, tuned), training seeds 0-2, each
@@ -49,7 +49,7 @@ class FrozenReal(Frozen):
 
 
 def joint_readout(model, y, idx, noise, batches=4, rng_offset=0):
-    """x10_proposal_sensitivity.joint_readout (independent check, 18 Nov 2026) with the observation noise as an argument."""
+    """x10_proposal_sensitivity.joint_readout with the observation noise as an argument."""
     d = model.dim
     start = np.zeros(d); start[-1] = y[0]
     prev, cached = None, None

@@ -1,4 +1,4 @@
-r"""Summarise X3 (Northern-Hemisphere temperature; 05_EXPERIMENTS.md section 3b, rule fixed 16 Nov 07:03, amended 07:12).
+r"""Summarise X3 (Northern-Hemisphere temperature; rule fixed 16 Nov 2026 07:03, amended 07:12).
 
 Per representation: profile H (vertex of the training bound over {0.5,...,0.9,0.95}) and the held-out log-likelihood per
 test window under the exact law (two-scale refit) at the grid group nearest the profile H; mean +- sd over seeds 0-2.
@@ -48,7 +48,7 @@ def paired(a, b):
 
 
 def main():
-    res = {"rule": "05 3b X3", "by": {}, "paired_vs_cosvi": {}}
+    res = {"rule": "X3", "by": {}, "paired_vs_cosvi": {}}
     base = ours("twoscale")
     for rep in NAMES:
         r = ours(rep)

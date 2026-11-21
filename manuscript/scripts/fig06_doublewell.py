@@ -81,7 +81,7 @@ def draw(layout):
         rows.append((vals, "their", label))
     ax = fig.add_subplot(gs[0, 1])
     dot_rows(ax, rows, (-30, 2), r"$\Delta$ held-out log-lik. vs \CosVI{} (nats)")
-    ax.set_title(r"their full system (MA-fBm)", fontsize=8.2)
+    ax.set_title(r"MA-fBm system (Daems et al.)", fontsize=8.2)
     S.panel_label(ax, "b", x=-0.40)
     hh = [ax.plot([], [], HM[H], color="#666666", mfc="white" if H == 0.75 else "#666666", ms=3.6)[0] for H in HS]
     fig.legend(hh, [r"$H_{\rm true}=%s$" % H for H in HS], loc="upper center", ncol=3, bbox_to_anchor=(0.36, 1.005),
@@ -104,12 +104,12 @@ def draw(layout):
     hist, edges = np.histogram(np.clip(occ, -1.5, 1.5), bins=60, range=(-1.5, 1.5), density=True)
     xc = 0.5 * (edges[1:] + edges[:-1])
     ax.fill_between(xc, -2.05, -2.05 + 0.45 * hist / hist.max(), color="#DDDDDD", lw=0, zorder=0, step="mid")
-    ax.text(0.0, -1.88, r"where the data are", fontsize=6.0, color="#777777", ha="center", va="bottom")
+    ax.text(0.0, -1.90, r"empirical occupation", fontsize=5.8, color="#666666", ha="center", va="bottom")
     ax.axhline(0, color="#DDDDDD", lw=0.5, zorder=0)
     ax.set_xlim(-1.5, 1.5); ax.set_ylim(-2.05, 2.05)
     ax.set_xlabel(r"state $x$"); ax.set_ylabel(r"drift $f_\theta(x)$")
     ax.set_title(r"learned drift, $H=0.75$", fontsize=8.2)
-    ax.legend(loc="upper right", fontsize=6.1, handlelength=1.8, labelspacing=0.15, borderaxespad=0.1)
+    ax.legend(loc="upper right", fontsize=5.9, handlelength=1.6, labelspacing=0.14, borderaxespad=0.25)
     S.clean(ax); S.panel_label(ax, "c", x=-0.30)
     S.save(fig, "fig06_doublewell", layout)
 

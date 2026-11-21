@@ -1,4 +1,4 @@
-r"""Summarise N7 with the crossover rule fixed in 05_EXPERIMENTS.md (15 Nov 2026, 21:59, before any run).
+r"""Summarise N7 with the crossover rule fixed on 15 Nov 2026 (21:59, before any run).
 
 Inputs: results/n7/n7_exact.json (accuracy at convergence, CPU) and results/n7/n7_cost.json (time per step, GPU).
 Cost at matched accuracy = time per step x 2000 for every configuration whose error at convergence is <= 2 %:
@@ -19,7 +19,7 @@ def main():
     ex = json.load(open(os.path.join(RES, "n7_exact.json")))["rows"]
     cost = [r for r in json.load(open(os.path.join(RES, "n7_cost.json")))["rows"] if "step_s" in r]
     step = lambda **k: next((r["step_s"] for r in cost if all(r.get(a) == b for a, b in k.items())), None)
-    out = {"rule": "05_EXPERIMENTS.md N7, fixed 15 Nov 2026 21:59", "by_H": {}}
+    out = {"rule": "N7, rule fixed 15 Nov 2026 21:59, before the runs", "by_H": {}}
     for H in sorted({r["H"] for r in ex}):
         rows, cross = [], None
         for r in sorted((r for r in ex if r["H"] == H), key=lambda r: r["T"]):

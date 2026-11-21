@@ -1,5 +1,5 @@
-"""N2: how tight is each representation's bound with respect to the SAME exact evidence? (protocol fixed in
-05_EXPERIMENTS.md on 15 Nov 2026, before the run)
+"""N2: how tight is each representation's bound with respect to the SAME exact evidence? (protocol fixed on
+15 Nov 2026, before the run)
 
 Model : CosVI's trained N1b model (drift MLP 1-32-32-1 and sigma; all six groups H = 0.5..0.9 and H_true) of one
         data seed, frozen.  Data: the 16 N1b test series of that seed (T = 5, 20 observations, s = 0.05).
@@ -42,7 +42,7 @@ def fit(glob, Ye, Ms, refit, dev):
 
 
 def run(H_true, seed, refit=4000, Ks=(512, 4096, 32768), reps=None, save=True, model_rep="twoscale"):
-    # model_rep (added 15 Nov 21:29 for N2-x, protocol in 05_EXPERIMENTS.md): which trained N1b model is frozen;
+    # model_rep (added 15 Nov 2026 21:29 for N2-x, protocol fixed before its run): which trained N1b model is frozen;
     # "twoscale" (CosVI) is the N2 protocol, "grid" the cross-check with the model trained under exact grid whitening.
     dev = torch.device("cuda"); torch.manual_seed(seed)
     _, Yte, _, _ = n1.make_data(H_true, seed)

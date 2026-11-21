@@ -1,4 +1,4 @@
-"""Quadrature helpers used by every exact (deterministic) computation in Paper 4.
+"""Quadrature helpers used by every exact (deterministic) computation in the CosVI paper.
 
 All rules are Gauss-Legendre or Gauss-Jacobi; graded rules cluster nodes geometrically toward an endpoint where
 the integrand has a power-type singularity (t^{2H}, (t-s)^{H-1/2}, ...).

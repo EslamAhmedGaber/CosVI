@@ -1,5 +1,5 @@
 {
- "rule": "05 3b X8",
+ "rule": "X8",
  "a": {
   "pass_all": true,
   "max_abs_diff_pl_vs_grid": 1.9184653865522705e-12,

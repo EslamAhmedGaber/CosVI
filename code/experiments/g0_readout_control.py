@@ -46,7 +46,7 @@ def own_lift_posterior_cov(rec, s_obs=0.1):
 
 
 def main():
-    out = {"rule": "audit 18 Nov section 2, adopted", "runs": {}, "by_H": {}}
+    out = {"rule": "read-out control (protocol of 18 Nov 2026)", "runs": {}, "by_H": {}}
     for H in (0.7, 0.9):
         for seed in (0, 1):
             rec = json.load(open(os.path.join(RES, f"bridge_H{H:.2f}_theta1.0_seed{seed}_steps2000.json")))

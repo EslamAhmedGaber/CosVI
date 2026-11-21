@@ -1,6 +1,6 @@
 r"""X4 (16 Nov 2026): calibration of the latent-path uncertainty of the trained N1b models (no new training).
 
-Protocol fixed in 05_EXPERIMENTS.md section 3b (X4) before any run.  For a saved N1b model (globals of every group;
+Protocol fixed before any run.  For a saved N1b model (globals of every group;
 the oracle group, H = H_true, is the last one) and its data seed:
   1. regenerate the data exactly as n1_drift_recovery.make_data (same random stream), keeping the true latent paths;
      the regenerated observations are checked against make_data;

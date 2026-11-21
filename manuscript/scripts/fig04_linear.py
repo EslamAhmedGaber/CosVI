@@ -33,16 +33,16 @@ def draw(layout):
     t = np.array(cur["times"])
     # (a)
     ax = fig.add_subplot(gs[0, 0])
-    ax.plot(t, cur["ma_authors_as_coded_K5"], color=S.C["their"], ls=":", lw=1.4, label=r"lift as coded, $K=5$")
-    ax.plot(t, cur["ma_default_K5"], color=S.C["ma"], ls="--", lw=1.3, label=r"lift, $K=5$")
+    ax.plot(t, cur["ma_authors_as_coded_K5"], color=S.C["their"], ls=":", lw=1.4, label=r"MA-fBm, as coded")
+    ax.plot(t, cur["ma_default_K5"], color=S.C["ma"], ls="--", lw=1.3, label=r"MA-fBm, $K=5$")
     for J, a in ((8, 0.45), (16, 0.7), (32, 1.0)):
         ax.plot(t, cur[f"cosine_projection_J{J}"], color=S.C["cosvi"], lw=1.0 + 0.3 * (J // 16), alpha=a,
-                label=r"cosine, $J=8,16,32$" if J == 32 else None)
+                label=r"cosine, $J{=}8,16,32$" if J == 32 else None)
     ax.plot(t, cur["exact"], color=S.C["ref"], lw=0.9, ls=(0, (1, 1)), label="exact", zorder=9)
     ax.set_xlabel(r"time $t$"); ax.set_ylabel(r"posterior variance of $X_t$")
     ax.set_xlim(0, 2); ax.set_ylim(0, None)
     ax.set_title(r"bridge posterior, $H=0.75$")
-    ax.legend(loc="lower center", bbox_to_anchor=(0.5, 0.02), ncol=1, fontsize=6.2, labelspacing=0.15, handlelength=1.8)
+    ax.legend(loc="lower center", bbox_to_anchor=(0.5, 0.0), ncol=1, fontsize=6.2, labelspacing=0.15, handlelength=1.4)
     S.clean(ax); S.panel_label(ax, "a", x=-0.24)
     # (b)
     ax = fig.add_subplot(gs[0, 1])
@@ -51,15 +51,17 @@ def draw(layout):
     Ks = sorted({int(k.split("K")[1]) for k in r["ma_typeI"]})
     md = [abs(r["ma_typeI"][f"default_K{K}"]["B"]["dlogp_mean"]) for K in Ks]
     mt = [abs(r["ma_typeI"][f"tuned_K{K}"]["B"]["dlogp_mean"]) for K in Ks]
-    ax.plot(Ks, md, **S.st("ma", label="lift, published nodes"))
-    ax.plot(Ks, mt, **S.st("ma_best", label="lift, tuned nodes"))
-    ax.plot(Js, cj, **S.st("cosvi_j", label=r"cosine (\CosVI-$J$)", lw=1.6))
+    ax.plot(Ks, md, **S.st("ma", label="MA-fBm, published"))    # short labels: the legend fits the empty
+    ax.plot(Ks, mt, **S.st("ma_best", label="MA-fBm, tuned"))   # upper right (J, K >= 16)
+    ax.plot(Js, cj, **S.st("cosvi_j", label=r"\CosVI-$J$", lw=1.6))
     ax.set_xscale("log", base=2); ax.set_xticks([2, 4, 8, 16, 32, 64]); ax.set_xticklabels(["2", "4", "8", "16", "32", "64"])
     ax.minorticks_off()
     S.logy(ax)
+    ax.set_ylim(1.5e-3, 22.0)
     ax.set_xlabel(r"dimension ($J$ or $K$)"); ax.set_ylabel(r"$|\mathrm{mean}\ \Delta \log p(\mathbf{y})|$ (nats)")
     ax.set_title(r"mean evidence error, $m=10$")
-    ax.legend(loc="lower left", fontsize=6.3, labelspacing=0.2)
+    ax.legend(loc="upper right", fontsize=6.1, labelspacing=0.18, handlelength=1.5, borderaxespad=0.1,
+              bbox_to_anchor=(1.02, 1.00))
     S.clean(ax); S.panel_label(ax, "b", x=-0.27)
     # (c) heatmap
     ax = fig.add_subplot(gs[0, 2])

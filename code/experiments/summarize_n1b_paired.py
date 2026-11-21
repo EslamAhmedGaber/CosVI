@@ -8,7 +8,7 @@ representations (mean, sd and the per-seed values); then the drift RMSE of CosVI
 the same seed. Tagged runs (for example the 10 000-step ablation) are skipped.
 
 Run from work\code\experiments:  python summarize_n1b_paired.py   (set PYTHONIOENCODING=utf-8 on Windows)
-Written 15 Nov 2026 for the three-seed reading in 04_THREAT_AND_PILOT.md §4b.
+Written 15 Nov 2026 for the three-seed paired reading.
 """
 import glob
 import json

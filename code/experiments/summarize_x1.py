@@ -1,4 +1,4 @@
-r"""Summarise X1 (05_EXPERIMENTS.md section 3b, rules fixed 16 Nov 07:03, amended 07:41 before any X1 result was read).
+r"""Summarise X1 (rules fixed 16 Nov 2026 07:03, amended 07:41 before any X1 result was read).
 
 Part (i): runs n1b_{rep}_seed{s}_H{H}_hg95.json with the profile grid {0.5, 0.6, 0.7, 0.8, 0.9, 0.95}.
 Two estimators of H per run:
@@ -81,7 +81,7 @@ def part_ii():
 
 
 if __name__ == "__main__":
-    res = {"rule": "05 section 3b X1 (fixed 07:03, amended 07:41)", "part_i": part_i(), "part_ii": part_ii()}
+    res = {"rule": "X1 (rule fixed 16 Nov 2026 07:03, amended 07:41, before any result was read)", "part_i": part_i(), "part_ii": part_ii()}
     with open(os.path.join(R, "x1_summary.json"), "w") as fh:
         json.dump(res, fh, indent=1)
     print("Part (i): estimates of H (mean +- sd over seeds 0-2; recovered = |H - H_true| <= 0.05; edge = top value 0.95)")

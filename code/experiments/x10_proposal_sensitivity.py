@@ -1,10 +1,8 @@
-r"""X10: do the importance scores depend on the proposal? (05_EXPERIMENTS.md section 3b; protocol fixed 18 Nov 2026,
+r"""X10: do the importance scores depend on the proposal? (protocol fixed 18 Nov 2026,
 19:28, before any X10 run.)  CPU only.
 
 The frozen-model RK4 solver (`Frozen.drift`, `Frozen.paths`) and the joint Gauss-Newton importance readout
-(`joint_readout`) are copied from an independent check of 18 Nov 2026 (check_proofs.py:
-FrozenModel and candidate_test(check_evidence=True)), unchanged except that the model file and the evaluation map are
-arguments.  For every test window: Levenberg-Marquardt mode from z = 0, x0 = y_1; Gauss-Newton precision; joint
+(`joint_readout`) take the model file and the evaluation map as arguments.  For every test window: Levenberg-Marquardt mode from z = 0, x0 = y_1; Gauss-Newton precision; joint
 Gaussian proposal (coupling between x0 and the noise kept); two independent sets of 4 x 128 = 512 draws; log score,
 ESS and largest normalised weight per set.  Common random numbers across the models of one (H, seed).
 
@@ -68,7 +66,7 @@ class Frozen:
                 if not np.array_equal(z["Yte"], self.data):
                     raise ValueError("test data differ from the saved series")
 
-    # ---- copied from check_proofs.FrozenModel (independent check, 18 Nov 2026) ----
+    # ---- frozen-model drift and RK4 paths ----
     def drift(self, x, tangent=False):
         a = np.tanh(x[:, None] * self.W[0] + self.bias[0])
         b = np.tanh(a @ self.W[1] + self.bias[1])
@@ -107,7 +105,7 @@ class Frozen:
 
 
 def joint_readout(model, y, idx, batches=4, rng_offset=0):
-    """Copied from check_proofs.candidate_test(check_evidence=True) (independent check, 18 Nov 2026)."""
+    """Joint Gauss-Newton importance readout of the log evidence of one test window (see the module docstring)."""
     d = model.dim
     start = np.zeros(d); start[-1] = y[0]
     prev, cached = None, None

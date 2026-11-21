@@ -5,14 +5,14 @@ dB/dt at the three RK4 stage positions of each of N steps on [0, T] (left end, m
 
 With the same variational family over z, representations differ only in (law accuracy, D, smoothness, cost),
 so trained comparisons isolate the representation.  Representations (all target STANDARD fBm, Var t^{2H}):
-  cosine     : J projection cosine coordinates (Paper 1); smooth rates; D = J; truncated law
+  cosine     : J projection cosine coordinates (CosChaos); smooth rates; D = J; truncated law
   twoscale   : cosine (J) + whitened residual on the interior grid, piecewise linear; D = J + N - 1;
                EXACT law on the grid (construction of Section 3.1 of the paper)
   grid       : exact fGn increments on the grid, Cholesky whitening (law of Davies-Harte, as used by
                Beskos, Dureau, Kalogeropoulos 2015); piecewise-linear path; D = N; EXACT on the grid
   markov     : Markovian lift of Daems et al. 2024 (type I, stationary OU start, weights of their Prop. 5,
                rescaled to standard fBm), exponential-Euler OU steps driven by the grid increments of W;
-               D = K + N; inexact law (history floor, 04_THREAT_AND_PILOT.md)
+               D = K + N; inexact law (history floor)
 At H = 1/2 'grid' and 'cosine' are Brownian motion (the Brownian baseline).
 """
 import os
@@ -62,6 +62,43 @@ def twoscale_map(H, T, N, J):
             Dm[n, n - 1] -= 1.0
     Rr = Dm @ LR / h                                            # (N, N-1), piecewise-constant residual rate
     return tuple(np.hstack([s, Rr]) for s in (left, mid, right))
+
+
+def twoscale_exact_map(H, T, N, J, jitter=0.0):
+    """Exact-increment Simpson-corrected smooth-stage CosVI map.
+
+    Retains the smooth cosine stage rates at left and right endpoints of each step and adjusts the
+    midpoint stage rate by (3/2) * (exact_inc - simpson_inc) so that Simpson's rule reproduces the
+    exact grid increments B^J(t_{n+1}) - B^J(t_n) to machine precision (~1e-15), eliminating the
+    O(h^{2H}) endpoint quadrature defect of raw smooth stages. Because C_R is strictly positive
+    definite on {t_1, ..., t_{N-1}} for every J >= 1 and N >= 2, Cholesky succeeds without jitter
+    (falling back to tiny relative jitter only if needed for extreme grids).
+    """
+    h = T / N
+    left, mid, right = cosine_map(H, T, N, J)
+    cc = CosineCoords(H, T, J)
+    tg = np.arange(N + 1, dtype=float) * h
+    B_cos = np.zeros((N + 1, J))
+    B_cos[1:] = cc.path_funcs(tg[1:], "projection")
+    exact_inc = (B_cos[1:] - B_cos[:-1]) / h
+    simp_inc = (left + 4.0 * mid + right) / 6.0
+    mid_corr = mid + 1.5 * (exact_inc - simp_inc)
+
+    A = B_cos[1:N]
+    t = tg[1:N]
+    CR = cc.fbm_cov(t, t) - A @ A.T
+    CR = 0.5 * (CR + CR.T)
+    if jitter > 0.0:
+        CR = CR + jitter * np.trace(CR) / len(t) * np.eye(len(t))
+    try:
+        LR = np.linalg.cholesky(CR)
+    except np.linalg.LinAlgError:
+        LR = np.linalg.cholesky(CR + 1e-12 * np.trace(CR) / len(t) * np.eye(len(t)))
+    Dm = np.zeros((N, N - 1))
+    Dm[:-1, :] += np.eye(N - 1)
+    Dm[1:, :] -= np.eye(N - 1)
+    Rr = (Dm @ LR) / h
+    return tuple(np.hstack([s, Rr]) for s in (left, mid_corr, right))
 
 
 def twoscale_pl_map(H, T, N, J):
@@ -119,6 +156,8 @@ def build(rep, H, T, N, **kw):
         out = cosine_map(H, T, N, kw.get("J", 32))
     elif rep == "twoscale":
         out = twoscale_map(H, T, N, kw.get("J", 16))
+    elif rep == "twoscale_exact":
+        out = twoscale_exact_map(H, T, N, kw.get("J", 16))
     elif rep == "twoscale_pl":
         out = twoscale_pl_map(H, T, N, kw.get("J", 16))
     elif rep == "grid":
