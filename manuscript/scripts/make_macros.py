@@ -675,6 +675,8 @@ if exists("x11/simpson_exact_check.json"):
     put("SimpCovErrSevenFive", _fmt_sci(sx["0.75"]["cov_relerr"]["simpson_exact"]))
     put("SimpCovErrNine", _fmt_sci(sx["0.90"]["cov_relerr"]["simpson_exact"]))
     put("SimpCovErrMax", _fmt_sci(max(v["cov_relerr"]["simpson_exact"] for v in sx.values())))
+    put("SimpCovErrRawMax", _fmt_sci(max(v["cov_relerr"]["raw_twoscale"] for v in sx.values())))
+    put("SimpCovErrPlMax", _fmt_sci(max(v["cov_relerr"]["twoscale_pl"] for v in sx.values())))
     put("SimpLinEvidSix", f"{sx['0.60']['linear_check']['max_logev_diff_simpson_exact_vs_grid']:.4f}")
     put("SimpLinEvidSevenFive", f"{sx['0.75']['linear_check']['max_logev_diff_simpson_exact_vs_grid']:.4f}")
     put("SimpLinEvidNine", f"{sx['0.90']['linear_check']['max_logev_diff_simpson_exact_vs_grid']:.4f}")
@@ -687,6 +689,7 @@ if exists("x11/simpson_exact_check.json"):
         put(f"CondCr{nm}", f"{sx[Hk]['cond_CR']:.1f}")
 else:
     for k in ("SimpCovErrSix", "SimpCovErrSevenFive", "SimpCovErrNine", "SimpCovErrMax",
+              "SimpCovErrRawMax", "SimpCovErrPlMax",
               "SimpLinEvidSix", "SimpLinEvidSevenFive", "SimpLinEvidNine",
               "LinGapMfGridSix", "LinGapMfGridSevenFive", "LinGapMfGridNine",
               "LinGapMfCosviSix", "LinGapMfCosviSevenFive", "LinGapMfCosviNine",

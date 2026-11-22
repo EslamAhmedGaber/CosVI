@@ -21,11 +21,11 @@ python -X utf8 manuscript/scripts/make_tables.py
 
 - `fast_hfc.py` — pure NumPy/SciPy piecewise degree-17 Chebyshev ($|x|\le 56$) + 18-term asymptotic ($|x|>56$) engine for $N_H(x)={}_1F_1(2H;2H+1;ix)$ and $M_H(x)={}_1F_1(2H-1;2H;ix)$ (worst error $\le 3.4\times 10^{-13}$ vs. 30-digit `mpmath`; $2.7\times$–$170\times$ single-thread build speedup across tested settings).
 - `coords.py` — exact closed-form cosine Gram matrix $G(H)$, nested Cholesky factor $L$, covariance curves $Q(t)$ and rates $\dot Q(t)$, and strictly positive-definite interior residual covariance $C_R\succ 0$ (`fast=True` by default; `fast=False` retained for benchmarking).
-- `noise_maps.py` — linear stage-rate maps for `twoscale` (smooth CosVI), `twoscale_exact_map` (Simpson-exact CosVI-EX, covariance error $\le 4.5\times 10^{-16}$, zero jitter), `twoscale_pl_map` (CosVI-PL solver-matched control), `cosine`, `grid`, and `markov`.
+- `noise_maps.py` — linear stage-rate maps for `twoscale` (smooth CosVI), `twoscale_exact_map` (Simpson-exact CosVI-EX, covariance error $\approx 4.5\times 10^{-16}$ at its measured maximum over six $H$ values, zero jitter), `twoscale_pl_map` (CosVI-PL solver-matched control), `cosine`, `grid`, and `markov`.
 - `families.py` — CUDA-graph-capturable structured joint Gaussian posteriors:
   - `LocalsJointFull`: joint full $q(\mathbf{z}, x_0)\in\mathbb{R}^{D+1}$,
   - `LocalsBlockJoint` & `Locals2BlockJoint`: two-scale $\mathcal{O}(J^2+N)$ joint posteriors,
-  - `LocalsPrecLR`: Matheron-sampled precision-low-rank Woodbury posterior $\Lambda=\operatorname{diag}(d^{-2})+VV^\top$, $\mathcal{O}(rN)$ memory, zero eigendecomposition.
+  - `LocalsPrecLR`: Matheron-sampled precision-low-rank Woodbury posterior $\Lambda=\operatorname{diag}(\delta^{-2})+VV^\top$, $\mathcal{O}(rN)$ local-parameter storage, zero eigendecomposition.
 - `linear_exact.py`, `ma_fbm.py`, `simulate.py`, `train_graph.py`, `train_maps.py` — exact linear-Gaussian references, MA-fBm analytical covariance law, Davies–Harte path simulation, and CUDA-graph training.
 - `code/tests/test_cosvi.py` — 28 unit tests verifying `fast_hfc`, $C_R\succ 0$, Simpson-exact grid laws, and all variational families.
 
@@ -39,7 +39,7 @@ python -X utf8 manuscript/scripts/make_tables.py
 | G0-H, N1c | Joint Hurst-index learning in MA-fBm | Main Sec. 4.4, Fig. 1b |
 | N1, N1b, X1 | 1-D double well (6 representations, 3 & 5 seeds, budget ablation) | Main Sec. 5.2, Fig. 6, Table 4, Table S.2 |
 | N2, X10 | Bound vs. evidence & coupled importance-proposal check | Main Sec. 5.2, 5.6 |
-| X8 (a–d), X11a | Coordinates vs. solver & 4-arm Haar-random rotation causal control | Main Sec. 5.3, Fig. 7, Table S.3, Table S.4 |
+| X8 (a–d), X11a | Coordinates vs. solver & 4-arm Haar-random rotation control | Main Sec. 5.3, Fig. 7, Table S.3, Table S.4 |
 | X4, N6, X11b | Latent-path calibration, ablations, structured $\mathcal{O}(N)$ families & VRAM scaling | Main Sec. 5.4, 5.7, Fig. 8, Fig. 11c, Table 5, Tables S.1, S.7 |
 | X2, X11c (Pt 1) | 2-D damped Duffing oscillator, PL and grid evaluators, 2-D BlockJoint | Main Sec. 5.5, Fig. 9, Table S.5 |
 | N4, N4c, X3, X5, X9, X11c (Pt 2) | Real series (Nile minima, NH temperature), window audit, Nile structured $q$ | Main Sec. 5.6, Fig. 10, Table 6, Tables S.4, S.7 |

@@ -66,9 +66,9 @@ def draw(layout):
     xb = json.load(open(xb_p)) if os.path.exists(xb_p) else None
     if xb and "scaling" in xb:
         sc = xb["scaling"]
-        fams = [("joint_full", "ma", r"JointFull $\mathcal{O}(N^2)$"),
-                ("prec_lr16", "cosvi_j", r"PrecLR $r{=}16$ $\mathcal{O}(rN)$"),
-                ("block_joint", "cosvi", r"BlockJoint $\mathcal{O}(J^2{+}N)$")]
+        fams = [("joint_full", "ma", r"JointFull ($\mathcal{O}(N^2)$ params)"),
+                ("prec_lr16", "cosvi_j", r"PrecLR $r{=}16$ ($\mathcal{O}(rN)$ params)"),
+                ("block_joint", "cosvi", r"BlockJoint ($\mathcal{O}(J^2{+}N)$ params)")]
         for fk, colk, lab in fams:
             pts = [r for r in sc if r["family"] == fk and "peak_mem_MB" in r]
             ax.plot([r["N"] for r in pts], [r["peak_mem_MB"] for r in pts], **S.st(colk, label=lab))
@@ -84,12 +84,13 @@ def draw(layout):
         bj1600 = next(r["peak_mem_MB"] for r in sc if r["family"] == "block_joint" and r["N"] == 1600)
         ax.annotate("", xy=(1600, bj1600 * 1.05), xytext=(1600, jf1600 * 0.96),
                     arrowprops=dict(arrowstyle="<->", color="#444444", lw=0.8))
-        ax.text(1460, np.sqrt(jf1600 * bj1600), rf"${jf1600/bj1600:.1f}\times$", ha="right", va="center",
-                fontsize=6.2, color="#333333", fontweight="bold")
+        ax.text(1460, np.sqrt(jf1600 * bj1600) * 0.92, rf"${jf1600/bj1600:.1f}\times$", ha="right", va="center",
+                fontsize=6.2, color="#333333", fontweight="bold",
+                bbox=dict(boxstyle="round,pad=0.08", fc="white", ec="none", alpha=0.85))
         ax.set_xlabel(r"grid steps $N$"); ax.set_ylabel(r"peak GPU VRAM (MiB)")
         ax.set_title(r"long-horizon memory scaling ($M=16$)")
-        ax.legend(loc="upper left", fontsize=5.8, labelspacing=0.14, handlelength=1.5)
-        ax.text(0.97, 0.05, r"precomp.\ speedup: $11$--$170\times$", transform=ax.transAxes, ha="right", va="bottom",
+        ax.legend(loc="upper left", fontsize=5.5, labelspacing=0.14, handlelength=1.4)
+        ax.text(0.97, 0.05, r"precomp.\ speedup: $2.7$--$170\times$", transform=ax.transAxes, ha="right", va="bottom",
                 fontsize=5.8, color="#444444", bbox=dict(boxstyle="round,pad=0.2", fc="#F7F9FC", ec="#CCCCCC", lw=0.5))
     else:
         ax.text(0.5, 0.5, "X11b scaling pending", transform=ax.transAxes, ha="center", va="center", color="#999999")
@@ -110,7 +111,7 @@ def draw(layout):
         name = r["cosvi_cheapest"][0]
         lab = rf"$J^*\!=\!{r['J_star']}$" if name.startswith("cosine") else r"two-scale"
         if r["T"] >= 50:
-            xytext, ha, va = (-5, -6), "right", "top"
+            xytext, ha, va = (1, -17), "right", "top"
         else:
             xytext, ha, va = (4, -4), "left", "top"
         ax.annotate(lab, (r["T"], r["cosvi_cheapest"][1]), xytext=xytext, textcoords="offset points", ha=ha, va=va,

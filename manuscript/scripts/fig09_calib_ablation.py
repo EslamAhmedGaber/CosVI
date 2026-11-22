@@ -23,7 +23,7 @@ def draw(layout):
     W = S.WIDE[layout]
     fig = plt.figure(figsize=(W, 4.0))
     gs = fig.add_gridspec(1, 2, left=0.12, right=0.93, top=0.84, bottom=0.56, wspace=0.70)
-    forest = fig.add_gridspec(1, 1, left=0.31, right=0.84, top=0.42, bottom=0.10)
+    forest = fig.add_gridspec(1, 1, left=0.34, right=0.83, top=0.42, bottom=0.11)
     # (a) reliability at H = 0.75
     ax = fig.add_subplot(gs[0, 0])
     ax.plot([0, 1], [0, 1], color=S.C["ref"], lw=0.8, zorder=1)
@@ -52,7 +52,7 @@ def draw(layout):
         ax.errorbar(Hs, 100 * np.array(m), yerr=100 * np.array(sd), capsize=1.5, elinewidth=0.7,
                     **{k: v for k, v in st.items() if k != "label"})
     ax.set_xticks(Hs); ax.set_xlabel(r"true Hurst index $H$")
-    ax.set_ylabel(r"calibration error (\%)"); ax.set_ylim(0, None)
+    ax.set_ylabel(r"coverage error (pp)"); ax.set_ylim(0, None)
     ax.set_title(r"calibration error")
     S.clean(ax, grid_y=True); S.panel_label(ax, "b", x=-0.30)
     # (c) ablation + structured joint families
@@ -66,9 +66,9 @@ def draw(layout):
     extra = []
     if has_xb:
         extra = [
-            ("block_vs_prod", r"BlockJoint $\mathcal{O}(N)$", "block_minus_prod_ll", "pl_block_joint"),
-            ("preclr_vs_prod", r"PrecLR ($r{=}16$)", "preclr16_minus_prod_ll", "pl_prec_lr16"),
-            ("joint_vs_prod", r"JointFull $q(\mathbf{z},x_0)$", "joint_minus_prod_ll", "pl_joint_full"),
+            ("block_vs_prod", r"prod.\ full / BlockJoint", "block_minus_prod_ll", "pl_block_joint"),
+            ("preclr_vs_prod", r"prod.\ full / PrecLR ($r{=}16$)", "preclr16_minus_prod_ll", "pl_prec_lr16"),
+            ("joint_vs_prod", r"prod.\ full / JointFull", "joint_minus_prod_ll", "pl_joint_full"),
         ]
     labels_y = []
     for i, (k, lab) in enumerate(comp):
@@ -100,22 +100,22 @@ def draw(layout):
                             color=col, mfc=col if j != 1 else "white", mec=col, ms=3.4, lw=0.8, capsize=1.2, zorder=4)
             npar = sm["0.75"][vkey]["local_params_per_series"]
             ratio = p_prod / npar
-            tag = rf"${ratio:.0f}\times$ less" if ratio >= 1.5 else r"$1.0\times$"
+            tag = rf"${ratio:.1f}\times$ fewer" if ratio >= 1.5 else r"$1.0\times$"
             ax.text(1.01, i, tag, fontsize=5.9, va="center", ha="left", transform=ax.get_yaxis_transform(), color="#444444")
     ax.axvline(0, color="#333333", lw=0.7, zorder=1)
-    ax.set_yticks(range(len(labels_y))); ax.set_yticklabels(labels_y, fontsize=6.4)
+    ax.set_yticks(range(len(labels_y))); ax.set_yticklabels(labels_y, fontsize=6.2)
     ax.invert_yaxis()
     ax.margins(x=0.04)
-    ax.set_xlabel(r"$\Delta$ held-out log-lik.\ (nats)")
-    ax.set_title(r"ablation \& structured $q$", fontsize=7.9)
-    ax.text(1.01, -0.85, r"cost/params", fontsize=5.8, ha="left", transform=ax.get_yaxis_transform(), color="#555555")
+    ax.set_xlabel(r"$\ell(\mathrm{base}) - \ell(\mathrm{variant})$ (nats; $>0$: base higher)")
+    ax.set_title(r"ablation \& structured $q$ (base / variant)", fontsize=7.9)
+    ax.text(1.01, -0.85, r"time/params", fontsize=5.8, ha="left", transform=ax.get_yaxis_transform(), color="#555555")
     ax.tick_params(axis="y", length=0); ax.spines[["top", "right", "left"]].set_visible(False)
     ax.grid(axis="x", color="#EEEEEE", lw=0.5, zorder=0)
-    S.panel_label(ax, "c", x=-0.46)
+    S.panel_label(ax, "c", x=-0.52)
     hh = [plt.Line2D([], [], ls="none", marker=HM[H], color="#666666", mfc="white" if H == 0.75 else "#666666", ms=3.6) for H in Hs]
     hh += [plt.Line2D([], [], ls="none", marker="s", color=S.C["cosvi"], ms=4),
            plt.Line2D([], [], ls="none", marker="s", color="#9A9A9A", ms=4)]
-    fig.legend(hh, [r"$H=0.6$", r"$H=0.75$", r"$H=0.9$", "base helps", "no detectable effect"],
+    fig.legend(hh, [r"$H=0.6$", r"$H=0.75$", r"$H=0.9$", "base higher", "unresolved"],
                loc="upper center", ncol=5, bbox_to_anchor=(0.5, 1.0), fontsize=6.5, handletextpad=0.2, columnspacing=1.0)
     S.save(fig, "fig09_calib_ablation", layout)
 

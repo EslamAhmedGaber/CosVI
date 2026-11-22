@@ -1,9 +1,9 @@
-"""Figure 7 — coordinates versus solver (X8c) and four-arm Haar-random rotated-coordinate causal control (X11a).
+"""Figure 7 — coordinates versus solver (X8c) and four-arm Haar-random orthogonal-rotation control (X11a).
 
 (a) X8c paired contrasts under PL evaluator after 5000 Adam steps (mean +- 2 SE, 5 seeds): coordinates, solver, total.
 (b) Training trajectory: CosVI-PL minus exact grid in training ELBO per series (median over 5 seeds).
-(c) X11a causal rotation control: aligned CosVI-PL minus exact grid, minus Haar-rotated grid, and minus Haar-rotated
-    CosVI-PL (identical grid covariance and precision spectrum; destroying alignment destroys the Adam gain).
+(c) X11a orthogonal-rotation control: aligned CosVI-PL minus exact grid, minus Haar-rotated grid, and minus Haar-rotated
+    CosVI-PL (identical grid covariance; measures sensitivity of the fixed training procedure to coordinate axes).
 """
 import os, sys, json
 import numpy as np
@@ -59,11 +59,12 @@ def contrasts_rot(ax, xa):
             x = j - 0.22 + 0.22 * k
             present = c["ll_verdict_2se"].startswith("present")
             ax.errorbar([x], [c["ll_gain_mean"]], yerr=[2 * c["ll_gain_se"]], color=col, lw=1.1, capsize=1.8, marker=m,
-                        ms=4.0, mfc=col if present else "white", mec=col, zorder=3, label=lab if j == 0 else None)
+                        ms=4.0, mfc=col if present else "white", mec=col, zorder=3)
     ax.axhline(0, color="#888888", lw=0.7, zorder=1)
     ax.set_xticks(range(3)); ax.set_xticklabels([r"$H=0.6$", r"$H=0.75$", r"$H=0.9$"])
-    ax.set_xlim(-0.5, 2.5); ax.set_ylim(-0.5, 5.1)
-    ax.legend(loc="upper right", fontsize=5.8, handletextpad=0.25, labelspacing=0.14, borderaxespad=0.15, frameon=False)
+    ax.set_xlim(-0.5, 2.5); ax.set_ylim(-0.5, 5.4)
+    rot_handles = [Line2D([], [], color=col, marker=m, ms=4.0, lw=1.1, label=lab) for _, lab, col, m in ROT]
+    ax.legend(handles=rot_handles, loc="upper right", fontsize=5.8, handletextpad=0.35, labelspacing=0.22, borderaxespad=0.20, frameon=False)
 
 
 def draw(layout):
@@ -75,7 +76,7 @@ def draw(layout):
     cc = json.load(open(f8)).get("c", {}).get("by_H", {}) if os.path.exists(f8) else {}
     fa = os.path.join(S.RES, "x11", "x11a_rotated_grid.json")
     xa = json.load(open(fa)) if os.path.exists(fa) else None
-    titles = [r"coordinates vs.\ solver (5000 steps)", r"training ELBO, \CosVI-PL $-$ grid", r"Haar-rotation causal control"]
+    titles = [r"coordinates vs.\ solver (5000 steps)", r"training ELBO, \CosVI-PL $-$ grid", r"Haar-rotation control"]
     for i in range(3):
         ax = fig.add_subplot(gs[0, i])
         if i == 0:
