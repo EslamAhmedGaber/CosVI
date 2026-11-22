@@ -378,7 +378,7 @@ pv = x3["paired_vs_cosvi"]
 put("XthreeCosJGain", sgn(-pv["cosine64"]["mean"])); put("XthreeCosJGainSd", f"{pv['cosine64']['sd']:.2f}")
 put("XthreeGridGap", sgn(pv["grid"]["mean"])); put("XthreeGridGapSd", f"{pv['grid']['sd']:.2f}")
 put("XthreeMaGap", sgn(pv["markov"]["mean"])); put("XthreeMaGapSd", f"{pv['markov']['sd']:.2f}")
-hcT = list(x3["classical_H"].values())
+hcT = [prov["nhemi_temp"][k] for k in ("H_whittle_fgn", "H_aggregated_variance", "H_RS")]
 put("XthreeClassMin", f"{min(hcT):.2f}"); put("XthreeClassMax", f"{max(hcT):.2f}")
 
 # ------------------------------------------------------------------ X2 two-dimensional Duffing (n8/x2_summary.json)
